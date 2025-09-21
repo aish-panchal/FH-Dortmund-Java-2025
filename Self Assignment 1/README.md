@@ -13,7 +13,7 @@ Problem 2 - Abdelrahman Abdin Mousa
 
 Problem 3 - Aishwary Panchal:
 Output of the solution code for the provided string:
-![P3 Output](https://raw.githubusercontent.com/aish-panchal/FH-Dortmund-Java-2025/refs/heads/main/Self%20Assignment%201/StringCharacters_problem3_output.jpg
+![P3 Output](https://raw.githubusercontent.com/aish-panchal/FH-Dortmund-Java-2025/refs/heads/main/Self%20Assignment%201/StringCharacters_problem3_output.jpg)
 
 
 Problem 4 - Abdelrahman Abdin Mousa
