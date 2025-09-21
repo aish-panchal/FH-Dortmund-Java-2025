@@ -12,13 +12,8 @@ The volume of the Earth is 2.2984729611703882E11 cubic miles, the volume of the 
 Problem 2 - Abdelrahman Abdin Mousa
 
 Problem 3 - Aishwary Panchal:
-![P3 Output](https://raw.githubusercontent.com/aish-panchal/FH-Dortmund-Java-2025/refs/heads/main/Self%20Assignment%201/StringCharacters_problem3_output.jpg)
 Output of the solution code for the provided string:
+![P3 Output](Self Assignment 1/StringCharacters_problem3_output.jpg)
 
-```
-The text contained vowels: 60
-consonants: 93
-spaces: 37
-```
 
 Problem 4 - Abdelrahman Abdin Mousa
