@@ -25,3 +25,5 @@ spaces: 37
 ```
 
 Problem 4 - Abdelrahman Abdin Mousa
+
+The code splits the string into words, words being defined as any sequence of alphabetical characters, after splitting the string on spaces, the words are cleaned (non-alphabetical characters removed) and then the list of words is sorted using a simple bubble sort (ignoring the case of the words for sorting)
