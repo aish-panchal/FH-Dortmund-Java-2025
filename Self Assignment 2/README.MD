@@ -1,10 +1,9 @@
 BASIC README
 
 1st IndustrialProcess:
+
 1- Fetch raw materials
-
 2 -Delivery to Factory
-
 3 - From Factory to Customer
 
 
