@@ -24,4 +24,5 @@ Time=Distance(destination) & MaxSpeed
 EnergyConsumed= ComsuptionRate & time
 BatteryLoad= get once it get to the position
 
----AVG only charges at the Warehouse. Some AVG types will need to recharge because they consumed too much.
+--- We have different type of AVG per IOperation, which will consume different amounts of energy and time. Some will need to recharge, which will affect the duration of the operation
+
