@@ -24,4 +24,15 @@ EnergyConsumed= ComsuptionRate & time
 BatteryLoad= get once it get to the position
 
 --- We have different type of AVG per IOperation, which will consume different amounts of energy and time. Some will need to recharge, which will affect the duration of the operation
+Some formulas:
+
+Distance btw (x1,y1) and (x2,y2)
+d=[(x2-x1)^2 + (y2-y1)^2]^(1/2)
+
+Time with distance and speed
+t= d/V
+
+Energy = time and consumption rate
+E=P*t
+
 
