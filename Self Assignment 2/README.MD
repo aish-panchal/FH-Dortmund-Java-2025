@@ -26,8 +26,9 @@ BatteryLoad= get once it get to the position
 --- We have different type of AVG per IOperation, which will consume different amounts of energy and time. Some will need to recharge, which will affect the duration of the operation
 Some formulas:
 
-Distance btw (x1,y1) and (x2,y2)
-d=[(x2-x1)^2 + (y2-y1)^2]^(1/2)
+Distance btw (x1,y1) and (x2,y2) (Assuming here that the AGV travels in X and Y only)
+
+d=[abs(x2-x1) + abs(y2-y1)]
 
 Time with distance and speed
 t= d/V
