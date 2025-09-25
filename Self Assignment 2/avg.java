@@ -23,7 +23,7 @@ public class avg {
 		id=type;
 		maxspeed=maxsp; // in km/h
 		consumptionRate=comsup; // in %/h
-		chargeTime=4; // time in hours
+		chargeTime=4; // time in hours to go from 0 to 100 %
 		actspeed=0; // Always starting at rest (in km/h)
 		batteryload=100; // 100% from start
 		pos[0]=0; // x-position
@@ -71,14 +71,15 @@ public class avg {
 	}
 	
 	public double getComsup() // get the overall battery consumption 
-	// Maybe can set an overall battery value here like 1000 Wh that can later be calculated relative to %
+	// Assumption here is for the capacity of the battery to be 50 kWh
 	{
-		return consumptionRate;
+		return ((overallConsum) * 50 / 100);
 	}
 	
-	public double getchargeTime() // TODO
+	public double getchargeTime() // get charge time in hours based on amount of battery to be charged
 	{
-		return chargeTime;
+		double batteryConsumed = 100 - batteryload;
+		return ((batteryConsumed * 4) / 100);
 	}
 	
 	public double getbatteryLoad() // returns remaining battery level in the AGV
