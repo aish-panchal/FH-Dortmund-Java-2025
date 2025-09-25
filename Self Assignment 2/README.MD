@@ -27,6 +27,7 @@ BatteryLoad= get once it get to the position
 Some formulas:
 
 Distance btw (x1,y1) and (x2,y2) (Assuming here that the AGV travels in X and Y only)
+
 d=[abs(x2-x1) + abs(y2-y1)]
 
 Time with distance and speed
