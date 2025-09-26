@@ -1,7 +1,7 @@
 package SA2;
 
 public class IOCustomer extends IndustrialOperation{
-    private double[] customer = {50,20};
+    private double[] customer = {100,20};
     private double[] warehouse_pos = {0,0};
     private int vehicle_limit = 50;
     public IOCustomer(String Customerid, int tonnes){
@@ -11,6 +11,7 @@ public class IOCustomer extends IndustrialOperation{
 	resources = new avg[vehicle_limit];
 	for(int i = 0; i < vehicle_limit; i++){
 	    resources[i] = new avg(i+"th vehicle", 100, 1);
+	    resources[i].setActSpeed(100);
 	}
 	// fetch all the tonnes of materials from the factory
 	out:
@@ -24,7 +25,7 @@ public class IOCustomer extends IndustrialOperation{
 	}
 	for(avg vehicle: resources){
 	    IOtime += vehicle.overallTime();
-	    IOenergy += vehicle.overallConsumption();
+	    IOenergy += vehicle.getComsup();
 	}
     }
 }

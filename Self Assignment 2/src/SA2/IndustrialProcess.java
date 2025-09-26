@@ -9,9 +9,9 @@ public class IndustrialProcess{
     private IndustrialOperation[] operations;
     private int tonnes_processed;
 
-    public IndustrialProcess(int product_tonnes, String id){
+    public IndustrialProcess(int product_tonnes, String ProcessID){
 	// calculate and call the stuff
-	id = id;
+	id = ProcessID;
 	operations = new IndustrialOperation[3];
 	operations[0] = new IOFetchMaterials("fetch " + id , product_tonnes);
 	operations[1] = new IOFactory("refine " + id, product_tonnes);
@@ -29,18 +29,18 @@ public class IndustrialProcess{
     }
 
     public void ProcessDuration(){
-	System.out.println("Process " + id +  " needed " + duration + " minutes");
+	System.out.println("Process " + id +  " needed " + Math.round(duration) + " minutes");
     }
 
     public void ProcessResources(){
-	System.out.println("Process " + id + " used " + energy_consumed + " watts of energy");
-	System.out.println("Process " + id + " used " + avg_num + "AVGs");
+	System.out.println("Process " + id + " used " + energy_consumed + " kilowatts of energy");
+	System.out.println("Process " + id + " used " + avg_num + " AVGs");
     }
 
     public void ProcessPrintInfo(){
 	ProcessDuration();
 	ProcessResources();
-	System.out.println("Process " + id + " processed " + tonnes_processed + " tonnes");
+	System.out.println("Process " + id + " processed " + tonnes_processed + " tonnes\n");
     }
 
     

@@ -12,10 +12,8 @@ public class avg {
     private double chargeTime; // Time in hours
     private double batteryload; // in %
     private double[] pos = new double[2]; // For initial position in the warehouse (x,y coordinates)
-    private float overallTime;
+    private double overallTime;
     private float overallConsum;
-	
-	
 	
     // setter
     public avg (String type, float maxsp, double comsup) // AVG constructor
@@ -58,18 +56,14 @@ public class avg {
 	return pos;
     }
 
-    public void wait(double time){
+    public void wait_at_pos(double time){
 	overallTime += time;
     }
 	
     //getters
 
-    public float overallTime(){
+    public double overallTime(){
 	return overallTime;
-    }
-
-    public float overallConsumption(){
-	return overallConsum;
     }
 	
     public double getmaxSpeed() // returns the max speed of the AGV

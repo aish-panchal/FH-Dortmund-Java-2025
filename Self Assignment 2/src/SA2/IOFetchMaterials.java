@@ -8,7 +8,9 @@ public class IOFetchMaterials extends IndustrialOperation{
 	id = Fetchid;
 	resources = new avg[2];
 	resources[0] = new avg("first vehicle", 100, 1);
+	resources[0].setActSpeed(100);
 	resources[1] = new avg("second vehicle", 100, 1);
+	resources[1].setActSpeed(100);
 	// fetch all the tonnes of materials from the factory
 	for(int i = tonnes; i >= 0; i--){
 	    if (i % 2 == 0){
@@ -20,6 +22,6 @@ public class IOFetchMaterials extends IndustrialOperation{
 	    }
 	}
 	IOtime += resources[0].overallTime() + resources[1].overallTime();
-	IOenergy += resources[0].overallConsumption() + resources[1].overallConsumption();
+	IOenergy += resources[0].getComsup() + resources[1].getComsup();
     }
 }
