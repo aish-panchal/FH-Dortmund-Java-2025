@@ -9,7 +9,6 @@ public class avg {
     private float maxspeed; // in km/h
     private double actspeed; // in km/h
     private double consumptionRate; // %/h
-    private double chargeTime; // Time in hours
     private double batteryload; // in %
     private double[] pos = new double[2]; // For initial position in the warehouse (x,y coordinates)
     private double overallTime;
@@ -21,7 +20,6 @@ public class avg {
 	id=type;
 	maxspeed=maxsp; // in km/h
 	consumptionRate=comsup; // in %/h
-	chargeTime=4; // time in hours to go from 0 to 100 %
 	actspeed=0; // Always starting at rest (in km/h)
 	batteryload=100; // 100% from start
 	pos[0]=0; // x-position
@@ -50,8 +48,8 @@ public class avg {
 	pos[0] = p2[0]; // new position of the AGV
 	pos[1] = p2[1];
 		
-	overallTime += time; // calcuating overall time consumed for the Iop by this AGV
-	overallConsum += batteryConsumed; // calcuating overall battery consumed for the Iop by this AGV
+	overallTime += time; // calculating overall time consumed for the Iop by this AGV
+	overallConsum += batteryConsumed; // calculating overall battery consumed for the Iop by this AGV
 		
 	return pos;
     }
