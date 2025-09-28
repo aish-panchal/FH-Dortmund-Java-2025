@@ -29,7 +29,7 @@ public class IndustrialProcess{
     }
 
     public void ProcessDuration(){
-	System.out.println("Process " + id +  " needed " + Math.round(duration) + " minutes");
+	System.out.println("Process " + id +  " needed " + Math.round(duration) + " hours");
     }
 
     public void ProcessResources(){

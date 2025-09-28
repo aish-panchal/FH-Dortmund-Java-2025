@@ -60,6 +60,7 @@ public class avg {
     public void chargeBatteryPercentage(double amount){
 	double time = amount / chargeRate;
 	overallTime += time;
+	batteryload = 100;
     }
     
     public void chargeBattery(double chargeHours){
@@ -78,41 +79,13 @@ public class avg {
     //getters
 
     public double overallTime(){
-	return overallTime;
-    }
-	
-    public double getmaxSpeed() // returns the max speed of the AGV
-    {
-	return maxspeed;
-    }
-	
-    public double getactSpeed() // returns the actual speed of the AGV
-    {
-	return actspeed;
+    	return overallTime;
     }
 	
     public double getComsup() // get the overall battery consumption 
     // Assumption here is for the capacity of the battery to be 50 kWh
     {
-	return ((overallConsum) * 50 / 100);
+    	return ((overallConsum) * 50 / 100);
     }
-	
-    public double getchargeTime() // get charge time in hours based on amount of battery to be charged
-    {
-	double batteryConsumed = 100 - batteryload;
-	return ((batteryConsumed * 4) / 100);
-    }
-	
-    public double getbatteryLoad() // returns remaining battery level in the AGV
-    {
-	return batteryload;
-    }
-	
-    public double[] getpos() // returns current position of the AGV
-    {
-	return pos;
-    }
-	
-	
 	
 }
