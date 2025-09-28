@@ -18,7 +18,7 @@ public class IOFactory extends IndustrialOperation{
 	    for(avg vehicle: resources){
 		if(tonnes == 0) break out; // check if there is more work to do
 		vehicle.changepos(factory); // go to factory
-		vehicle.wait_at_pos(time_per_tonne); // wait // this doesn't discount this time from the charging time for the vehicle
+		vehicle.wait_at_pos(time_per_tonne); // wait 
 		vehicle.changepos(warehouse_pos); // return with goods
 		tonnes -= 1; // tonne is done
 	    }
