@@ -4,7 +4,6 @@ package SA2;
  */
 
 public class avg {
-	
     private String id;
     private float maxspeed; // in km/h
     private double actspeed; // in km/h
@@ -15,9 +14,7 @@ public class avg {
     private double overallTime;
     private float overallConsum;
 	
-    // setter
-    public avg (String type, float maxsp, double comsup, double chargerate) // AVG constructor
-    {
+    public avg (String type, float maxsp, double comsup, double chargerate){ // AVG constructor
 	id=type;
 	maxspeed=maxsp; // in km/h
 	consumptionRate=comsup; // in %/h
@@ -28,8 +25,7 @@ public class avg {
 	pos[1]=0; // y-position
     }
 	
-    public void setActSpeed(double speed) // Sets the actual speed of the vehicle
-    {
+    public void setActSpeed(double speed){ // Sets the actual speed of the vehicle
 	if (speed <= maxspeed && speed > 0) {
 	    actspeed=speed;
 	} else { 
@@ -37,8 +33,7 @@ public class avg {
 	}
     }
 	
-    public double[] changepos (double[] p2) // change of position entitles a battery consumption and a distance traveled
-    {
+    public double[] changepos (double[] p2){ // change of position entitles a battery consumption and a distance traveled
 	double distance=0;
 	double time = 0;
 	double batteryConsumed = 0;
@@ -75,16 +70,13 @@ public class avg {
     public void wait_at_pos(double time){
 	chargeBattery(time);
     }
-	
-    //getters
 
     public double overallTime(){
     	return overallTime;
     }
 	
-    public double getComsup() // get the overall battery consumption 
+    public double getComsup(){ // get the overall battery consumption 
     // Assumption here is for the capacity of the battery to be 50 kWh
-    {
     	return ((overallConsum) * 50 / 100);
     }
 	
