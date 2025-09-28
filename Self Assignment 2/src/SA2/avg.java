@@ -76,7 +76,7 @@ public class avg {
     }
 	
     public double getComsup(){ // get the overall battery consumption 
-    // Assumption here is for the capacity of the battery to be 50 kWh
+	// Assumption here is for the capacity of the battery to be 50 kWh
     	return ((overallConsum) * 50 / 100);
     }
 	
