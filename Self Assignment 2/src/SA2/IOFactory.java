@@ -9,7 +9,7 @@ public class IOFactory extends IndustrialOperation{
 	id = Factoryid;
 	resources = new avg[6];
 	for(int i = 0; i < 6; i++){
-	    resources[i] = new avg(i+"th vehicle", 100, 1);
+	    resources[i] = new avg(i+"th vehicle", 100, 1, 10);
 	    resources[i].setActSpeed(100);
 	}
 	// fetch all the tonnes of materials from the factory

@@ -7,9 +7,9 @@ public class IOFetchMaterials extends IndustrialOperation{
 	description = "fetch materials from the mine to the warehouse, the mine can only handle 2 AVGs to load/unload";
 	id = Fetchid;
 	resources = new avg[2];
-	resources[0] = new avg("first vehicle", 100, 1);
+	resources[0] = new avg("first vehicle", 100, 1, 10);
 	resources[0].setActSpeed(100);
-	resources[1] = new avg("second vehicle", 100, 1);
+	resources[1] = new avg("second vehicle", 100, 1, 10);
 	resources[1].setActSpeed(100);
 	// fetch all the tonnes of materials from the factory
 	for(int i = tonnes; i >= 0; i--){

@@ -9,17 +9,19 @@ public class avg {
     private float maxspeed; // in km/h
     private double actspeed; // in km/h
     private double consumptionRate; // %/h
+    private double chargeRate; // %/h
     private double batteryload; // in %
     private double[] pos = new double[2]; // For initial position in the warehouse (x,y coordinates)
     private double overallTime;
     private float overallConsum;
 	
     // setter
-    public avg (String type, float maxsp, double comsup) // AVG constructor
+    public avg (String type, float maxsp, double comsup, double chargerate) // AVG constructor
     {
 	id=type;
 	maxspeed=maxsp; // in km/h
 	consumptionRate=comsup; // in %/h
+	chargeRate=chargerate; // %/h
 	actspeed=0; // Always starting at rest (in km/h)
 	batteryload=100; // 100% from start
 	pos[0]=0; // x-position
@@ -47,15 +49,30 @@ public class avg {
 	batteryload = batteryload - batteryConsumed; // remaining battery level
 	pos[0] = p2[0]; // new position of the AGV
 	pos[1] = p2[1];
-		
+
+	chargeBatteryPercentage(batteryConsumed);
 	overallTime += time; // calculating overall time consumed for the Iop by this AGV
 	overallConsum += batteryConsumed; // calculating overall battery consumed for the Iop by this AGV
 		
 	return pos;
     }
 
-    public void wait_at_pos(double time){
+    public void chargeBatteryPercentage(double amount){
+	double time = amount / chargeRate;
 	overallTime += time;
+    }
+    
+    public void chargeBattery(double chargeHours){
+	// charge batter for _time_
+	batteryload += chargeRate * chargeHours;
+	if(batteryload > 100){
+	    batteryload = 100;
+	}
+	overallTime += chargeHours;
+    }
+
+    public void wait_at_pos(double time){
+	chargeBattery(time);
     }
 	
     //getters

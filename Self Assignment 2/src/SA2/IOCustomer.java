@@ -10,7 +10,7 @@ public class IOCustomer extends IndustrialOperation{
 	// commission vehicles
 	resources = new avg[vehicle_limit];
 	for(int i = 0; i < vehicle_limit; i++){
-	    resources[i] = new avg(i+"th vehicle", 100, 1);
+	    resources[i] = new avg(i+"th vehicle", 100, 1, 10);
 	    resources[i].setActSpeed(100);
 	}
 	// fetch all the tonnes of materials from the factory
