@@ -3,7 +3,7 @@ package SA3;
  * Constructs AVGs and returns it data
  */
 
-public class avg {
+public class avg extends HardwareResource{
     private String id;
     private float maxspeed; // in km/h
     private double actspeed; // in km/h
