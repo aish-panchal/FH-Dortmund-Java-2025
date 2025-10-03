@@ -4,8 +4,7 @@ package SA2;
  * the amount of AVGs it requires and its energy consumption.
  */
 public class main {
-    public static void main (String[] args)
-    {
+    public static void main (String[] args){
 	IndustrialProcess first = new IndustrialProcess(20, "1");
 	first.ProcessPrintInfo();
 
@@ -15,5 +14,4 @@ public class main {
 	IndustrialProcess third = new IndustrialProcess(200, "3");
 	third.ProcessPrintInfo();
     }
-	
 }
