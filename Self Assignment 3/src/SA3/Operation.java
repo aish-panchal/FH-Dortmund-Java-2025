@@ -10,8 +10,8 @@ abstract class Operation {
 	protected double Op_time;
 	protected int Op_resources;
 	
-	abstract void operationtime(float time);
 	abstract float operationalCost();
 	abstract float getoptime();
 	
 }
+
