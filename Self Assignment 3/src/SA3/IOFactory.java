@@ -27,5 +27,13 @@ public class IOFactory extends IndustrialOperation{
 	    IOtime += vehicle.overallTime();
 	    IOenergy += vehicle.getComsup();
 	}
+
+	transport = new TransportOp (resources,IOenergy);
+    Hoperation = new HumanOp("Loader",10,4);
+    	
+	transport.operationtime(IOtime);
+    	
+    	IOtime=Hoperation.getoptime()+transport.getoptime();
+    	IOcost=transport.operationalCost()+Hoperation.operationalCost();
     }
 }
