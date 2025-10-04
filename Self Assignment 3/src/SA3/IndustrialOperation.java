@@ -6,6 +6,9 @@ public class IndustrialOperation{
 	public avg[] resources; //stores AVGS needed in this operation
 	public float IOtime;
 	public float IOenergy;
+	public float IOcost;
+	public HumanOp Hoperation; //employess in the operation
+	public TransportOp transport;
     
     public float IOtime(){
 	return IOtime;
@@ -17,5 +20,9 @@ public class IndustrialOperation{
 
     public int AVGAmount(){
 	return resources.length;
+    }
+	public float getOpCost()
+    {
+    	return IOcost;
     }
 }
