@@ -24,12 +24,12 @@ public class IOFetchMaterials extends IndustrialOperation{
 	IOtime += resources[0].overallTime() + resources[1].overallTime();
 	IOenergy += resources[0].getComsup() + resources[1].getComsup();
 
-		transport = new TransportOp (resources,IOenergy);
-	  	Hoperation = new HumanOp("Loader",10,2);
+	transport = new TransportOp (resources,IOenergy);
+	Hoperation = new HumanOp("Loader",10,2);
+	
+	transport.operationtime(trans_time);
 		
-		transport.operationtime(trans_time);
-		
-		IOtime=Hoperation.getoptime()+transport.getoptime();
-		IOcost=transport.operationalCost()+Hoperation.operationalCost();
+	IOtime=Hoperation.getoptime()+transport.getoptime();
+	IOcost=transport.operationalCost()+Hoperation.operationalCost();
     }
 }
