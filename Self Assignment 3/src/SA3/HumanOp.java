@@ -1,16 +1,14 @@
 package SA3;
 
 public class HumanOp extends Operation {
-	
 	private String employees_pos; //employees position
 	private float salary; //per hour
 	private float HOptime; //working time of the employee per operation
-	//private float HOpCost;
 	
 	public HumanOp (String pos,float HRsalary, int nohr) {
 		employees_pos = pos;
 		salary = HRsalary;
-		HOptime=0;
+		HOptime=8;
 		Op_resources=nohr; //number of employees per operation
 	}
 	
