@@ -1,31 +1,20 @@
 package SA3;
 
-public class HumanOp extends Operation {
-	private String employees_pos; //employees position
-	private float salary; //per hour
-	private float HOptime; //working time of the employee per operation
-	
-	public HumanOp (String pos,float HRsalary, int nohr) {
-		employees_pos = pos;
-		salary = HRsalary;
-		HOptime=8;
-		Op_resources=nohr; //number of employees per operation
-	}
-	
-	//setter
+public class HumanResource extends Resource{
+    public String name;
+    public String position;
+    private double hours_worked;
+    public double salary;
 
-	
-	public float operationalCost () {
-		return Op_resources*(HOptime*salary); //hourly salary of the employees
-	}
-	
-	//getter
-	public float getoptime() {
-		return HOptime;
-	}
-	
-	public int getOperationHR() {
-		return Op_resources;
-	}
-	
+    public HumanResource(String name, String position, double salary){
+	this.name = name;
+	this.position = position;
+	this.salary = salary;
+    }
+    public void work(double hours){
+	hours_worked += hours;
+    }
+    public double payable_salary(){
+	return hours_worked * salary;
+    }
 }
