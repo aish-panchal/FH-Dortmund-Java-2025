@@ -9,6 +9,8 @@ public class IndustrialProcess extends Process{
     IndustrialOperation[] operations;
     private int tonnes_processed;
 
+	private float total_cost; //from all operations
+
     public IndustrialProcess(int product_tonnes, String ProcessID){
 	// calculate and call the stuff
 	id = ProcessID;
@@ -25,6 +27,7 @@ public class IndustrialProcess extends Process{
 	    energy_consumed += proc.IOenergy();
 	    duration += proc.IOtime();
 	    avg_num += proc.AVGAmount();
+		total_cost +=proc.getOpCost();
 	}
     }
 
@@ -41,6 +44,7 @@ public class IndustrialProcess extends Process{
 	ProcessDuration();
 	ProcessResources();
 	System.out.println("Process " + id + " processed " + tonnes_processed + " tonnes\n");
+	System.out.println("Process " + id + " costs " + total_cost + " Euros\n");
     }
 
     
