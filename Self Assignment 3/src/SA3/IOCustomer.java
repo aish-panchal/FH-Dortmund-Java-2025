@@ -27,5 +27,14 @@ public class IOCustomer extends IndustrialOperation{
 	    IOtime += vehicle.overallTime();
 	    IOenergy += vehicle.getComsup();
 	}
+
+		transport = new TransportOp (resources,IOenergy);
+  	Hoperation = new HumanOp("Loader",10,1);
+	
+	transport.operationtime(trans_time);
+	
+	IOtime=Hoperation.getoptime()+transport.getoptime();
+	
+	IOcost=transport.operationalCost()+Hoperation.operationalCost();
     }
 }
