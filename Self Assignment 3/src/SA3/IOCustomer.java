@@ -31,7 +31,7 @@ public class IOCustomer extends IndustrialOperation{
 		transport = new TransportOp (resources,IOenergy);
   	Hoperation = new HumanOp("Loader",10,1);
 	
-	transport.operationtime(trans_time);
+	transport.operationtime(IOtime);
 	
 	IOtime=Hoperation.getoptime()+transport.getoptime();
 	
