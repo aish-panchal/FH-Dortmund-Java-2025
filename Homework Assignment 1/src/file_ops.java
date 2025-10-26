@@ -21,11 +21,11 @@ public class file_ops {
 			if (Files.notExists(log_path)) {
 				Files.createFile(log_path);
 				try (BufferedWriter writer = Files.newBufferedWriter(log_path)){
-					writer.write("Log event: " + loggingEvent + " Date: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) + "\n");		
+					writer.write("Log event: " + loggingEvent + "\n"); 		
 				}
 			} else {
 				try (BufferedWriter writer = Files.newBufferedWriter(log_path, StandardOpenOption.APPEND)){
-					writer.write("Log event: " + loggingEvent + " Date: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) + "\n");
+					writer.write("Log event: " + loggingEvent + "\n");
 				}
 			}
 		} catch (IOException e) {
