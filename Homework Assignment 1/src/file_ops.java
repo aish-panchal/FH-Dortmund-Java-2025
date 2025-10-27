@@ -108,7 +108,7 @@ public class file_ops {
 		try {
 			// byte stream data exchange simulation
 			try (FileInputStream in_strm = new FileInputStream(log_path.toFile()); FileOutputStream out_strm = new FileOutputStream("logs/byte_strm_output.log")) {
-				byte[] buffer = new byte[10240]; // arbitrary value of 10 KB chosen for efficient read and memory usage
+				byte[] buffer = new byte[1024]; // arbitrary value of 1 KB chosen for simple read and write for simulation reasons
 				int bytesRead;
 				while ((bytesRead = in_strm.read(buffer)) != -1){
 					out_strm.write(buffer, 0, bytesRead);
