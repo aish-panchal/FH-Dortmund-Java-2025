@@ -1,5 +1,3 @@
-package HA1;
-
 /*
 * Constructs AVGs and returns it data
 * changes: made maxspeed and chargeR a fixed value
@@ -7,7 +5,7 @@ package HA1;
 
 //add statues: loaded/unloaded
 
-public class avg {
+public class avg extends storageEquipment{
 	
    public String id;
    private static float maxspeed=100; // in km/h
@@ -18,7 +16,7 @@ public class avg {
    private double[] pos = new double[2]; // For initial position in the warehouse (x,y coordinates)
    private double overallTime;
    private double overallConsum;
-	private double dis;
+   private double dis;
    public avg (String type, double comsup){//(String type, float maxsp, double comsup, double chargerate){ // AVG constructor
 	id=type;
 //	maxspeed=maxsp; // in km/h
