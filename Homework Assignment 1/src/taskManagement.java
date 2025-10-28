@@ -77,8 +77,11 @@ public class taskManagement {
 	case "toDelivery":
 	    start=warehouse;
 	    end=dispatch;
+	    break;
 	case "toCharge":
 	    end= vehicle_storage;
+	    break;
+
 	}
 		
 	//manage order
@@ -109,10 +112,9 @@ public class taskManagement {
 	case "toWarehouse":
 	
 	    move = new movStorage(this.orderID,currentdate,direction, vehicles,file,origin,"factory","warehouse");
-	    overallduration= (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
+	    overallduration = (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 			
-	    //	System.out.println(move.timestamp+": "+this.orderID+" mission completed. Overall duration: "+String.format("%.2f", overallduration)+" hours.");
-	    entry=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp)+": "+this.orderID+" mission completed. Overall duration: "+String.format("%.2f", overallduration)+" hours.");
+	    entry = calculate_date(overallduration, move, this.orderID);
 	    file_ops.createUpdateLog(file, entry);
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
@@ -123,9 +125,8 @@ public class taskManagement {
 			
 	    move = new movDelivery (this.orderID, currentdate, file, vehicles, origin, direction);
 	    overallduration= (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
-			
-	    //System.out.println(move.timestamp+": "+this.orderID+" mission completed. Overall duration: "+String.format("%.2f", overallduration)+" hours.");
-	    entry=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp)+": "+this.orderID+" mission completed. Overall duration: "+String.format("%.2f", overallduration)+" hours.");
+
+	    entry= calculate_date(overallduration, move, this.orderID);
 	    file_ops.createUpdateLog(file, entry);
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
@@ -138,7 +139,13 @@ public class taskManagement {
 	}
 				
     }
-	
+
+    private static String calculate_date(double overallduration, movementVehicle move, String orderID){
+	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp)+": "
+	    +orderID+" mission completed. Overall duration: "
+	    +String.format("%.2f", overallduration)+" hours.";
+    }
+    
     private void monitorVehicles() {
 		
     }
