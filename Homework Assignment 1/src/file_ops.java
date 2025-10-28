@@ -64,7 +64,7 @@ public class file_ops {
 					Files.createDirectories(archive_dir_path);
 				}
 				
-				Path archive_file_path = archive_dir_path.resolve(fileName.replace(".log", "_archive.log"));
+				Path archive_file_path = archive_dir_path.resolve(fileName.replace(".txt", "_archive.txt"));
 				Files.move(log_path, archive_file_path, StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch (IOException e) {
@@ -87,7 +87,7 @@ public class file_ops {
 	
 	// to open a log file with log name and its relevant extension
 	public static void openLog (String equipmentDateTerm) {
-		Path log_path = Paths.get(Logs_dir, equipmentDateTerm + ".log");
+		Path log_path = Paths.get(Logs_dir, equipmentDateTerm + ".txt");
 		
 		if(Files.exists(log_path)) {
 			try (BufferedReader reader = Files.newBufferedReader(log_path)){
@@ -107,7 +107,7 @@ public class file_ops {
 		
 		try {
 			// byte stream data exchange simulation
-			try (FileInputStream in_strm = new FileInputStream(log_path.toFile()); FileOutputStream out_strm = new FileOutputStream("logs/byte_strm_output.log")) {
+			try (FileInputStream in_strm = new FileInputStream(log_path.toFile()); FileOutputStream out_strm = new FileOutputStream("logs/byte_strm_output.txt")) {
 				byte[] buffer = new byte[1024]; // arbitrary value of 1 KB chosen for simple read and write for simulation reasons
 				int bytesRead;
 				while ((bytesRead = in_strm.read(buffer)) != -1){
@@ -116,7 +116,7 @@ public class file_ops {
 				System.out.println("byte stream transfer data simulation complete");
 				
 				// character stream data exchange data simulation
-				try (FileReader reader = new FileReader(log_path.toFile()); FileWriter writer = new FileWriter("logs/char_strm_output.log")){
+				try (FileReader reader = new FileReader(log_path.toFile()); FileWriter writer = new FileWriter("logs/char_strm_output.txt")){
 					int charactersRead;
 					while ((charactersRead = reader.read()) != -1) {
 						writer.write(charactersRead);
