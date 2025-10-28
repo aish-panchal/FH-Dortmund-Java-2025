@@ -102,8 +102,7 @@ public class taskManagement {
 	    move = new movStorage(this.orderID,currentdate,direction, vehicles,file,origin,"warehouse","factory");
 	    overallduration= (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 			
-	    //	System.out.println(move.timestamp+": "+this.orderID+" mission completed. Overall duration: "+String.format("%.2f", overallduration)+" hours.");
-	    entry=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp)+": "+this.orderID+" mission completed. Overall duration: "+String.format("%.2f", overallduration)+" hours.");
+	    entry=calculate_date(overallduration, move, this.orderID);
 	    file_ops.createUpdateLog(file, entry);
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
