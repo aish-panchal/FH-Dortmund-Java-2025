@@ -20,6 +20,7 @@ public class taskManagement {
     private int tonnes;
     
     private String orderID;
+    public rawMaterial ordermaterial;
     public Date currentdate;
     private int orderno=1;
     
@@ -62,10 +63,10 @@ public class taskManagement {
 	end = new double[2];
 	
 	//manage order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}
-	this.manageOrder(order);
+	this.manageOrder(order,load);
     }
 	
-    private void manageOrder(String task) {
+    private void manageOrder(String task, int ton) {
 		
 	Date starttime=new java.util.Date();
 	starttime.setTime(currentdate.getTime());
@@ -74,8 +75,8 @@ public class taskManagement {
 		
 	switch (task) {
 	case "toFactory":
-
-	    move = new movStorage(this.orderID, currentdate, factory, vehicles, file, warehouse, "warehouse", "factory");
+		ordermaterial = new rawMaterial("item"+orderno,"raw",ton,warehouse);
+	    move = new movStorage(this.orderID, currentdate, factory, vehicles, file, warehouse, "warehouse", "factory",this.ordermaterial);
 	    overallduration= (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 			
 	    entry=calculate_date(overallduration, move, this.orderID);
@@ -88,8 +89,8 @@ public class taskManagement {
 	    break;
 			
 	case "toWarehouse":
-	
-	    move = new movStorage(this.orderID,currentdate,warehouse, vehicles,file,factory,"factory","warehouse");
+		ordermaterial = new rawMaterial("item "+orderno,"product",ton,factory);
+	    move = new movStorage(this.orderID,currentdate,warehouse, vehicles,file,factory,"factory","warehouse",this.ordermaterial);
 	    overallduration = (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 			
 	    entry = calculate_date(overallduration, move, this.orderID);
@@ -102,8 +103,8 @@ public class taskManagement {
 	    break;
 			
 	case "toDelivery":
-			
-	    move = new movDelivery (this.orderID, currentdate, file, vehicles, warehouse, dispatch);
+		ordermaterial = new rawMaterial("item "+orderno,"product",ton,warehouse);	
+	    move = new movDelivery (this.orderID, currentdate, file, vehicles, warehouse, dispatch,this.ordermaterial);
 	    overallduration= (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 
 	    entry= calculate_date(overallduration, move, this.orderID);
