@@ -12,14 +12,16 @@ abstract class movementVehicle {
     protected double location[]=new double[2];
     protected double destination[]=new double[2];
     
-    public String sysfile;
+    public String sysfile; 
     public String file_name;
     protected String event;
     protected String taskid;
     protected avg avgs[];
-    protected avg lowbat[];
-    public boolean hasLowBat;
+    protected avg lowbat[]; //stores vehicles that need to charge
+    public boolean hasLowBat; //battery < 50%
     protected Date timestamp;
+    protected storageManagement tonnes;
+    protected rawMaterial movingmaterial;
 	
     protected boolean status;
     protected static boolean done=true;
