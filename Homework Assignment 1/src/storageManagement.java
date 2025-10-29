@@ -2,9 +2,18 @@ import java.util.ArrayList;
 
 public class storageManagement{
     // change to private later
-    public storageEquipment[] equipment;
+    public ArrayList<storageEquipment> equipment;
     public ArrayList<rawMaterial> stored_materials;
-    public storageEquipment[] equipment(){
+
+    public void initialize_storage_equipment(int n){
+	// initialize a grid of n*n storage devices
+	for(int i = 0; i < n; i++){
+	    for(int j = 0; j < n; j++){
+		equipment.add(new storageEquipment(new double[] {i, j}));
+	    }
+	}
+    }
+    public ArrayList<storageEquipment> equipment(){
 	return equipment;
     }
     public ArrayList<rawMaterial> stored_materials(){
