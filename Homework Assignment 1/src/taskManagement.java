@@ -49,10 +49,6 @@ public class taskManagement {
 	    op_vehicles=low_load;
 	}
 		
-	//add condition of creation of vehicles according to the existing inventory
-	//add condition that if avg's are busy, then take more avgs from storage equipment
-	//get avg's needed for the transportation of the tones
-	//if(orderno==1) {
 	vehicles=new avg[op_vehicles];
 	for(int i=0; i<op_vehicles;i++) {
 	    vehicles[i]= new avg("avg."+i, 0.25);//id,consump %/h
@@ -60,13 +56,13 @@ public class taskManagement {
 	    vehicles[i].avgfile=(new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+vehicles[i].id+".txt");//create/update vehicle file
 	    file_ops.createUpdateLog(vehicles[i].avgfile, "Started task.");
 	}	
-	//}
+	
 		
 	start = new double[2];
 	end = new double[2];
 	
 	//manage order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}
-	this.manageOrder(order);	
+	this.manageOrder(order);
     }
 	
     private void manageOrder(String task) {
@@ -75,7 +71,6 @@ public class taskManagement {
 	starttime.setTime(currentdate.getTime());
 	double overallduration=0;
 	String entry;
-	avg chargingv;
 		
 	switch (task) {
 	case "toFactory":
@@ -88,7 +83,6 @@ public class taskManagement {
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
 	    if(this.move.hasLowBat) {
-	    	task= "toCharge";
 	    	charge = new chargingStation( file, currentdate, this.move.lowbat);
 	    } 
 	    break;
@@ -103,7 +97,6 @@ public class taskManagement {
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
 	    if(this.move.hasLowBat) {
-	    	task= "toCharge";
 	    	charge = new chargingStation( file, currentdate, this.move.lowbat);
 	    }
 	    break;
@@ -118,18 +111,9 @@ public class taskManagement {
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
 	    if(this.move.hasLowBat) {
-	    	task= "toCharge";
-	    	 System.out.println("change task");
-	    	//break;
-	    	 charge = new chargingStation( file, currentdate, this.move.lowbat);
-	    	 
+	    	 charge = new chargingStation( file, currentdate, this.move.lowbat);    	 
 	    }
 	    break;
-			
-	/*case "toCharge":
-		System.out.println("Need charging");
-	    
-	    break;*/
 	}
 				
     }
@@ -139,7 +123,8 @@ public class taskManagement {
 	    +orderID+" mission completed. Overall duration: "
 	    +String.format("%.2f", overallduration)+" hours.";
     }
-    
+   
+    /*
     private void monitorVehicles() {
 		
     }
@@ -151,5 +136,5 @@ public class taskManagement {
 	    file_ops.deleteLog(file);//eliminates it from current file
 	}
 		
-    }
+    }*/
 }
