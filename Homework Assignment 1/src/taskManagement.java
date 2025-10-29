@@ -80,12 +80,9 @@ public class taskManagement {
 	case "toCharge":
 	    end= vehicle_storage;
 	    break;
-
 	}
-		
 	//manage order
-	this.manageOrder(order,start,end);
-		
+	this.manageOrder(order, start, end);	
     }
 	
     private void manageOrder(String task, double[] origin, double[] direction) {
