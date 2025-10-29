@@ -11,12 +11,14 @@ public class avg{
     private static float maxspeed=100; // in km/h
     public double actspeed; // in km/h
     private static double consumptionRate; // %/h
-    private static double chargeRate=10; // %/h
+    private static double chargeRate=50; // %/h
     private double batteryload; // in %
     private double[] pos = new double[2]; // For initial position in the warehouse (x,y coordinates)
     private double overallTime;
     private double overallConsum;
     private double dis;
+    public String avgfile;
+    
     public avg (String type, double comsup){//(String type, float maxsp, double comsup, double chargerate){ // AVG constructor
 	id=type;
 	//	maxspeed=maxsp; // in km/h
@@ -61,10 +63,11 @@ public class avg{
 	return pos;
     }
 
-    public void chargeBatteryPercentage(double amount){
-	double time = amount / chargeRate;
+    public double chargeBatteryPercentage(double amount){
+	double time = (amount*100) / chargeRate;
 	//	overallTime += time;
 	batteryload = 100;
+	return time;
     }
    
     public void chargeBattery(double chargeHours){
@@ -92,7 +95,7 @@ public class avg{
     */
     public double getComsup(){ // get the overall battery consumption 
 	// Assumption here is for the capacity of the battery to be 50 kWh
-   	return (overallConsum);
+   	return (1-overallConsum); //remaining battery
     }
 	
 }

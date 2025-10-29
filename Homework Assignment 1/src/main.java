@@ -12,9 +12,9 @@ public class main {
 
 	taskManagement workday = new taskManagement(today); //array of days //depending on number of days should archive/delete files
 		
-	workday.takeOrder(50, "toFactory");//Order of 50 tones from warehouse to factory
-	workday.takeOrder(100, "toWarehouse");
-	workday.takeOrder(200, "toDelivery");
+	//workday.takeOrder(50, "toFactory");//Order of 50 tones from warehouse to factory
+	//workday.takeOrder(100, "toWarehouse");
+	workday.takeOrder(50, "toDelivery");
     }
 
 }

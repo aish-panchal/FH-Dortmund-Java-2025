@@ -1,23 +1,27 @@
-
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class movDelivery extends movementVehicle {
+	private int ind;
 	
     public movDelivery(String task, Date time, String filename, avg transport[], double storUnit[], double dispatcharea[]) {
 		
 	this.taskid =task;
 	this.timestamp=time;
-	this.file_name= filename;
+	this.sysfile= filename;
 	this.location=storUnit;
 	this.destination=dispatcharea;
-		
+	this.hasLowBat=false;
+	
 	this.avgs = new avg[transport.length];
+	this.lowbat = new avg[avgs.length];
+	ind=0;
+	
 	for(int i=0; i<transport.length;i++) {
 	    this.avgs[i]=transport[i];
 	    this.avgs[i].setActSpeed(2); //slower because of the delicate materials
+	    //this.avgs[i].avgfile=(time+this.avgs[i].id);//create/update vehicle file
 	}
 	loading("warehouse");
 	movingtolocation("dispatch area");
@@ -56,34 +60,43 @@ public class movDelivery extends movementVehicle {
 	return location;
     }
 	
-    public void movingtolocation(String loc) {
+    public void movingtolocation(String loc) {//start movement from current location to destination
 	status=in_progress;
 	updateLog("transporting", loc);
 	for(int i=0;i<avgs.length;i++) {
-	    this.avgs[i].changepos(destination); 
+	    this.avgs[i].changepos(destination);
+
+	    if(avgs[i].getComsup()<0.50) {
+	    	this.lowbat[ind++]=avgs[i];
+	    }
+	}
+	if(ind>0) {
+		this.hasLowBat=true;
 	}
 	location = destination;
 	this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis((long) this.avgs[0].overallTime()) ); //add duration of the unloading process, also assuming perfect sync
 	status=done;
 	updateLog("transporting",loc);//process finished and added to the log file
-    } //start movement from current location to destination
+	
+    } 
 	
 	
     public void updateLog(String update, String delivarea) { //add events current and finished to the log file
+     	String upevent;
+    	this.event= (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "+taskid+" Vehicle: ");
 	if(status) {
 	    for(int j=0; j<avgs.length;j++) {
-		this.event= (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "+taskid+" Vehicle: "+avgs[j].id+ " finished "+ update+" the delivary at the "+delivarea);
-		file_ops.createUpdateLog(this.file_name, this.event);
+		upevent= (this.event+avgs[j].id+ " finished "+ update+" the delivary at the "+delivarea);
+		file_ops.createUpdateLog(this.sysfile, upevent);
+		file_ops.createUpdateLog(avgs[j].avgfile, upevent);
 				
-		//System.out.println(this.timestamp + ": "+taskid+" Vehicle: "+avgs[j].id+ " finished delivery.");
 		continue;
 	    }
 	}else {
 	    for(int j=0; j<avgs.length;j++) {
-		this.event= (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "+taskid+" Vehicle: "+avgs[j].id+ " is "+update+" the delivery to the "+delivarea+".");
-		file_ops.createUpdateLog(this.file_name, this.event);
-				
-		//	System.out.println(this.timestamp + ": "+taskid+" Vehicle: "+avgs[j].id+ " is "+process+ " at "+location+".");
+	    	upevent= (this.event+avgs[j].id+ " is "+update+" the delivery to the "+delivarea+".");
+			file_ops.createUpdateLog(this.sysfile, upevent);
+			file_ops.createUpdateLog(avgs[j].avgfile, upevent);
 		continue;
 	    }
 	}

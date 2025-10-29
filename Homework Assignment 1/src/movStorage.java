@@ -7,18 +7,21 @@ import java.util.concurrent.TimeUnit;
  * */
 public class movStorage extends movementVehicle {
 	
-    long start;
-    double duration=0;
+	private int index;
 	
     public movStorage(String task, Date time, double coord[], avg avgs[], String logfile, double orig[],String src, String dst) {
 	taskid=task;
-	this.file_name=logfile;
+	sysfile=logfile;
+	
 	this.location=orig;
 	this.destination= coord;// x2, y2
 	this.timestamp=time;
 	this.avgs = new avg[avgs.length];
+	lowbat = new avg[avgs.length];
+	index=0;
 	for(int i=0;i<avgs.length;i++) {
 	    this.avgs[i]=avgs[i];
+	    
 	}
 		
 	this.loading(src);
@@ -29,7 +32,7 @@ public class movStorage extends movementVehicle {
     public void loading(String inplace) {
 	long loadtime=10; //minutes
 	status=in_progress;
-	start=this.timestamp.getTime();
+	
 	updateLog("loading", inplace);
 	for(int i=0;i<avgs.length;i++) {
 	    avgs[i].changepos(location);//set avgs to loading location
@@ -63,6 +66,14 @@ public class movStorage extends movementVehicle {
 	updateLog("moving",place);
 	for(int i=0;i<avgs.length;i++) {
 	    avgs[i].changepos(destination);
+	    
+	    if(avgs[i].getComsup()<0.50) {
+	    	this.lowbat[index++]=avgs[i];
+	    }
+
+	}
+	if(index>0) {
+		this.hasLowBat=true;
 	}
 		  
 	location=destination;
@@ -73,20 +84,21 @@ public class movStorage extends movementVehicle {
     }
 	
     public void updateLog(String process, String location) {
+    	String update;
+    	this.event= (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "+taskid+" Vehicle: ");
+    	
 	if(status) {
 	    for(int j=0; j<avgs.length;j++) {
-		this.event= (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "+taskid+" Vehicle: "+avgs[j].id+ " finished "+process+ ".");
-		file_ops.createUpdateLog(this.file_name, this.event);
-				
-		//System.out.println(this.timestamp + ": "+taskid+" Vehicle: "+avgs[j].id+ " finished "+process+ ".");
+	    	update= (this.event+avgs[j].id+ " finished "+process+ ".");
+	    	file_ops.createUpdateLog(this.sysfile, update);
+	    	file_ops.createUpdateLog(avgs[j].avgfile, update);		
 		continue;
 	    }
 	}else {
 	    for(int j=0; j<avgs.length;j++) {
-		this.event= (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "+taskid+" Vehicle: "+avgs[j].id+ " is "+process+ " at "+location+".");
-		file_ops.createUpdateLog(this.file_name, this.event);
-				
-		//	System.out.println(this.timestamp + ": "+taskid+" Vehicle: "+avgs[j].id+ " is "+process+ " at "+location+".");
+	    	update= (this.event+avgs[j].id+ " is "+process+ " at "+location+".");
+	    	file_ops.createUpdateLog(this.sysfile, update);
+	    	file_ops.createUpdateLog(avgs[j].avgfile, update);		
 		continue;
 	    }
 	}		
