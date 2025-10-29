@@ -1,9 +1,12 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class storageManagement{
     // change to private later
     public ArrayList<storageEquipment> equipment;
     public ArrayList<rawMaterial> stored_materials;
+    public String storageLog;
 
     public class storageException extends Exception{}
     public class storageOccupiedException extends storageException{}
@@ -12,7 +15,9 @@ public class storageManagement{
     public class noFreeStorageSpaceException extends storageException{}
     
     public storageManagement(){
-	
+    	Date thisday = new java.util.Date();
+    	storageLog=(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(thisday)+" Storage"+".txt");
+    	file_ops.createUpdateLog(storageLog, "");//create log file when initialized
     }
     public storageManagement(int n){
 	initialize_storage_equipment(n);
@@ -43,10 +48,12 @@ public class storageManagement{
     }
     //TODO make storage exceptions and specific ones for each error
     public rawMaterial retrieve_material(double[] location) throws materialNotFoundException{
+   
 	for(rawMaterial item: stored_materials){
 	    if(item.location == location){
 		stored_materials.remove(item);
 		// TODO add logging here
+		
 		return item;
 	    }
 	}
@@ -70,6 +77,7 @@ public class storageManagement{
     }
     
     public void store_material(rawMaterial item, double[] storage_location) throws storageOccupiedException, storageNotFoundException{
+    	
 	// store a material at a storage location
 	storageEquipment storageSpace = null;
 	for(storageEquipment s: equipment){
@@ -89,6 +97,7 @@ public class storageManagement{
 	storageSpace.load();
 	item.location = storage_location;
 	stored_materials.addLast(item);
+	
 	// TODO add logging here
     }
 }
