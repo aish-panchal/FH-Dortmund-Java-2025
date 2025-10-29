@@ -5,7 +5,7 @@
 
 //add statues: loaded/unloaded
 
-public class avg extends storageEquipment{
+public class avg{
 	
     public String id;
     private static float maxspeed=100; // in km/h

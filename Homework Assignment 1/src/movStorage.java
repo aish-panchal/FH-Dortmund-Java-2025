@@ -10,7 +10,7 @@ public class movStorage extends movementVehicle {
     long start;
     double duration=0;
 	
-    public movStorage(String task, Date time, double coord[], avg avgs[], String logfile, double orig[],String xyo, String xy1) {
+    public movStorage(String task, Date time, double coord[], avg avgs[], String logfile, double orig[],String src, String dst) {
 	taskid=task;
 	this.file_name=logfile;
 	this.location=orig;
@@ -21,9 +21,9 @@ public class movStorage extends movementVehicle {
 	    this.avgs[i]=avgs[i];
 	}
 		
-	this.loading(xyo);
-	this.movingtolocation(xy1);
-	this.unloading(xy1);
+	this.loading(src);
+	this.movingtolocation(dst);
+	this.unloading(dst);
     }
 	
     public void loading(String inplace) {

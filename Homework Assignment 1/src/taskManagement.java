@@ -14,26 +14,25 @@ public class taskManagement {
 
     public file_ops log_file;
     public String file;
-	
+
     private int op_vehicles=0; //vehicles needed
     private avg vehicles[];
     private int tonnes;
-	
+    
     private String orderID;
     public Date currentdate;
     private int orderno=1;
-	
+    
     private movementVehicle move;
     private chargingStation charge;
     private double[] start;
     private double[] end;
-	
+    
     public taskManagement(Date date) {
 	currentdate = date;
 	file= ("log."+new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+".txt");
 
-	//		file_ops.createUpdateLog(file, "New log file");
-		
+	//file_ops.createUpdateLog(file, "New log file");
     }
 	
     //creates order id
@@ -99,7 +98,7 @@ public class taskManagement {
 	switch (task) {
 	case "toFactory":
 
-	    move = new movStorage(this.orderID,currentdate,direction, vehicles,file,origin,"warehouse","factory");
+	    move = new movStorage(this.orderID, currentdate, direction, vehicles, file, origin, "warehouse", "factory");
 	    overallduration= (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 			
 	    entry=calculate_date(overallduration, move, this.orderID);

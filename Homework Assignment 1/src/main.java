@@ -1,5 +1,3 @@
-
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,7 +8,7 @@ public class main {
     public static void main (String[] args) {
 		
 	Date today = new java.util.Date();
-	int day=0;
+	//int day=0;
 
 	taskManagement workday = new taskManagement(today); //array of days //depending on number of days should archive/delete files
 		
