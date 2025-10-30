@@ -15,7 +15,7 @@ public class main {
 	workday.takeOrder(100, "toWarehouse");
 	workday.takeOrder(50, "toDelivery");
 	
-	
+	file_ops.openLog("ChargingStation");
 	
     }
 

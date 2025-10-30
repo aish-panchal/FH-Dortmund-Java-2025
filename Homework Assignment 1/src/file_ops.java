@@ -1,7 +1,8 @@
 
 import java.io.*;
 import java.nio.file.*;
-import java.text.SimpleDateFormat;
+import java.util.regex.*;
+import java.util.stream.Stream;
 
 public class file_ops {
 	
@@ -87,18 +88,29 @@ public class file_ops {
 	
     // to open a log file with log name and its relevant extension
     public static void openLog (String equipmentDateTerm) {
-	Path log_path = Paths.get(Logs_dir, equipmentDateTerm + ".txt");
+    	Path log_path = Paths.get(Logs_dir);
 		
-	if(Files.exists(log_path)) {
-	    try (BufferedReader reader = Files.newBufferedReader(log_path)){
-		String data;
-		while ((data = reader.readLine()) != null) {
-		    System.out.println(data);
+		try (Stream<Path> files = Files.list(log_path)){
+			// compilation of regex pattern from search term (can be equipment name or date)
+			Pattern pattern = Pattern.compile(Pattern.quote(equipmentDateTerm));
+			
+			files.filter(file -> file.getFileName().toString().endsWith(".txt"))
+				.filter(file -> pattern.matcher(file.getFileName().toString()).find()).forEach(file -> {
+				
+				System.out.println("\nFound file: " + file.getFileName());
+				try (BufferedReader reader = Files.newBufferedReader(file)) {
+					String data;
+					while ((data = reader.readLine()) != null) {
+					    System.out.println(data);
+					}
+				} catch (IOException e) {
+					System.out.println("Error reading log file: " + e.getMessage());
+				}
+			
+			});
+		} catch (IOException e) {
+			System.out.println("Error Searching log files: " + e.getMessage());
 		}
-	    } catch (IOException e) {
-		System.out.println("Error reading log file: " + e.getMessage());
-	    }
-	}
     }
 	
     // to simulate data exchange using byte and character streams
