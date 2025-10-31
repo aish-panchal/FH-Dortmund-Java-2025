@@ -1,21 +1,22 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class exception_handling extends Exception {
 	
 	public void multipleExceptions() {
 		try {
-			int[] arr = {1, 2, 3};
-			int num = arr[4];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("ArrayIndexOutofBoundsException demo: " + e.getMessage());
-		} 
-		
-		try {
-			int division = 7 / 0;
-		} catch (ArithmeticException e) {
-			System.out.println("ArithmeticException demo: " + e.getMessage());
+			File file = new File("missing.txt");
+			Scanner scanner = new Scanner(file);
+			while (scanner.hasNextLine()){
+				System.out.println(scanner.nextLine());
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("File is missing: " + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("IO exception: : " + e.getMessage());
 		}
 	}
 	
