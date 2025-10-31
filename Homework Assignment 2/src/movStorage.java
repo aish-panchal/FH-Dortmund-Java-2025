@@ -10,8 +10,8 @@ public class movStorage extends movementVehicle {
 	private int index;
 	
     public movStorage(String task, Date time, double coord[], avg avgs[], String logfile, double orig[],String src, String dst, rawMaterial mat) {
-		taskid=task;
-		sysfile=logfile;
+		this.taskid=task;
+		this.sysfile=logfile;
 		
 		this.movingmaterial=mat;
 		this.tonnes = new storageManagement();
@@ -23,9 +23,14 @@ public class movStorage extends movementVehicle {
 		lowbat = new avg[avgs.length];
 		index=0;
 		
+		try {
 		for(int i=0;i<avgs.length;i++) {
+			if(this.avgs[i]==null) {
+				this.emov.handleVehicleNotFound();
+			}
 		    this.avgs[i]=avgs[i];	    
 		}
+		}catch(Throwable e) {System.out.println("Error: "+e.toString());}
 			
 		this.loading(src);
 		this.movingtolocation(dst);
@@ -44,12 +49,7 @@ public class movStorage extends movementVehicle {
 		
 		this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis(loadtime) ); //add duration of the loading process
 		//retrieves the material from a location
-		/*try {
-			tonnes.retrieve_material(location,this.timestamp,this.movingmaterial);
-		} catch (storageManagement.materialNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
 		status=done;
 		updateLog("loading",inplace); //process finished and added to the log file
     }
@@ -64,12 +64,7 @@ public class movStorage extends movementVehicle {
 		
 		this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis(unloadtime) ); //add duration of the unloading process, also assuming perfect sync
 		//stores material in a location
-		/*try {
-			tonnes.store_material(this.movingmaterial,location,this.timestamp);
-		} catch (storageManagement.storageOccupiedException | storageManagement.storageNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
 		status=done;
 		updateLog("unloading",toplace);//process finished and added to the log file
 		  

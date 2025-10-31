@@ -22,6 +22,7 @@ abstract class movementVehicle {
     protected Date timestamp;
     protected storageManagement tonnes;
     protected rawMaterial movingmaterial;
+    protected exception_handling emov;
 	
     protected boolean status;
     protected static boolean done=true;

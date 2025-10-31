@@ -19,10 +19,15 @@ public class movDelivery extends movementVehicle {
 		this.avgs = new avg[transport.length];
 		this.lowbat = new avg[avgs.length];
 		ind=0;
+		try {
 		for(int i=0; i<transport.length;i++) {
+			if(this.avgs[i]==null) {
+				this.emov.handleVehicleNotFound();
+			}
 		    this.avgs[i]=transport[i];
 		    this.avgs[i].setActSpeed(2); //slower because of the delicate materials
 		}
+		}catch(Throwable e) {System.out.println("Error: "+e.toString());}
 		loading("warehouse");
 		movingtolocation("dispatch area");
 		unloading("dispatch area");
@@ -39,12 +44,6 @@ public class movDelivery extends movementVehicle {
 		
 		this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis(loadtime) ); //add duration of the unloading process, also assuming perfect sync
 		
-		/*try {
-			tonnes.retrieve_material(location,this.timestamp,this.movingmaterial);
-		} catch (storageManagement.materialNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		status=done;
 		updateLog("loading",start);//process finished and added to the log file
     }
@@ -58,12 +57,7 @@ public class movDelivery extends movementVehicle {
 		}
 	
 		this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis(unloadtime) ); //add duration of the unloading process, also assuming perfect sync
-		/*try {
-			tonnes.store_material(this.movingmaterial,location,this.timestamp);
-		} catch (storageManagement.storageOccupiedException | storageManagement.storageNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
 		status=done;
 		updateLog("unloading","dispatch area.");//process finished and added to the log file
 			  
@@ -76,6 +70,7 @@ public class movDelivery extends movementVehicle {
     public void movingtolocation(String loc) {//start movement from current location to destination
 		status=in_progress;
 		updateLog("transporting", loc);
+		
 		for(int i=0;i<avgs.length;i++) {
 		    this.avgs[i].changepos(destination);
 		    if(avgs[i].getComsup()<0.50) {
@@ -92,7 +87,6 @@ public class movDelivery extends movementVehicle {
 		updateLog("transporting",loc);//process finished and added to the log file
 	
     } 
-	
 	
     public void updateLog(String update, String delivarea) { //add events current and finished to the log file
      	String upevent, produpdate;
