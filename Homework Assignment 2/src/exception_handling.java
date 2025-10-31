@@ -19,10 +19,7 @@ public class exception_handling extends Exception {
 			System.out.println("IO exception: : " + e.getMessage());
 		}
 	}
-	
-	public void rethrowingExceptions() {
-		
-	}
+
 	
 	public void resourceManagement() {
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("testFile.txt"))){
