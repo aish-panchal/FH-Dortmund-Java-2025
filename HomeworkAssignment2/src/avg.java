@@ -66,7 +66,8 @@ public class avg{
     public double chargeBatteryPercentage(double amount){
 	double time = (amount*100) / chargeRate;
 	//	overallTime += time;
-	batteryload = 100;
+	batteryload = 1;
+	overallConsum=0;
 	return time;
     }
    

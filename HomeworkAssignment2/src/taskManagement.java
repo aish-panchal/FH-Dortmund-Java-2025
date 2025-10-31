@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class taskManagement {
     //coordinates of the different locations
-    static final double warehouse[]= {3,1};
+	 static final double warehouse[]= {3,1};
     static final double factory[]= {5,6};
     static final double dispatch[]= {4,5};
     //amount of avg needed based on the amount of tonnes to be transported
