@@ -34,7 +34,7 @@ public class taskManagement {
 	    avg a = new avg("avg."+i, 0.25);
 	    vehicles.add(a);
 	    a.setActSpeed(5);
-	    a.avgfile=(new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+vehicles[i].id+".txt");//create/update vehicle file
+	    a.avgfile=(new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+a.id+".txt");//create/update vehicle file
 	    file_ops.createUpdateLog(a.avgfile, "Started task.");
 	}
 	this.vehicles = vehicles;
