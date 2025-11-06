@@ -38,6 +38,7 @@ public class taskManagement {
 	    file_ops.createUpdateLog(a.avgfile, "Started task.");
 	}
 	this.vehicles = vehicles;
+	this.vehiclesInNeedOfCharging = new ArrayList<avg>();
 	
 	file= ("log."+new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+".txt");
 	
