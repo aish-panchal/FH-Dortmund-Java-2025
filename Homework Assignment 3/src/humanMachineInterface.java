@@ -30,7 +30,7 @@ public class humanMachineInterface extends Application{
     
     public void start(Stage mainStage) {
     	Date today = new Date();
-    	taskManagement workday = new taskManagement(today);
+    	taskManagement workday = new taskManagement(today,200);
     	
     	// creating label for weight prompt
     	Label weightLabel = new Label("Enter order weight:");
