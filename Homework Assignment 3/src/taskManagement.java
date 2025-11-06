@@ -51,7 +51,7 @@ public class taskManagement {
 		
 	orderID= ( new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+"Task"+"."+orderno);
 	//determine range of the load
-	try {
+	try {	    
 	    if(load>100) {
 		op_vehicles=high_load;
 	    }else if ((load<=100)&&(load>50)) {
@@ -66,15 +66,7 @@ public class taskManagement {
 	} catch(Throwable e) {
 	    System.out.println("Error: "+e.toString());
 	}
-		
-	vehicles=new avg[op_vehicles];
-	for(int i=0; i<op_vehicles;i++) {
-	    vehicles[i]= new avg("avg."+i, 0.25);//id,consump %/h
-	    vehicles[i].setActSpeed(5);
-	    vehicles[i].avgfile=(new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+vehicles[i].id+".txt");//create/update vehicle file
-	    file_ops.createUpdateLog(vehicles[i].avgfile, "Started task.");
-	}	
-		
+
 	//manage order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}
 	this.manageOrder(order,load);
     }
@@ -84,7 +76,7 @@ public class taskManagement {
 	starttime.setTime(currentdate.getTime());
 	double overallduration=0;
 	String entry;
-			
+	
 	switch (task) {
 	case "toFactory":
 	    ordermaterial = new rawMaterial("item"+orderno,"raw",ton,warehouse);
@@ -124,7 +116,7 @@ public class taskManagement {
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
 	    if(this.move.hasLowBat) {
-		charge = new chargingStation( file, currentdate, this.move.lowbat);    	 
+		charge = new chargingStation(this.vehicles, this.vehiclesInNeedOfCharging);    	 
 	    }
 	    break;
 		    

@@ -6,7 +6,7 @@
 //add statues: loaded/unloaded
 
 public class avg{
-	
+
     public String id;
     private static float maxspeed=100; // in km/h
     public double actspeed; // in km/h
@@ -69,6 +69,7 @@ public class avg{
 	batteryload = 1;
 	overallConsum=0;
 	return time;
+	// time is in hours, and can be fractional
     }
    /*
     public void chargeBattery(double chargeHours){

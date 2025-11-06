@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 /*locations:
@@ -11,14 +12,16 @@ abstract class movementVehicle {
 	
     protected double location[]=new double[2];
     protected double destination[]=new double[2];
+
+    protected ArrayList<avg> avgsToBeUsed;
+    protected ArrayList<avg> chargeQ; // stores vehicles to be charged
+    protected ArrayList<avg> readyVehicleQ;
     
     public String sysfile; 
     public String file_name;
     protected String event;
     protected String taskid;
     protected avg avgs[];
-    protected avg lowbat[]; //stores vehicles that need to charge
-    public boolean hasLowBat; //battery < 50%
     protected Date timestamp;
     protected storageManagement tonnes;
     protected rawMaterial movingmaterial;
