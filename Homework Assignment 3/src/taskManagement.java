@@ -46,9 +46,6 @@ public class taskManagement {
 	this.vehiclesInNeedOfCharging = new ArrayList<avg>();
 	
 	file= ("log."+new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+".txt");
-	
-	
-	//total amount of avg= 
     }
 	
     //creates order id
