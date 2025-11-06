@@ -23,10 +23,15 @@ public class taskManagement {
     public ArrayList<avg> vehiclesInNeedOfCharging;
     public rawMaterial ordermaterial;
     public movementVehicle move;
+    public Thread chargingStationThread;
     public chargingStation charge;
     public exception_handling etask = new exception_handling();
     
     public taskManagement(Date date,int noavgs) {
+	this.charge = new chargingStation(vehicles, vehiclesInNeedOfCharging);
+	this.chargingStationThread = new Thread("charging station");
+	this.chargingStationThread.start();
+
 	currentdate = date;
 	ArrayList<avg> vehicles= new ArrayList<avg>(); 
 	for(int i=0; i<op_vehicles;i++) {
