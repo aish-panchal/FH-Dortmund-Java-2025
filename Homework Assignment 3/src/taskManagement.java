@@ -1,6 +1,8 @@
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+//two array lists: avgs that are ready and avgs that need charging
 
 public class taskManagement {
     //coordinates of the different locations
@@ -17,15 +19,20 @@ public class taskManagement {
     public Date currentdate;
     public int orderno=1;
     private int op_vehicles=0; //vehicles needed
-    public avg vehicles[];
+    public ArrayList<avg> vehicles[];
     public rawMaterial ordermaterial;
     public movementVehicle move;
     public chargingStation charge;
     public exception_handling etask = new exception_handling();
     
-    public taskManagement(Date date) {
+    public taskManagement(Date date,int noavgs) {
 	currentdate = date;
+	
+	
 	file= ("log."+new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+".txt");
+	
+	
+	//total amount of avg= 
     }
 	
     //creates order id

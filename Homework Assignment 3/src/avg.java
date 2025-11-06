@@ -70,7 +70,7 @@ public class avg{
 	overallConsum=0;
 	return time;
     }
-   
+   /*
     public void chargeBattery(double chargeHours){
 	// charge batter for _time_
 	batteryload += chargeRate * chargeHours;
@@ -78,7 +78,7 @@ public class avg{
 	    batteryload = 100;
 	}
 	//overallTime += chargeHours;
-    }
+    }*/
 
     public void wait_at_pos(double time){
 	//chargeBattery(time);
