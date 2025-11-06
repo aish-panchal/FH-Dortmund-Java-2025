@@ -48,7 +48,7 @@ public class taskManagement {
 	
     //creates order id
     public void takeOrder( int load, String order) throws exception_handling.ZeroTonnesException, exception_handling.InvalidOrderException, exception_handling, exception_handling.VehicleNotFoundException {
-		
+	ArrayList<avg> v = new ArrayList<avg>();	
 	orderID= ( new SimpleDateFormat("yyyy-MM-dd").format(currentdate)+"Task"+"."+orderno);
 	//determine range of the load
 	try {	    
@@ -61,17 +61,21 @@ public class taskManagement {
 	    } else {
 		etask.handleNullTonnes();
 	    }
-	    // exception_handling.NullTonnesException e = ;
-		
+	    if(op_vehicles > this.vehicles.size()){
+		Thread.sleep(100);
+	    }
+	    for(int i = 0; i < op_vehicles; i++){
+		v.add(this.vehicles.remove(i)); // removes avg from vehicles ArrayList and adds it to v
+	    }
+	    // exception_handling.NullTonnesException e = ;	
 	} catch(Throwable e) {
 	    System.out.println("Error: "+e.toString());
 	}
-
 	//manage order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}
-	this.manageOrder(order,load);
+	this.manageOrder(order,load, v);
     }
 	
-    private void manageOrder(String task, int ton) throws exception_handling, exception_handling.InvalidOrderException, exception_handling.VehicleNotFoundException  {
+    private void manageOrder(String task, int ton, ArrayList<avg> vehiclesToBeUsed) throws exception_handling, exception_handling.InvalidOrderException, exception_handling.VehicleNotFoundException  {
 	Date starttime=new java.util.Date();
 	starttime.setTime(currentdate.getTime());
 	double overallduration=0;
@@ -80,44 +84,38 @@ public class taskManagement {
 	switch (task) {
 	case "toFactory":
 	    ordermaterial = new rawMaterial("item"+orderno,"raw",ton,warehouse);
-	    move = new movStorage(this.orderID, currentdate, factory, vehicles, file, warehouse, "warehouse", "factory",this.ordermaterial);
+	    move = new movStorage(this.orderID, currentdate, factory, vehiclesToBeUsed, vehiclesInNeedOfCharging, this.vehicles, file, warehouse, "warehouse", "factory",this.ordermaterial);
 	    overallduration= (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 				
 	    entry=calculate_date(overallduration, move, this.orderID);
 	    file_ops.createUpdateLog(file, entry);
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
-	    if(this.move.hasLowBat) {
-		charge = new chargingStation( file, currentdate, this.move.lowbat);
-	    } 
 	    break;
 				
 	case "toWarehouse":
 	    ordermaterial = new rawMaterial("item "+orderno,"product",ton,factory);
-	    move = new movStorage(this.orderID,currentdate,warehouse, vehicles,file,factory,"factory","warehouse",this.ordermaterial);
+	    move = new movStorage(this.orderID, currentdate, warehouse, vehiclesToBeUsed, vehiclesInNeedOfCharging, this.vehicles, file, factory, "factory", "warehouse", this.ordermaterial); 
 	    overallduration = (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 				
 	    entry = calculate_date(overallduration, move, this.orderID);
 	    file_ops.createUpdateLog(file, entry);
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
-	    if(this.move.hasLowBat) {
-		charge = new chargingStation( file, currentdate, this.move.lowbat);
-	    }
 	    break;
 				
 	case "toDelivery":
 	    ordermaterial = new rawMaterial("item "+orderno,"product",ton,warehouse);	
-	    move = new movDelivery (this.orderID, currentdate, file, vehicles, warehouse, dispatch,this.ordermaterial);
+
+	    move = new movDelivery(this.orderID, currentdate, file, vehiclesToBeUsed, vehiclesInNeedOfCharging,
+				   vehicles, warehouse, dispatch, this.ordermaterial);
+	    
 	    overallduration= (double)(move.timestamp.getTime() - starttime.getTime())/3600000; //in hours
 	
 	    entry= calculate_date(overallduration, move, this.orderID);
 	    file_ops.createUpdateLog(file, entry);
 	    currentdate.setTime(move.timestamp.getTime());//update taskmanager time
 	    orderno++;
-	    if(this.move.hasLowBat) {
-		charge = new chargingStation(this.vehicles, this.vehiclesInNeedOfCharging);    	 
-	    }
 	    break;
 		    
 	case null, default:

@@ -1,9 +1,11 @@
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class movDelivery extends movementVehicle {
-    public movDelivery(String task, Date time, String filename, avg transport[], double storUnit[], double dispatcharea[], rawMaterial prod) {
+    public movDelivery(String task, Date time, String filename, ArrayList<avg> avgsToBeUsed, ArrayList<avg> chargeQ,
+		       ArrayList<avg> readyVehicleQ, double storUnit[], double dispatcharea[], rawMaterial prod) {
 	this.taskid =task;
 	this.timestamp=time;
 	this.sysfile= filename;
@@ -12,17 +14,9 @@ public class movDelivery extends movementVehicle {
 		
 	this.movingmaterial=prod;
 	this.tonnes = new storageManagement();
-		
-	this.avgs = new avg[transport.length];
-	try {
-	    for(int i=0; i<transport.length;i++) {
-		this.avgs[i]=transport[i];
-		this.avgs[i].setActSpeed(2); //slower because of the delicate materials
-		if(this.avgs[i]==null) {
-		    this.emov.handleVehicleNotFound();
-		}
-	    }
-	}catch(Throwable e) {System.out.println("Error: "+e.toString());}
+	for(avg a: avgsToBeUsed){
+	    a.setActSpeed(2);
+	}	
 	loading("warehouse");
 	movingtolocation("dispatch area");
 	unloading("dispatch area");
@@ -75,7 +69,10 @@ public class movDelivery extends movementVehicle {
 	updateLog("transporting", loc);
 
 	location = destination;
-		
+	for (int i = 0; i < avgs.length; i++) {
+	    avgs[i].changepos(destination);
+	}
+
 	this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis((long) this.avgs[0].overallTime()) ); //add duration of the unloading process, also assuming perfect sync
 	status=done;
 	updateLog("transporting",loc);//process finished and added to the log file

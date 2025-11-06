@@ -79,11 +79,11 @@ public class movStorage extends movementVehicle {
 
 	status = done;
 	updateLog("unloading", toplace);// process finished and added to the log file
-	for(int i=0;i<avgs.length;i++) {
+	for (int i = 0; i < avgs.length; i++) {
 	    this.avgs[i].changepos(destination);
-	    if(avgs[i].getComsup()<0.50) {
+	    if (avgs[i].getComsup() < 0.50) {
 		this.chargeQ.add(avgs[i]);
-	    }else{
+	    } else {
 		this.readyVehicleQ.add(avgs[i]);
 	    }
 	}
@@ -97,9 +97,10 @@ public class movStorage extends movementVehicle {
     public void movingtolocation(String place) {
 	status = in_progress;
 	updateLog("moving", place);
-
 	location = destination;
-
+	for (int i = 0; i < avgs.length; i++) {
+	    avgs[i].changepos(destination);
+	}
 	this.timestamp.setTime(
 			       this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgs[0].overallTime()));// add
 	// duration
