@@ -51,6 +51,9 @@ public class movDelivery extends movementVehicle {
 	updateLog("unloading","dispatch area.");//process finished and added to the log file
 	for(int i=0;i<avgs.length;i++) {
 	    this.avgs[i].changepos(destination);
+	    for(avg a: avgs){
+		a.setActSpeed(5);
+	    }
 	    if(avgs[i].getComsup()<0.50) {
 		this.chargeQ.add(avgs[i]);
 	    }else{
