@@ -20,6 +20,7 @@ public class taskManagement {
     public int orderno=1;
     private int op_vehicles=0; //vehicles needed
     public ArrayList<avg> vehicles;
+    public ArrayList<avg> vehiclesInNeedOfCharging;
     public rawMaterial ordermaterial;
     public movementVehicle move;
     public chargingStation charge;
