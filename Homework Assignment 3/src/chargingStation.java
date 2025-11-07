@@ -32,13 +32,13 @@ public class chargingStation implements Runnable {
 	public chargingStation(ArrayList<avg> avgs, ArrayList<avg> toCharge) {
 		// initialize log file for all n charging stations
 		accTime = new java.util.Date();
-		logf = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(accTime) + "ChargingStation" + ".txt");
+		logf = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS").format(accTime) + "ChargingStation" + ".txt");
 		file_ops.createUpdateLog(logf, "");
 		this.availableStations = STATIONS;
 		this.avg = avgs;
 		this.chargingQ = toCharge;
 		charging = new ArrayList<pair>();
-		l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(accTime)+ ": Vehicle ");
+		l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(accTime)+ ": Vehicle ");
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class chargingStation implements Runnable {
 			try {
 				
 				Thread.sleep(1000);
-				l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
+				l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(System.currentTimeMillis())+ ": Vehicle ");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -117,9 +117,9 @@ public class movStorage extends movementVehicle {
 
     public void updateLog(String process, String location) {
 	String update, itemupdate;
-	this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": " + taskid
+	this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + taskid
 		      + " Vehicle: ");
-	String itemlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "
+	String itemlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
 			  + this.movingmaterial.id + ": ");
 	if (status) {
 	    for(avg a: avgsToBeUsed){

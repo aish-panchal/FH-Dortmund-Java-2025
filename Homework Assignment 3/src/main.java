@@ -1,4 +1,4 @@
-import java.io.Console;
+/*import java.io.Console;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -51,7 +51,7 @@ public class main {
 		/*while(true) {
 			System.out.println("Enter searching log file: ");
 			file_ops.openLog(logname.nextLine());
-		}*/
+		}
     }
 
-}
+}*/

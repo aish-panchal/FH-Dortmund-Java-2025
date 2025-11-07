@@ -103,9 +103,9 @@ public class movDelivery extends movementVehicle {
 
 	public void updateLog(String update, String delivarea) { // add events current and finished to the log file
 		String upevent, produpdate;
-		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": " + taskid
+		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + taskid
 				+ " Vehicle: ");
-		String prodlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "
+		String prodlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
 				+ this.movingmaterial.id + ": ");
 		if (status) {
 			for (avg a : avgsToBeUsed) {

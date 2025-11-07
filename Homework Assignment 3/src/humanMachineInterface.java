@@ -1,4 +1,4 @@
-/*
+
 import javafx.application.Application;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -31,7 +31,7 @@ public class humanMachineInterface extends Application{
     
     public void start(Stage mainStage) {
     	Date today = new Date();
-    	taskManagement workday = new taskManagement(today,200);
+    	taskManagement workday = new taskManagement(today,50);
     	
     	// creating label for weight prompt
     	Label weightLabel = new Label("Enter order weight:");
@@ -88,8 +88,17 @@ public class humanMachineInterface extends Application{
     			// get weight and operation from the text and drop down boxes
     			int weight = Integer.parseInt(weightField.getText());
     			String operation = operationBox.getValue();
+    			int id = 0;
     			
-    			workday.takeOrder(weight, operation);
+    			if (operation == "toFactory") {
+    				id = 1;
+    			} else if (operation == "toWarehouse") {
+    				id = 2;
+    			} else {
+    				id = 3;
+    			}
+    			
+    			workday.takeOrder(weight, operation, id);
     		} catch (NumberFormatException excep) {
     			// exception for the bad weight input
     			System.out.println("Incorrect input! Enter a valid whole number weight.");
@@ -197,4 +206,3 @@ public class humanMachineInterface extends Application{
     
     
 }
-*/

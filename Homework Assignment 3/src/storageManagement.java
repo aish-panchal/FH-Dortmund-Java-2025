@@ -16,7 +16,7 @@ public class storageManagement{
     
     public storageManagement(){
     	Date thisday = new java.util.Date();
-    	storageLog=(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(thisday)+" Storage"+".txt");
+    	storageLog=(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS").format(thisday)+" Storage"+".txt");
     	file_ops.createUpdateLog(storageLog, "");//create log file when initialized
     }
     public storageManagement(int n){

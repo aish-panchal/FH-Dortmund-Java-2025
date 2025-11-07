@@ -20,7 +20,11 @@ public class file_ops {
 				Files.createDirectories(Paths.get(Logs_dir));
 			}
 
-			// creating a new file if one doesn't already exist
+			try (BufferedWriter writer = Files.newBufferedWriter(log_path, Files.exists(log_path) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE)) {
+				writer.write("Log event: " + loggingEvent + "\n");
+			}
+			
+			/* creating a new file if one doesn't already exist
 			if (Files.notExists(log_path)) {
 				Files.createFile(log_path);
 				try (BufferedWriter writer = Files.newBufferedWriter(log_path)) {
@@ -30,9 +34,10 @@ public class file_ops {
 				try (BufferedWriter writer = Files.newBufferedWriter(log_path, StandardOpenOption.APPEND)) {
 					writer.write("Log event: " + loggingEvent + "\n");
 				}
-			}
+			}*/
 		} catch (IOException e) {
 			System.out.println("Error creating/writing to log file: " + e.getMessage());
+			e.printStackTrace();
 		}
 
 	}
