@@ -24,12 +24,14 @@ public class humanMachineInterface extends Application{
     //public String avgStatus;
 	private static final String Logs_dir = "logs";
 	private static final String archive_dir = "logs/archive";
+	private int orderID = 1;
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
     
     public void start(Stage mainStage) {
+    	orderID= 1;
     	Date today = new Date();
     	taskManagement workday = new taskManagement(today,50);
     	
@@ -88,17 +90,11 @@ public class humanMachineInterface extends Application{
     			// get weight and operation from the text and drop down boxes
     			int weight = Integer.parseInt(weightField.getText());
     			String operation = operationBox.getValue();
-    			int id = 0;
+    			int id = orderID;
     			
-    			if (operation == "toFactory") {
-    				id = 1;
-    			} else if (operation == "toWarehouse") {
-    				id = 2;
-    			} else {
-    				id = 3;
-    			}
     			
     			workday.takeOrder(weight, operation, id);
+    			orderID++;
     		} catch (NumberFormatException excep) {
     			// exception for the bad weight input
     			System.out.println("Incorrect input! Enter a valid whole number weight.");
