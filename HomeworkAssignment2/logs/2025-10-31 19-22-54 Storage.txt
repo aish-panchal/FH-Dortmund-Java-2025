@@ -1,0 +1,77 @@
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:54: item 1:  is loading at factory.
+Log event: 2025-10-31 19:32:54: item 1:  finished loading.
+Log event: 2025-10-31 19:32:54: item 1:  is moving at warehouse.
+Log event: 2025-10-31 20:36:54: item 1:  finished journey.
+Log event: 2025-10-31 20:36:54: item 1:  is unloading at warehouse.
+Log event: 2025-10-31 20:46:54: item 1:  finished unloading.

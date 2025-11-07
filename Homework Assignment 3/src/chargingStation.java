@@ -38,11 +38,14 @@ public class chargingStation implements Runnable {
 		this.avg = avgs;
 		this.chargingQ = toCharge;
 		charging = new ArrayList<pair>();
+		l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(accTime)+ ": Vehicle ");
 	}
 
 	@Override
 	public void run() {
 		System.out.println("In thread");
+		String startevent, endevent;
+		accTime = new java.util.Date();
 		while (true) {
 			if (chargingQ.size() > 0) {
 				for (int i = 0; i < chargingQ.size() && availableStations > 0; i++) {
@@ -54,26 +57,32 @@ public class chargingStation implements Runnable {
 					charging.add(a);
 					availableStations -= 1;
 					System.out.println("In charging");//Update log to vehicles started charging
+					startevent = (l_event + charging.get(i).avg.id+" is charging.");
+					updateLogFile(startevent);
 				}
 			}
 			for(int i=0; i<charging.size();i++) {
 				charging.get(i).time -= 0.1;
 				if (charging.get(i).time < 0) {
 					avg.add(charging.get(i).avg);
+					endevent = (l_event + charging.get(i).avg.id+" is charged.");
+					updateLogFile(endevent);
 					charging.remove(i);
 					availableStations += 1; //update log finish charging
-				//	System.out.println("Finish charging "+charging.get(i).avg.id);
 				}
 			}
 			try {
 				
-				Thread.sleep(100);
+				Thread.sleep(1000);
+				l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
+	//main idea who's tracking the time and who is going to act on it, charging station.
+	
 	// public chargingStation(int id, String file,Date currentT,avg[]
 	// vehicletocharge) throws exception_handling.VehicleNotFoundException {
 	// stationid= ("Charging Station "+id);
@@ -155,7 +164,7 @@ public class chargingStation implements Runnable {
 	 */
 
 	public void updateLogFile(String event) {
-		file_ops.createUpdateLog(taskfile, event);// update overall taskmanager file
+		//file_ops.createUpdateLog(taskfile, event);// update overall taskmanager file
 		// file_ops.createUpdateLog(batstat[i].avgfile, event);// update vehicle file
 		file_ops.createUpdateLog(logf, event);// update charging station file
 	}

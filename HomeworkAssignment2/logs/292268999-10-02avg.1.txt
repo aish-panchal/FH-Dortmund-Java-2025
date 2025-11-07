@@ -1,0 +1,9 @@
+Log event: Started task.
+Log event: 292268999-10-02 14:09:58: 292268999-10-02Task.1 Vehicle: avg.1 is loading the delivery to the warehouse.
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.1 finished loading the delivary at the warehouse
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.1 is transporting the delivery to the dispatch area.
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.1 finished transporting the delivary at the dispatch area
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.1 is unloading the delivery to the dispatch area.
+Log event: 292268999-10-02 16:52:58: 292268999-10-02Task.1 Vehicle: avg.1 finished unloading the delivary at the dispatch area.
+Log event: 292268999-10-02 16:52:58: Vehicle avg.1 is charging.
+Log event: 292268999-10-02 16:52:58 Vehicle: avg.1 is charged.

@@ -1,0 +1,370 @@
+Log event: 2025-10-31 19:22:53: Vehicle avg.0 is charging.
+Log event: 2025-10-31 21:22:53 Vehicle: avg.0 is charged.
+Log event: 2025-10-31 19:22:53: Vehicle avg.0 is charging.
+Log event: 2025-10-31 21:22:53 Vehicle: avg.0 is charged.
+Log event: 2025-10-31 19:22:53: Vehicle avg.0 is charging.
+Log event: 2025-10-31 21:22:53 Vehicle: avg.0 is charged.
+Log event: 2025-10-31 19:22:53: Vehicle avg.0 is charging.
+Log event: 292268999-10-02 12:09:58 Vehicle: avg.0 is charged.
+Log event: 2025-10-31 19:22:53: Vehicle avg.0 is charging.
+Log event: 292268999-10-02 14:09:58 Vehicle: avg.0 is charged.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.0 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.1 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.2 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.3 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.4 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.0 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.1 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.2 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.3 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.4 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.0 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.1 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.2 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.3 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.4 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.0 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.1 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.2 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.3 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.4 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.0 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.1 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.2 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.3 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.4 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.0 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.1 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.2 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.3 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.4 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.0 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.1 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.2 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.3 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.4 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.0 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.1 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.2 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.3 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.4 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.0 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.1 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.2 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.3 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.4 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.0 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.1 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.2 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.3 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.4 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.0 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.1 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.2 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.3 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.4 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.0 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.1 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.2 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.3 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.4 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.0 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.1 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.2 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.3 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.4 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.0 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.1 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.2 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.3 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.4 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.0 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.1 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.2 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.3 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.4 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.0 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.1 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.2 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.3 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.4 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.0 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.1 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.2 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.3 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toWarehouse Vehicle: avg.4 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.0 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.1 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.2 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.3 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.4 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.0 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.1 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.2 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.3 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toWarehouse Vehicle: avg.4 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.0 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.1 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.2 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.3 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toWarehouse Vehicle: avg.4 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toDelivery Vehicle: avg.0 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toDelivery Vehicle: avg.1 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toDelivery Vehicle: avg.2 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toDelivery Vehicle: avg.3 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: toDelivery Vehicle: avg.4 is loading the delivery to the warehouse.
+Log event: 2025-10-31 19:22:54: test item:  is loading at warehouse.
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.0 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.1 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.2 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.3 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.4 finished loading the delivary at the warehouse
+Log event: 2025-10-31 19:42:54: test item:  finished loading.
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.0 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.1 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.2 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.3 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: toDelivery Vehicle: avg.4 is transporting the delivery to the dispatch area.
+Log event: 2025-10-31 19:42:54: test item:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.0 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.1 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.2 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.3 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.4 finished transporting the delivary at the dispatch area
+Log event: 2025-10-31 21:45:54: test item:  finished transporting.
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.0 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.1 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.2 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.3 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: toDelivery Vehicle: avg.4 is unloading the delivery to the dispatch area.
+Log event: 2025-10-31 21:45:54: test item:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:54: toDelivery Vehicle: avg.0 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toDelivery Vehicle: avg.1 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toDelivery Vehicle: avg.2 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toDelivery Vehicle: avg.3 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: toDelivery Vehicle: avg.4 finished unloading the delivary at the dispatch area.
+Log event: 2025-10-31 22:05:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading at src.
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 finished loading.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 is moving at dst.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 finished journey.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 is unloading at dst.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.0 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.1 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.2 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.3 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.4 finished unloading.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading at src.
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 finished loading.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 is moving at dst.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 finished journey.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 is unloading at dst.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.0 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.1 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.2 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.3 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.4 finished unloading.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading at src.
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 finished loading.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 is moving at dst.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 finished journey.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 is unloading at dst.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.0 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.1 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.2 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.3 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.4 finished unloading.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading at src.
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 finished loading.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 is moving at dst.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 finished journey.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 is unloading at dst.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.0 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.1 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.2 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.3 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.4 finished unloading.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.0 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.1 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.2 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.3 is loading at src.
+Log event: 2025-10-31 19:22:54: toWarehouse Vehicle: avg.4 is loading at src.
+Log event: 2025-10-31 19:22:54: test item:  is loading at src.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 finished loading.
+Log event: 2025-10-31 19:32:54: test item:  finished loading.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.0 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.1 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.2 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.3 is moving at dst.
+Log event: 2025-10-31 19:32:54: toWarehouse Vehicle: avg.4 is moving at dst.
+Log event: 2025-10-31 19:32:54: test item:  is moving at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 finished journey.
+Log event: 2025-10-31 20:36:54: test item:  finished journey.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.0 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.1 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.2 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.3 is unloading at dst.
+Log event: 2025-10-31 20:36:54: toWarehouse Vehicle: avg.4 is unloading at dst.
+Log event: 2025-10-31 20:36:54: test item:  is unloading at dst.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.0 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.1 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.2 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.3 finished unloading.
+Log event: 2025-10-31 20:46:54: toWarehouse Vehicle: avg.4 finished unloading.
+Log event: 2025-10-31 20:46:54: test item:  finished unloading.

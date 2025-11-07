@@ -1,0 +1,47 @@
+Log event: 292268999-10-02 14:09:58: 292268999-10-02Task.1 Vehicle: avg.0 is loading the delivery to the warehouse.
+Log event: 292268999-10-02 14:09:58: 292268999-10-02Task.1 Vehicle: avg.1 is loading the delivery to the warehouse.
+Log event: 292268999-10-02 14:09:58: 292268999-10-02Task.1 Vehicle: avg.2 is loading the delivery to the warehouse.
+Log event: 292268999-10-02 14:09:58: 292268999-10-02Task.1 Vehicle: avg.3 is loading the delivery to the warehouse.
+Log event: 292268999-10-02 14:09:58: 292268999-10-02Task.1 Vehicle: avg.4 is loading the delivery to the warehouse.
+Log event: 292268999-10-02 14:09:58: item 1:  is loading at warehouse.
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.0 finished loading the delivary at the warehouse
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.1 finished loading the delivary at the warehouse
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.2 finished loading the delivary at the warehouse
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.3 finished loading the delivary at the warehouse
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.4 finished loading the delivary at the warehouse
+Log event: 292268999-10-02 14:29:58: item 1:  finished loading.
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.0 is transporting the delivery to the dispatch area.
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.1 is transporting the delivery to the dispatch area.
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.2 is transporting the delivery to the dispatch area.
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.3 is transporting the delivery to the dispatch area.
+Log event: 292268999-10-02 14:29:58: 292268999-10-02Task.1 Vehicle: avg.4 is transporting the delivery to the dispatch area.
+Log event: 292268999-10-02 14:29:58: item 1:  is transporting at dispatch area.
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.0 finished transporting the delivary at the dispatch area
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.1 finished transporting the delivary at the dispatch area
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.2 finished transporting the delivary at the dispatch area
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.3 finished transporting the delivary at the dispatch area
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.4 finished transporting the delivary at the dispatch area
+Log event: 292268999-10-02 16:32:58: item 1:  finished transporting.
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.0 is unloading the delivery to the dispatch area.
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.1 is unloading the delivery to the dispatch area.
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.2 is unloading the delivery to the dispatch area.
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.3 is unloading the delivery to the dispatch area.
+Log event: 292268999-10-02 16:32:58: 292268999-10-02Task.1 Vehicle: avg.4 is unloading the delivery to the dispatch area.
+Log event: 292268999-10-02 16:32:58: item 1:  is unloading at dispatch area.
+Log event: 292268999-10-02 16:52:58: 292268999-10-02Task.1 Vehicle: avg.0 finished unloading the delivary at the dispatch area.
+Log event: 292268999-10-02 16:52:58: 292268999-10-02Task.1 Vehicle: avg.1 finished unloading the delivary at the dispatch area.
+Log event: 292268999-10-02 16:52:58: 292268999-10-02Task.1 Vehicle: avg.2 finished unloading the delivary at the dispatch area.
+Log event: 292268999-10-02 16:52:58: 292268999-10-02Task.1 Vehicle: avg.3 finished unloading the delivary at the dispatch area.
+Log event: 292268999-10-02 16:52:58: 292268999-10-02Task.1 Vehicle: avg.4 finished unloading the delivary at the dispatch area.
+Log event: 292268999-10-02 16:52:58: item 1:  finished unloading.
+Log event: 292268999-10-02 16:52:58: 292268999-10-02Task.1 mission completed. Overall duration: 2.72 hours.
+Log event: 292268999-10-02 16:52:58: Vehicle avg.0 is charging.
+Log event: 292268999-10-02 16:52:58: Vehicle avg.1 is charging.
+Log event: 292268999-10-02 16:52:58: Vehicle avg.2 is charging.
+Log event: 292268999-10-02 16:52:58: Vehicle avg.3 is charging.
+Log event: 292268999-10-02 16:52:58: Vehicle avg.4 is charging.
+Log event: 292268999-10-02 16:52:58 Vehicle: avg.0 is charged.
+Log event: 292268999-10-02 16:52:58 Vehicle: avg.1 is charged.
+Log event: 292268999-10-02 16:52:58 Vehicle: avg.2 is charged.
+Log event: 292268999-10-02 16:52:58 Vehicle: avg.3 is charged.
+Log event: 292268999-10-02 16:52:58 Vehicle: avg.4 is charged.

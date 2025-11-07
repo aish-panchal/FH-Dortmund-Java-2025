@@ -1,0 +1,11 @@
+Log event: 
+Log event: 2025-10-31 22:05:55: Vehicle avg.0 is charging.
+Log event: 2025-10-31 22:05:55: Vehicle avg.1 is charging.
+Log event: 2025-10-31 22:05:55: Vehicle avg.2 is charging.
+Log event: 2025-10-31 22:05:55: Vehicle avg.3 is charging.
+Log event: 2025-10-31 22:05:55: Vehicle avg.4 is charging.
+Log event: 2025-10-31 22:05:55 Vehicle: avg.0 is charged.
+Log event: 2025-10-31 22:05:55 Vehicle: avg.1 is charged.
+Log event: 2025-10-31 22:05:55 Vehicle: avg.2 is charged.
+Log event: 2025-10-31 22:05:55 Vehicle: avg.3 is charged.
+Log event: 2025-10-31 22:05:55 Vehicle: avg.4 is charged.

@@ -1,0 +1,21 @@
+Log event: 
+Log event: 2025-10-31 19:22:55: item 1:  is loading at warehouse.
+Log event: 2025-10-31 19:42:55: item 1:  finished loading.
+Log event: 2025-10-31 19:42:55: item 1:  is transporting at dispatch area.
+Log event: 2025-10-31 21:45:55: item 1:  finished transporting.
+Log event: 2025-10-31 21:45:55: item 1:  is unloading at dispatch area.
+Log event: 2025-10-31 22:05:55: item 1:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:55: item1:  is loading at warehouse.
+Log event: 2025-10-31 19:32:55: item1:  finished loading.
+Log event: 2025-10-31 19:32:55: item1:  is moving at factory.
+Log event: 2025-10-31 20:36:55: item1:  finished journey.
+Log event: 2025-10-31 20:36:55: item1:  is unloading at factory.
+Log event: 2025-10-31 20:46:55: item1:  finished unloading.
+Log event: 
+Log event: 2025-10-31 19:22:55: item 1:  is loading at factory.
+Log event: 2025-10-31 19:32:55: item 1:  finished loading.
+Log event: 2025-10-31 19:32:55: item 1:  is moving at warehouse.
+Log event: 2025-10-31 20:36:55: item 1:  finished journey.
+Log event: 2025-10-31 20:36:55: item 1:  is unloading at warehouse.
+Log event: 2025-10-31 20:46:55: item 1:  finished unloading.

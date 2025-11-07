@@ -15,13 +15,37 @@ public class main {
 		Scanner logname;
 		logname = new Scanner(System.in);
 		taskManagement workday = new taskManagement(today,25); //date and avg in total 
-		//workday.takeOrder(50, "toFactory");//Order of 50 tones from warehouse to factory
+		
+		Thread t1 = new Thread(() -> {
+			try {
+				workday.takeOrder(50, "toFactory",1);
+			} catch (exception_handling.ZeroTonnesException | exception_handling.InvalidOrderException
+					| exception_handling | exception_handling.VehicleNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		Thread t2 = new Thread(() ->{
+			try {
+				workday.takeOrder(200, "toDelivery",2);
+			} catch (exception_handling.ZeroTonnesException | exception_handling.InvalidOrderException
+					| exception_handling | exception_handling.VehicleNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		
+		t1.start();
+		t2.start();
+		
+		//Order of 50 tones from warehouse to factory
 		//workday.takeOrder(100, "toWarehouse");
-		while(true) {
-			System.out.println("loop");
-			workday.takeOrder(50, "toDelivery");
+		//while(true) {
+			//System.out.println("loop");
 			
-		}
+		
+			
+		//}
 		
 		
 		/*while(true) {

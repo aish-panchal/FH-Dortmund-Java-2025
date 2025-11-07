@@ -1,0 +1,17 @@
+Log event: 
+Log event: 
+Log event: 
+Log event: 
+Log event: 
+Log event: 
+Log event: 
+Log event: 
+Log event: 
+Log event: 
+Log event: 
+Log event: 292268999-10-02 14:09:58: item 1:  is loading at warehouse.
+Log event: 292268999-10-02 14:29:58: item 1:  finished loading.
+Log event: 292268999-10-02 14:29:58: item 1:  is transporting at dispatch area.
+Log event: 292268999-10-02 16:32:58: item 1:  finished transporting.
+Log event: 292268999-10-02 16:32:58: item 1:  is unloading at dispatch area.
+Log event: 292268999-10-02 16:52:58: item 1:  finished unloading.

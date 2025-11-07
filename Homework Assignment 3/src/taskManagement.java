@@ -4,7 +4,7 @@ import java.util.Date;
 
 //two array lists: avgs that are ready and avgs that need charging
 
-public class taskManagement {
+public class taskManagement  {
 	// coordinates of the different locations
 	static final double warehouse[] = { 3, 1 };
 	static final double factory[] = { 5, 6 };
@@ -17,7 +17,7 @@ public class taskManagement {
 	public String file;
 	private String orderID;
 	public Date currentdate;
-	public int orderno = 1;
+	public int orderno;
 	private int op_vehicles = 0; // vehicles needed
 	public ArrayList<avg> vehicles;
 	public ArrayList<avg> vehiclesInNeedOfCharging;
@@ -28,8 +28,7 @@ public class taskManagement {
 	public exception_handling etask = new exception_handling();
 
 	public taskManagement(Date date, int noavgs) {
-
-		
+		this.orderno=1;
 		this.vehiclesInNeedOfCharging = new ArrayList<avg>();
 		currentdate = date;
 		ArrayList<avg> vehicles = new ArrayList<avg>();
@@ -54,10 +53,10 @@ public class taskManagement {
 	}
 
 	// creates order id
-	public void takeOrder(int load, String order) throws exception_handling.ZeroTonnesException,
+	public void takeOrder(int load, String order,int id) throws exception_handling.ZeroTonnesException,
 			exception_handling.InvalidOrderException, exception_handling, exception_handling.VehicleNotFoundException {
 		ArrayList<avg> v = new ArrayList<avg>();
-		orderID = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + "Task" + "." + orderno);
+		orderID = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + "Task" + "." + id);
 		// determine range of the load
 		try {
 			if (load > 100) {
@@ -69,8 +68,8 @@ public class taskManagement {
 			} else {
 				etask.handleNullTonnes();
 			}
-			if (op_vehicles > this.vehicles.size()) {
-				Thread.sleep(100);
+			while (op_vehicles > this.vehicles.size()) {
+				Thread.sleep(1000);
 			}
 			for (int i = 0; i < op_vehicles; i++) {
 				v.add(this.vehicles.remove(i)); // removes avg from vehicles ArrayList and adds it to v
@@ -80,6 +79,7 @@ public class taskManagement {
 			System.out.println("Error: " + e.toString());
 		}
 		// manage order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}
+		this.orderno=id;
 		this.manageOrder(order, load, v);
 	}
 
@@ -100,7 +100,7 @@ public class taskManagement {
 			entry = calculate_date(overallduration, move, this.orderID);
 			file_ops.createUpdateLog(file, entry);
 			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
-			orderno++;
+			//orderno++;
 			break;
 
 		case "toWarehouse":
@@ -112,7 +112,7 @@ public class taskManagement {
 			entry = calculate_date(overallduration, move, this.orderID);
 			file_ops.createUpdateLog(file, entry);
 			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
-			orderno++;
+			//orderno++;
 			break;
 
 		case "toDelivery":
@@ -126,7 +126,7 @@ public class taskManagement {
 			entry = calculate_date(overallduration, move, this.orderID);
 			file_ops.createUpdateLog(file, entry);
 			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
-			orderno++;
+			//orderno++;
 			break;
 
 		case null, default:
@@ -139,4 +139,6 @@ public class taskManagement {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp) + ": " + orderID
 				+ " mission completed. Overall duration: " + String.format("%.2f", overallduration) + " hours.";
 	}
+
+
 }
