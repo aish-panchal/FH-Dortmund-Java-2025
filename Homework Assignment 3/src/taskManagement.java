@@ -2,9 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-//two array lists: avgs that are ready and avgs that need charging
-
-public class taskManagement  {
+public class taskManagement {
 	// coordinates of the different locations
 	static final double warehouse[] = { 3, 1 };
 	static final double factory[] = { 5, 6 };
@@ -28,13 +26,12 @@ public class taskManagement  {
 	public exception_handling etask = new exception_handling();
 
 	public taskManagement(Date date, int noavgs) {
-		this.orderno=1;
+		this.orderno = 1;
 		this.vehiclesInNeedOfCharging = new ArrayList<avg>();
 		currentdate = date;
 		ArrayList<avg> vehicles = new ArrayList<avg>();
 		for (int i = 0; i < noavgs; i++) {
-			// id,consump %/h
-			avg a = new avg("avg." + i, 0.25);
+			avg a = new avg("avg." + i, 0.25);// id,consump %/h
 			vehicles.add(a);
 			a.setActSpeed(5);
 			a.avgfile = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + a.id + ".txt");// create/update vehicle file
@@ -43,17 +40,13 @@ public class taskManagement  {
 		this.vehicles = vehicles;
 
 		file = ("log." + new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + ".txt");
-		//System.out.println("before thread");
-		
+
 		this.charge = new chargingStation(vehicles, vehiclesInNeedOfCharging);
 		this.chargingStationThread = new Thread(this.charge);
 		this.chargingStationThread.start();
-		
-		//System.out.println("after thread");
 	}
 
-	// creates order id
-	public void takeOrder(int load, String order,int id) throws exception_handling.ZeroTonnesException,
+	public void takeOrder(int load, String order, int id) throws exception_handling.ZeroTonnesException,
 			exception_handling.InvalidOrderException, exception_handling, exception_handling.VehicleNotFoundException {
 		ArrayList<avg> v = new ArrayList<avg>();
 		orderID = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + "Task" + "." + id);
@@ -74,12 +67,11 @@ public class taskManagement  {
 			for (int i = 0; i < op_vehicles; i++) {
 				v.add(this.vehicles.remove(i)); // removes avg from vehicles ArrayList and adds it to v
 			}
-			// exception_handling.NullTonnesException e = ;
 		} catch (Throwable e) {
 			System.out.println("Error: " + e.toString());
 		}
 		// manage order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}
-		this.orderno=id;
+		this.orderno = id;
 		this.manageOrder(order, load, v);
 	}
 
@@ -100,7 +92,6 @@ public class taskManagement  {
 			entry = calculate_date(overallduration, move, this.orderID);
 			file_ops.createUpdateLog(file, entry);
 			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
-			//orderno++;
 			break;
 
 		case "toWarehouse":
@@ -112,7 +103,6 @@ public class taskManagement  {
 			entry = calculate_date(overallduration, move, this.orderID);
 			file_ops.createUpdateLog(file, entry);
 			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
-			//orderno++;
 			break;
 
 		case "toDelivery":
@@ -120,13 +110,11 @@ public class taskManagement  {
 
 			move = new movDelivery(this.orderID, currentdate, file, vehiclesToBeUsed, vehiclesInNeedOfCharging,
 					vehicles, warehouse, dispatch, this.ordermaterial);
-
 			overallduration = (double) (move.timestamp.getTime() - starttime.getTime()) / 3600000; // in hours
 
 			entry = calculate_date(overallduration, move, this.orderID);
 			file_ops.createUpdateLog(file, entry);
 			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
-			//orderno++;
 			break;
 
 		case null, default:
@@ -139,6 +127,5 @@ public class taskManagement  {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp) + ": " + orderID
 				+ " mission completed. Overall duration: " + String.format("%.2f", overallduration) + " hours.";
 	}
-
 
 }

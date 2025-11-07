@@ -81,25 +81,6 @@ public class chargingStation implements Runnable {
 		}
 	}
 
-	//main idea who's tracking the time and who is going to act on it, charging station.
-	
-	// public chargingStation(int id, String file,Date currentT,avg[]
-	// vehicletocharge) throws exception_handling.VehicleNotFoundException {
-	// stationid= ("Charging Station "+id);
-	// taskfile=file;
-	// accTime=currentT;
-	// stationOccupied=true;
-	// l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(accTime)+"
-	// "+stationid+": ");
-
-	// chargingavg = new avg[vehicletocharge.length];
-	// for(int i=0;i<vehicletocharge.length;i++) {
-	// chargingavg[i]=vehicletocharge[i];
-	// }
-
-	// charging(chargingavg);
-	// }
-
 	public void charging(avg[] avgcharge) throws exception_handling.VehicleNotFoundException {
 		String startevent, endevent;
 		double chargepercent;
@@ -117,12 +98,6 @@ public class chargingStation implements Runnable {
 				endevent = (l_event + avgcharge[i].id + " is charged.");
 				updateLogFile(startevent);
 
-				/*
-				 * file_ops.createUpdateLog(taskfile, logupdate);
-				 * file_ops.createUpdateLog(avgcharge[i].avgfile, logupdate);//update vehicle
-				 * file file_ops.createUpdateLog(logf, logupdate);// update charging station
-				 * file
-				 */
 				Thread.sleep(waittime); // charging time
 				updateLogFile(endevent);
 			}
@@ -130,8 +105,6 @@ public class chargingStation implements Runnable {
 		} catch (Throwable e) {
 			System.out.println("Error: " + e.toString());
 		}
-
-		// getStationstatus(avgcharge);
 	}
 
 	public String getChargingstatus() {
@@ -147,21 +120,6 @@ public class chargingStation implements Runnable {
 	public boolean getStationStatus() {
 		return stationOccupied;
 	}
-
-	/*
-	 * public void getStationstatus(avg[] batstat) { String lupdate;
-	 * accTime.setTime(accTime.getTime()+TimeUnit.HOURS.toMillis((long) chargtime));
-	 * String endevent=(new
-	 * SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(accTime)+": ");
-	 * stationOccupied=false; try { for(int i=0;i<batstat.length;i++) {
-	 * if(batstat[i]== null) { echarge.handleVehicleNotFound(); }
-	 * 
-	 * lupdate=(endevent+batstat[i].id+" is charged.");
-	 * file_ops.createUpdateLog(taskfile, lupdate);
-	 * file_ops.createUpdateLog(batstat[i].avgfile, lupdate);//update vehicle file
-	 * file_ops.createUpdateLog(logf, lupdate);// update charging station file }
-	 * }catch(Throwable e) {System.out.println("Error: "+e.toString());} }
-	 */
 
 	public void updateLogFile(String event) {
 		//file_ops.createUpdateLog(taskfile, event);// update overall taskmanager file
