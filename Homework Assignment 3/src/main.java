@@ -14,10 +14,15 @@ public class main {
 		Date today = new java.util.Date();
 		Scanner logname;
 		logname = new Scanner(System.in);
-		taskManagement workday = new taskManagement(today,50); //date and avg in total 
-		workday.takeOrder(50, "toFactory");//Order of 50 tones from warehouse to factory
-		workday.takeOrder(100, "toWarehouse");
-		workday.takeOrder(50, "toDelivery");
+		taskManagement workday = new taskManagement(today,25); //date and avg in total 
+		//workday.takeOrder(50, "toFactory");//Order of 50 tones from warehouse to factory
+		//workday.takeOrder(100, "toWarehouse");
+		while(true) {
+			System.out.println("loop");
+			workday.takeOrder(50, "toDelivery");
+			
+		}
+		
 		
 		/*while(true) {
 			System.out.println("Enter searching log file: ");
