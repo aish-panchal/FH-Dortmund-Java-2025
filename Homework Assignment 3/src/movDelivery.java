@@ -26,9 +26,9 @@ public class movDelivery extends movementVehicle {
 	long loadtime=20; //minutes
 	status=in_progress;
 	updateLog("loading", start);
-	for(int i=0;i<avgs.length;i++) {
-	    avgs[i].changepos(location);//set avgs to loading location
-	    this.avgs[i].wait_at_pos(loadtime);  
+	for(avg a: avgsToBeUsed){
+	    a.changepos(location);
+	    a.wait_at_pos(loadtime);
 	}
 		
 	this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis(loadtime) ); //add duration of the unloading process, also assuming perfect sync
@@ -41,26 +41,23 @@ public class movDelivery extends movementVehicle {
 	long unloadtime=20; //minutes
 	status=in_progress;
 	updateLog("unloading", end);
-	for(int i=0;i<avgs.length;i++) {
-	    this.avgs[i].wait_at_pos(unloadtime);  
+	for(avg a: avgsToBeUsed){
+	    a.wait_at_pos(unloadtime);
 	}
 	
 	this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis(unloadtime) ); //add duration of the unloading process, also assuming perfect sync
 		
 	status=done;
 	updateLog("unloading","dispatch area.");//process finished and added to the log file
-	for(int i=0;i<avgs.length;i++) {
-	    this.avgs[i].changepos(destination);
-	    for(avg a: avgs){
-		a.setActSpeed(5);
-	    }
-	    if(avgs[i].getComsup()<0.50) {
-		this.chargeQ.add(avgs[i]);
+	for(avg a: avgsToBeUsed){
+	    a.changepos(destination);
+	    a.setActSpeed(5);
+	    if(a.getComsup()<0.50){
+		this.chargeQ.add(a);
 	    }else{
-		this.readyVehicleQ.add(avgs[i]);
+		this.readyVehicleQ.add(a);
 	    }
 	}
-			  
     }
 	
     public double[] getlocation() { 
@@ -72,11 +69,11 @@ public class movDelivery extends movementVehicle {
 	updateLog("transporting", loc);
 
 	location = destination;
-	for (int i = 0; i < avgs.length; i++) {
-	    avgs[i].changepos(destination);
+	for(avg a: avgsToBeUsed){
+	    a.changepos(destination);
 	}
 
-	this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis((long) this.avgs[0].overallTime()) ); //add duration of the unloading process, also assuming perfect sync
+	this.timestamp.setTime( this.timestamp.getTime()+TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()) ); //add duration of the unloading process, also assuming perfect sync
 	status=done;
 	updateLog("transporting",loc);//process finished and added to the log file
 	
@@ -87,19 +84,20 @@ public class movDelivery extends movementVehicle {
     	this.event= (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "+taskid+" Vehicle: ");
     	String prodlog=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "+this.movingmaterial.id+": ");
 	if(status) {
-	    for(int j=0; j<avgs.length;j++) {
-		upevent= (this.event+avgs[j].id+ " finished "+ update+" the delivary at the "+delivarea);
+	    for(avg a: avgsToBeUsed){
+		upevent = (this.event+a.id+ " finished "+ update+" the delivary at the "+delivarea);
 		file_ops.createUpdateLog(this.sysfile, upevent);
-		file_ops.createUpdateLog(avgs[j].avgfile, upevent);
+		file_ops.createUpdateLog(a.avgfile, upevent);
 	    }
 	    produpdate = (prodlog+" finished "+update+".");
 	    file_ops.createUpdateLog(this.sysfile, produpdate);
 	    file_ops.createUpdateLog(this.tonnes.storageLog, produpdate);
 	}else {
-	    for(int j=0; j<avgs.length;j++) {
-		upevent= (this.event+avgs[j].id+ " is "+update+" the delivery to the "+delivarea+".");
+
+	    for(avg a: avgsToBeUsed){
+		upevent= (this.event+a.id+ " is "+update+" the delivery to the "+delivarea+".");
 		file_ops.createUpdateLog(this.sysfile, upevent);
-		file_ops.createUpdateLog(avgs[j].avgfile, upevent);
+		file_ops.createUpdateLog(a.avgfile, upevent);
 	    }
 	    produpdate = (prodlog+" is "+update+ " at "+delivarea+".");
 	    file_ops.createUpdateLog(this.sysfile, produpdate);

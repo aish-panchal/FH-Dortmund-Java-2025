@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import exception_handling.VehicleNotFoundException;
+
 /* movStorage: moving raw materials from warehouse to factory as well as moving finished
  * goods from factory to storage
  * */
@@ -42,9 +44,9 @@ public class movStorage extends movementVehicle {
 	status = in_progress;
 	updateLog("loading", inplace);
 
-	for (int i = 0; i < avgs.length; i++) {
-	    avgs[i].changepos(location);// set avgs to loading location
-	    avgs[i].wait_at_pos(loadtime);
+	for(avg a: avgsToBeUsed){
+	    a.changepos(location);
+	    a.wait_at_pos(loadtime);
 	}
 
 	this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(loadtime)); // add duration
@@ -61,10 +63,10 @@ public class movStorage extends movementVehicle {
 	long unloadtime = 10; // minutes
 	status = in_progress;
 	updateLog("unloading", toplace);
-	for (int i = 0; i < avgs.length; i++) {
-	    avgs[i].wait_at_pos(unloadtime);
+	for(avg a: avgsToBeUsed){
+	    a.wait_at_pos(unloadtime);
 	}
-
+	
 	this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(unloadtime)); // add
 	// duration
 	// of
@@ -79,12 +81,13 @@ public class movStorage extends movementVehicle {
 
 	status = done;
 	updateLog("unloading", toplace);// process finished and added to the log file
-	for (int i = 0; i < avgs.length; i++) {
-	    this.avgs[i].changepos(destination);
-	    if (avgs[i].getComsup() < 0.50) {
-		this.chargeQ.add(avgs[i]);
-	    } else {
-		this.readyVehicleQ.add(avgs[i]);
+	for(avg a: avgsToBeUsed){
+	    a.changepos(destination);
+	    a.setActSpeed(5);
+	    if(a.getComsup()<0.50){
+		this.chargeQ.add(a);
+	    }else{
+		this.readyVehicleQ.add(a);
 	    }
 	}
 
@@ -98,11 +101,11 @@ public class movStorage extends movementVehicle {
 	status = in_progress;
 	updateLog("moving", place);
 	location = destination;
-	for (int i = 0; i < avgs.length; i++) {
-	    avgs[i].changepos(destination);
+	for(avg a: avgsToBeUsed){
+	    a.changepos(destination);
 	}
 	this.timestamp.setTime(
-			       this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgs[0].overallTime()));// add
+			       this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));// add
 	// duration
 	// of
 	// the
@@ -119,21 +122,19 @@ public class movStorage extends movementVehicle {
 	String itemlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "
 			  + this.movingmaterial.id + ": ");
 	if (status) {
-
-	    for (int j = 0; j < avgs.length; j++) {
-		update = (this.event + avgs[j].id + " finished " + process + ".");
+	    for(avg a: avgsToBeUsed){
+		update = (this.event + a.id + " finished " + process + ".");
 		file_ops.createUpdateLog(this.sysfile, update);
-		file_ops.createUpdateLog(avgs[j].avgfile, update);
+		file_ops.createUpdateLog(a.avgfile, update);
 	    }
 	    itemupdate = (itemlog + " finished " + process + ".");
 	    file_ops.createUpdateLog(this.sysfile, itemupdate);
 	    file_ops.createUpdateLog(this.tonnes.storageLog, itemupdate);
 	} else {
-
-	    for (int j = 0; j < avgs.length; j++) {
-		update = (this.event + avgs[j].id + " is " + process + " at " + location + ".");
+	    for(avg a: avgsToBeUsed){
+		update = (this.event + a.id + " is " + process + " at " + location + ".");
 		file_ops.createUpdateLog(this.sysfile, update);
-		file_ops.createUpdateLog(avgs[j].avgfile, update);
+		file_ops.createUpdateLog(a.avgfile, update);
 	    }
 	    itemupdate = (itemlog + " is " + process + " at " + location + ".");
 	    file_ops.createUpdateLog(this.sysfile, itemupdate);

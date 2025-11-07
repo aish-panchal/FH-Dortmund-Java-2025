@@ -21,7 +21,6 @@ abstract class movementVehicle {
     public String file_name;
     protected String event;
     protected String taskid;
-    protected avg avgs[];
     protected Date timestamp;
     protected storageManagement tonnes;
     protected rawMaterial movingmaterial;
