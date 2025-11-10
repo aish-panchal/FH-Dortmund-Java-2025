@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+/* movDelivery: moving finished products from warehouse to dispatch area */
 public class movDelivery extends movementVehicle {
 	public movDelivery(String task, Date time, String filename, ArrayList<avg> avgsToBeUsed, ArrayList<avg> chargeQ,
 			ArrayList<avg> readyVehicleQ, double storUnit[], double dispatcharea[], rawMaterial prod) {
@@ -11,9 +12,9 @@ public class movDelivery extends movementVehicle {
 		this.sysfile = filename;
 		this.location = storUnit;
 		this.destination = dispatcharea;
-		this.avgsToBeUsed = avgsToBeUsed;
-		this.chargeQ = chargeQ;
-		this.readyVehicleQ = readyVehicleQ;
+		this.avgsToBeUsed = avgsToBeUsed;//working avg
+		this.chargeQ = chargeQ; //charging queue
+		this.readyVehicleQ = readyVehicleQ;//available avg list
 		this.movingmaterial = prod;
 		this.tonnes = new storageManagement();
 		for (avg a : avgsToBeUsed) {
@@ -24,7 +25,7 @@ public class movDelivery extends movementVehicle {
 		unloading("dispatch area");
 	}
 
-	public void loading(String start) {// starts and finishes loading
+	public void loading(String start) {
 		long loadtime = 20; // minutes
 		status = in_progress;
 		updateLog("loading", start);
@@ -32,32 +33,42 @@ public class movDelivery extends movementVehicle {
 			a.changepos(location);
 			a.wait_at_pos(loadtime);
 		}
-
-		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(loadtime)); // add duration of the
-																								// unloading process,
-																								// also assuming perfect
-																								// sync
-
+		// add duration of loading process
+		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(loadtime)); 
 		status = done;
 		updateLog("loading", start);// process finished and added to the log file
 	}
 
-	public void unloading(String end) {// starts and finishes unloading
+	public void movingtolocation(String loc) {// start movement from current location to destination
+		status = in_progress;
+		updateLog("transporting", loc);
+
+		location = destination;
+		for (avg a : avgsToBeUsed) {
+			a.changepos(destination);
+		}
+		//add duration of journey
+		if (avgsToBeUsed.size() > 0) {
+			this.timestamp.setTime(
+					this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));
+		}
+		status = done;
+		updateLog("transporting", loc);// process finished and added to the log file
+	}
+	
+	public void unloading(String end) {
 		long unloadtime = 20; // minutes
 		status = in_progress;
 		updateLog("unloading", end);
 		for (avg a : avgsToBeUsed) {
 			a.wait_at_pos(unloadtime);
 		}
-
-		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(unloadtime)); // add duration of the
-																									// unloading
-																									// process, also
-																									// assuming perfect
-																									// sync
+		// add duration of unloading process
+		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(unloadtime));
 
 		status = done;
 		updateLog("unloading", "dispatch area.");// process finished and added to the log file
+		//checks battery status
 		for (avg a : avgsToBeUsed) {
 			a.changepos(destination);
 			a.setActSpeed(5);
@@ -74,34 +85,7 @@ public class movDelivery extends movementVehicle {
 		return location;
 	}
 
-	public void movingtolocation(String loc) {// start movement from current location to destination
-		status = in_progress;
-		updateLog("transporting", loc);
-
-		location = destination;
-		for (avg a : avgsToBeUsed) {
-			a.changepos(destination);
-		}
-
-		if (avgsToBeUsed.size() > 0) {
-			this.timestamp.setTime(
-					this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime())); // add
-																														// duration
-																														// of
-																														// the
-																														// unloading
-																														// process,
-																														// also
-																														// assuming
-																														// perfect
-																														// sync
-		}
-		status = done;
-		updateLog("transporting", loc);// process finished and added to the log file
-
-	}
-
-	public void updateLog(String update, String delivarea) { // add events current and finished to the log file
+	public void updateLog(String update, String delivarea) {
 		String upevent, produpdate;
 		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + taskid
 				+ " Vehicle: ");
