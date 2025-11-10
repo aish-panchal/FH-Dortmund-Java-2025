@@ -38,6 +38,9 @@ public class humanMachineInterface extends Application{
     	// creating label for weight prompt
     	Label weightLabel = new Label("Enter order weight:");
     	
+    	// creating label for AVG information
+    	Label avgInfoLabel = new Label("AVG information and status");
+    	
     	// creating text field to enter weight 
     	TextField weightField = new TextField();
     	weightField.setPromptText("Enter weight in tonnes");
@@ -66,6 +69,7 @@ public class humanMachineInterface extends Application{
     	searchField.setMaxWidth(200);
     	searchField.setPromptText("Enter search term (equipment/date)");
     	
+    	// create label for file moving operation
     	Label moveLabel = new Label("Move Log File:");
     	TextField targetField = new TextField();
     	targetField.setMaxWidth(200);
@@ -77,12 +81,29 @@ public class humanMachineInterface extends Application{
     	logListView.setMaxWidth(200);
     	logListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     	
+    	// creating a listing of the created avgs
+    	ListView<avg> vehiclesListView = new ListView<>();
+    	vehiclesListView.setMaxHeight(200);
+    	vehiclesListView.setMaxWidth(200);
+    	vehiclesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    	
     	// creating area to view log file contents
     	TextArea logContents = new TextArea();
     	logContents.setEditable(false);
     	logContents.setWrapText(false);
-    	logContents.setMaxHeight(1000);
+    	logContents.setMaxHeight(1100);
     	logContents.setMaxWidth(500);
+    	
+    	TextArea vehiclesInfo = new TextArea();
+    	vehiclesInfo.setEditable(false);
+    	vehiclesInfo.setMaxHeight(200);
+    	vehiclesInfo.setMaxWidth(200);
+    	
+    	vehiclesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldAvg, newAvg) -> {
+    		if (newAvg != null) {
+    			vehiclesInfo.setText(newAvg.getInfo());
+    		}
+    	});
     	
     	// section to trigger the method call to takeOrder
     	takeOrder.setOnAction(e -> {
@@ -109,6 +130,7 @@ public class humanMachineInterface extends Application{
 			}
     	});
     	
+    	// section to trigger call to search log
     	searchLog.setOnAction(e -> {
     		String searchTerm = searchField.getText();
     		if(!searchTerm.isEmpty()) {
@@ -118,6 +140,7 @@ public class humanMachineInterface extends Application{
     		}
     	});
     	
+    	// section to trigger call to delete log
     	deleteLog.setOnAction(e -> {
     		String file = logListView.getSelectionModel().getSelectedItem();
     		if (file != null) {
@@ -128,6 +151,7 @@ public class humanMachineInterface extends Application{
     		}
     	});
     	
+    	// section to trigger call to archive log
     	archiveLog.setOnAction(e -> {
     		String file = logListView.getSelectionModel().getSelectedItem();
     		if (file != null) {
@@ -137,7 +161,8 @@ public class humanMachineInterface extends Application{
     			System.out.println("No file selected! Please select a file!");
     		}
     	});
-
+    	
+    	// section to trigger call to move log
     	moveLog.setOnAction(e -> {
     		String file = logListView.getSelectionModel().getSelectedItem();
     		String targetDir = targetField.getText().trim();
@@ -149,6 +174,7 @@ public class humanMachineInterface extends Application{
     		}
     	});
     	
+    	// section to trigger call to open the log file by double click
     	logListView.setOnMouseClicked(event -> {
     		if (event.getClickCount() == 2) {
     			String file = logListView.getSelectionModel().getSelectedItem();
@@ -157,6 +183,10 @@ public class humanMachineInterface extends Application{
     			}
     		}
     	});
+    	
+    	for (int i = 0; i < workday.vehicles.size(); i++) {
+    		vehiclesListView.getItems().add(workday.vehicles.get(i));
+    	}
     	
     	GridPane grid = new GridPane();
     	grid.setVgap(15);
@@ -171,8 +201,13 @@ public class humanMachineInterface extends Application{
     	border2.setStyle("-fx-border-color: black; -fx-border-width: 2px");
     	border2.setPadding(new Insets(5));
     	
+    	Pane border3 = new Pane();
+    	border3.setStyle("-fx-border-color: black; -fx-border-width: 2px");
+    	border3.setPadding(new Insets(5));
+    	
     	grid.add(border1, 0, 0, 4, 5);
     	grid.add(border2, 0, 9, 4, 10);
+    	grid.add(border3, 7, 0, 8, 7);
     	grid.add(weightLabel, 1, 1);
     	grid.add(weightField, 2, 1);
     	grid.add(operationBox, 2, 2);
@@ -186,7 +221,10 @@ public class humanMachineInterface extends Application{
     	grid.add(moveLabel, 1, 15);
     	grid.add(targetField, 2, 15);
     	grid.add(logListView, 1, 16, 2, 2);
-    	grid.add(logContents, 4, 0, 10, 19);
+    	grid.add(logContents, 4, 0, 3, 19);
+    	grid.add(vehiclesListView, 8, 2, 2, 2);
+    	grid.add(vehiclesInfo, 11, 2, 2, 2);
+    	grid.add(avgInfoLabel, 8, 1);
     	
     	Scene scene = new Scene(grid, 400, 400);
     	mainStage.setTitle("Order Creation");

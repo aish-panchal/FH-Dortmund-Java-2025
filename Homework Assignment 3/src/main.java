@@ -12,8 +12,8 @@ public class main {
     	
     	//humanMachineInterface.launch(args);
 		Date today = new java.util.Date();
-		Scanner logname;
-		logname = new Scanner(System.in);
+		//Scanner logname;
+		//logname = new Scanner(System.in);
 		taskManagement workday = new taskManagement(today,25); //date and avg in total 
 		
 		Thread t1 = new Thread(() -> {
@@ -51,7 +51,7 @@ public class main {
 		/*while(true) {
 			System.out.println("Enter searching log file: ");
 			file_ops.openLog(logname.nextLine());
-		}
+		}*
     }
 
 }*/
