@@ -44,6 +44,8 @@ public class chargingStation implements Runnable {
 		//charging = new ArrayList<avg>();
 		l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(accTime)+ ": Vehicle ");
 	}
+	
+	//TODO ----- if all avgs are all unavailable then handle exception, wait blah blah
 
 	@Override
 	public void run() {
@@ -53,40 +55,45 @@ public class chargingStation implements Runnable {
 		while (true) {
 
 			if (chargingQ.size() > 0) {
-				avg avgToBeCharged=new avg("",0.15);
+				//avg avgToBeCharged=new avg("",0.15);
 				
 				for (int i = 0; (i < chargingQ.size()) && (availableStations > 0); i++) {
-					//avgToBeCharged = chargingQ.get(0);//chargingQ.size() - 1);
-					double chargepercent =chargingQ.get(i).getConsump(); //avgToBeCharged.getConsump();
-					double chargeTime = chargingQ.get(i).chargeBatteryPercentage(chargepercent);//avgToBeCharged.chargeBatteryPercentage(chargepercent);
+					avg avgToBeCharged = chargingQ.get(0);//chargingQ.size() - 1);
+					double chargepercent =avgToBeCharged.getConsump();//chargingQ.get(i).getConsump(); //
+					double chargeTime = avgToBeCharged.chargeBatteryPercentage(chargepercent);//chargingQ.get(i).chargeBatteryPercentage(chargepercent);//
 					
 					System.out.println("charging time: "+chargeTime+"hours");
 					//TODO ---------- why are we storing charging time if we're not using it?
 					
-					pair a = new pair(chargingQ.get(i),chargeTime);//avgToBeCharged, chargeTime);
+					pair a = new pair(avgToBeCharged, chargeTime);//chargingQ.get(i),chargeTime);//
 					charging.add(a);
 					availableStations-= 1;
 					//Update log to vehicles started charging
 					startevent = (l_event + charging.get(i).avg.id+" is charging.");//avg.id+" is charging.");
 					updateLogFile(charging.get(i).avg.avgfile,startevent);
+					chargingQ.remove(0);//chargingQ.size() - 1);
+					getStationStatus();
 				}
-			//}
+			}
 			int j=0;
 			for(int i=0; i<charging.size();i++) {
-				charging.get(i).time -= 0.01;
-				if (charging.get(j).time < 0) {
-					charging.get(j).avg.getInfo();
+				
+				charging.get(i).time -= 0.1;
+				System.out.println("time: "+charging.get(i).time);
+				if (charging.get(i).time <= 0) {
+					System.out.println("2nd for loop!");
+					charging.get(i).avg.getInfo();
 					avg.add(charging.get(i).avg);
-					l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
-					endevent = (l_event + charging.get(j).avg.id+" is charged.");
-					updateLogFile(charging.get(j).avg.avgfile,endevent);
-					charging.remove(j);
+					//l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
+					endevent = (l_event + charging.get(i).avg.id+" is charged.");
+					updateLogFile(charging.get(i).avg.avgfile,endevent);
+					charging.remove(i);
 					availableStations += 1; //update log finish charging
-					chargingQ.remove(j);//chargingQ.size() - 1);
 					getChargingstatus();
 				}
+				getStationStatus();
 			}
-			}
+			//}
 			try {
 				Thread.sleep(1000);
 				l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
