@@ -54,38 +54,30 @@ public class chargingStation implements Runnable {
 		accTime = new java.util.Date();
 		while (true) {
 
-			if (chargingQ.size() > 0) {
-				//avg avgToBeCharged=new avg("",0.15);
-				
+			if (chargingQ.size() > 0) {	
 				for (int i = 0; (i < chargingQ.size()) && (availableStations > 0); i++) {
-					avg avgToBeCharged = chargingQ.get(0);//chargingQ.size() - 1);
-					double chargepercent =avgToBeCharged.getConsump();//chargingQ.get(i).getConsump(); //
-					double chargeTime = avgToBeCharged.chargeBatteryPercentage(chargepercent);//chargingQ.get(i).chargeBatteryPercentage(chargepercent);//
+					avg avgToBeCharged = chargingQ.get(0);
+					double chargepercent =avgToBeCharged.getConsump();
+					double chargeTime = avgToBeCharged.chargeBatteryPercentage(chargepercent);
 					
-					System.out.println("charging time: "+chargeTime+"hours");
-					//TODO ---------- why are we storing charging time if we're not using it?
-					
-					pair a = new pair(avgToBeCharged, chargeTime);//chargingQ.get(i),chargeTime);//
+					pair a = new pair(avgToBeCharged, chargeTime);
 					charging.add(a);
 					availableStations-= 1;
-					//Update log to vehicles started charging
-					startevent = (l_event + charging.get(i).avg.id+" is charging.");//avg.id+" is charging.");
+					startevent = (l_event + charging.get(charging.size()-1).avg.id+" is charging.");//avg.id+" is charging.");
 					updateLogFile(charging.get(i).avg.avgfile,startevent);
-					chargingQ.remove(0);//chargingQ.size() - 1);
+					chargingQ.remove(0);
 					getStationStatus();
 				}
 			}
-			int j=0;
-			for(int i=0; i<charging.size();i++) {
-				
+		
+			for(int i=0; i<charging.size();i++) {	
 				charging.get(i).time -= 0.1;
 				System.out.println("time: "+charging.get(i).time);
 				if (charging.get(i).time <= 0) {
 					System.out.println("2nd for loop!");
 					charging.get(i).avg.getInfo();
 					avg.add(charging.get(i).avg);
-					//System.out.println(avg);
-					//l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
+		
 					endevent = (l_event + charging.get(i).avg.id+" is charged.");
 					updateLogFile(charging.get(i).avg.avgfile,endevent);
 					charging.remove(i);
@@ -94,7 +86,6 @@ public class chargingStation implements Runnable {
 				}
 				getStationStatus();
 			}
-			//}
 			try {
 				Thread.sleep(1000);
 				l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
@@ -103,33 +94,7 @@ public class chargingStation implements Runnable {
 			}
 		}
 	}
-/*
-	public void charging(avg[] avgcharge) throws exception_handling.VehicleNotFoundException {
-		String startevent, endevent;
-		double chargepercent;
-		long waittime;
-		try {
-			for (int i = 0; i < avgcharge.length; i++) {
-				if (avgcharge[i] == null) {
-					echarge.handleVehicleNotFound();
-				}
-				stationOccupied = true;
-				chargepercent = avgcharge[i].getConsump();
-				chargtime = avgcharge[i].chargeBatteryPercentage(chargepercent);
-				waittime = TimeUnit.HOURS.toMillis((long) chargtime);
-				startevent = (l_event + avgcharge[i].id + " is charging.");
-				endevent = (l_event + avgcharge[i].id + " is charged.");
-				updateLogFile(,startevent);
 
-				Thread.sleep(waittime); // charging time
-				updateLogFile(endevent);
-			}
-
-		} catch (Throwable e) {
-			System.out.println("Error: " + e.toString());
-		}
-	}
-*/
 	public String getChargingstatus() {
 		String status;
 		if (stationOccupied) {
@@ -140,7 +105,6 @@ public class chargingStation implements Runnable {
 		return status;
 	}
 
-	//TODO------add to GUI
 	public String getStationStatus() {
 		return ("Currently charging: "+charging.size()+ " vehicles.\n\n"+"Stations available: "+(this.availableStations));
 	}
