@@ -5,10 +5,10 @@ import java.util.concurrent.TimeUnit;
 
 /* movDelivery: moving finished products from warehouse to dispatch area */
 public class movDelivery extends movementVehicle {
-	public movDelivery(String task, Date time, String filename, ArrayList<avg> avgsToBeUsed, ArrayList<avg> chargeQ,
+	public movDelivery(String task, String filename, ArrayList<avg> avgsToBeUsed, ArrayList<avg> chargeQ,
 			ArrayList<avg> readyVehicleQ, double storUnit[], double dispatcharea[], rawMaterial prod) {
 		this.taskid = task;
-		this.timestamp = time;
+		this.timestamp = new java.util.Date();
 		this.sysfile = filename;
 		this.location = storUnit;
 		this.destination = dispatcharea;
@@ -17,19 +17,23 @@ public class movDelivery extends movementVehicle {
 		this.readyVehicleQ = readyVehicleQ;//available avg list
 		this.movingmaterial = prod;
 		this.tonnes = new storageManagement();
-		for (avg a : avgsToBeUsed) {
+		
+		for (avg a : this.avgsToBeUsed) {
 			a.setActSpeed(2);
 		}
-		loading("warehouse");
-		movingtolocation("dispatch area");
-		unloading("dispatch area");
+		int ind_place=2;
+		
+		loading(ind_place);
+		movingtolocation(ind_place);
+		unloading(ind_place);
 	}
 
-	public void loading(String start) {
+	public void loading(int end_index) {
 		long loadtime = 20; // minutes
 		status = in_progress;
+		String start="["+location[0]+","+location[1]+"]";
 		updateLog("loading", start);
-		for (avg a : avgsToBeUsed) {
+		for (avg a : this.avgsToBeUsed) {
 			a.changepos(location);
 			a.wait_at_pos(loadtime);
 		}
@@ -39,41 +43,41 @@ public class movDelivery extends movementVehicle {
 		updateLog("loading", start);// process finished and added to the log file
 	}
 
-	public void movingtolocation(String loc) {// start movement from current location to destination
+	public void movingtolocation(int toplace) {// start movement from current location to destination
 		status = in_progress;
-		updateLog("transporting", loc);
+		String src="["+location[0]+","+location[1]+"]";
+		updateLog("transporting", end_destination[toplace]);
 
 		location = destination;
-		for (avg a : avgsToBeUsed) {
+		for (avg a : this.avgsToBeUsed) {
 			a.changepos(destination);
 		}
 		//add duration of journey
-		if (avgsToBeUsed.size() > 0) {
+		if (this.avgsToBeUsed.size() > 0) {
 			this.timestamp.setTime(
 					this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));
 		}
 		status = done;
-		updateLog("transporting", loc);// process finished and added to the log file
+		updateLog("transporting", end_destination[toplace]);// process finished and added to the log file
 	}
 	
-	public void unloading(String end) {
+	public void unloading(int end) {
 		long unloadtime = 20; // minutes
 		status = in_progress;
-		updateLog("unloading", end);
-		for (avg a : avgsToBeUsed) {
+		updateLog("unloading", end_destination[end]);
+		for (avg a : this.avgsToBeUsed) {
 			a.wait_at_pos(unloadtime);
 		}
 		// add duration of unloading process
 		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(unloadtime));
 
 		status = done;
-		updateLog("unloading", "dispatch area.");// process finished and added to the log file
+		updateLog("unloading", end_destination[end]);// process finished and added to the log file
 		//checks battery status
-		for (avg a : avgsToBeUsed) {
+		for (avg a : this.avgsToBeUsed) {
 			a.changepos(destination);
 			a.setActSpeed(5);
-			if (a.getComsup() < 0.50) {
-				System.out.println("lowbat");
+			if (a.getConsump() > 0.50) {
 				this.chargeQ.add(a);
 			} else {
 				this.readyVehicleQ.add(a);
@@ -92,8 +96,8 @@ public class movDelivery extends movementVehicle {
 		String prodlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
 				+ this.movingmaterial.id + ": ");
 		if (status) {
-			for (avg a : avgsToBeUsed) {
-				upevent = (this.event + a.id + " finished " + update + " the delivary at the " + delivarea);
+			for (avg a : this.avgsToBeUsed) {
+				upevent = (this.event + a.id + " finished " + update + " the delivary at " + delivarea);
 				file_ops.createUpdateLog(this.sysfile, upevent);
 				file_ops.createUpdateLog(a.avgfile, upevent);
 			}
@@ -102,7 +106,7 @@ public class movDelivery extends movementVehicle {
 			file_ops.createUpdateLog(this.tonnes.storageLog, produpdate);
 		} else {
 
-			for (avg a : avgsToBeUsed) {
+			for (avg a : this.avgsToBeUsed) {
 				upevent = (this.event + a.id + " is " + update + " the delivery to the " + delivarea + ".");
 				file_ops.createUpdateLog(this.sysfile, upevent);
 				file_ops.createUpdateLog(a.avgfile, upevent);
