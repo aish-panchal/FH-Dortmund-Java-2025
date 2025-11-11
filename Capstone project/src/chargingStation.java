@@ -134,7 +134,7 @@ public class chargingStation implements Runnable {
 
 	//TODO------add to GUI
 	public String getStationStatus() {
-		return ("Currently charging: "+charging.size()+ " vehicles.\n"+"Stations available: "+(this.availableStations));
+		return ("Currently charging: "+charging.size()+ " vehicles.\n\n"+"Stations available: "+(this.availableStations));
 	}
 
 	public void updateLogFile(String file, String event) {
@@ -142,4 +142,8 @@ public class chargingStation implements Runnable {
 		file_ops.createUpdateLog(file, event);// update vehicle file
 		file_ops.createUpdateLog(logf, event);// update charging station file
 	}
+	
+	public String getInfo() {
+    	return "Station Status: " + getStationStatus();
+    }
 }

@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.scene.text.*;
 import javafx.event.*;
+import javafx.application.*;
 import java.text.*;
 import java.util.*;
 import java.io.*;
@@ -22,8 +23,8 @@ public class humanMachineInterface extends Application{
     //public String itemStatus;
     //public String orderStatus;
     //public String avgStatus;
-	private static final String Logs_dir = "logs";
-	private static final String archive_dir = "logs/archive";
+	//private static final String Logs_dir = "logs";
+	//private static final String archive_dir = "logs/archive";
 	private int orderID = 1;
 	
 	public static void main(String[] args) {
@@ -40,6 +41,9 @@ public class humanMachineInterface extends Application{
     	
     	// creating label for AVG information
     	Label avgInfoLabel = new Label("AVG information and status");
+    	
+    	// creating label for charging station information
+    	Label chargeStationLabel = new Label("Charging station information and status");
     	
     	// creating text field to enter weight 
     	TextField weightField = new TextField();
@@ -87,6 +91,12 @@ public class humanMachineInterface extends Application{
     	vehiclesListView.setMaxWidth(200);
     	vehiclesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     	
+    	/*// creating a listing of the charging stations
+    	ListView<chargingStation> chargeStationListView = new ListView<>();
+    	chargeStationListView.setMaxHeight(400);
+    	chargeStationListView.setMaxWidth(200);
+    	chargeStationListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);*/
+    	
     	// creating area to view log file contents
     	TextArea logContents = new TextArea();
     	logContents.setEditable(false);
@@ -94,16 +104,35 @@ public class humanMachineInterface extends Application{
     	logContents.setMaxHeight(1100);
     	logContents.setMaxWidth(500);
     	
+    	// creating area to view avg information
     	TextArea vehiclesInfo = new TextArea();
     	vehiclesInfo.setEditable(false);
     	vehiclesInfo.setMaxHeight(200);
     	vehiclesInfo.setMaxWidth(200);
     	
+    	// creating area to view charging station information
+    	TextArea chargeStationInfo = new TextArea();
+    	chargeStationInfo.setEditable(false);
+    	chargeStationInfo.setMaxHeight(300);
+    	chargeStationInfo.setMaxWidth(300);
+    	
+    	// show information of selected avg in the relevant text box
     	vehiclesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldAvg, newAvg) -> {
     		if (newAvg != null) {
     			vehiclesInfo.setText(newAvg.getInfo());
     		}
     	});
+    	
+    	
+    	Timer timer = new Timer();
+    	timer.scheduleAtFixedRate(new TimerTask() {
+    		public void run() {
+    			Platform.runLater(() -> {
+    				chargeStationInfo.setText(workday.charge.getInfo());
+    			});
+    		}
+    	}, 0, 250);
+    	
     	
     	// section to trigger the method call to takeOrder
     	takeOrder.setOnAction(e -> {
@@ -111,10 +140,9 @@ public class humanMachineInterface extends Application{
     			// get weight and operation from the text and drop down boxes
     			int weight = Integer.parseInt(weightField.getText());
     			String operation = operationBox.getValue();
-    			int id = orderID;
     			
     			
-    			workday.takeOrder(weight, operation, id);
+    			workday.takeOrder(weight, operation);
     			orderID++;
     		} catch (NumberFormatException excep) {
     			// exception for the bad weight input
@@ -184,6 +212,7 @@ public class humanMachineInterface extends Application{
     		}
     	});
     	
+    	// adding all the created avgs to the list view
     	for (int i = 0; i < workday.vehicles.size(); i++) {
     		vehiclesListView.getItems().add(workday.vehicles.get(i));
     	}
@@ -205,9 +234,14 @@ public class humanMachineInterface extends Application{
     	border3.setStyle("-fx-border-color: black; -fx-border-width: 2px");
     	border3.setPadding(new Insets(5));
     	
+    	Pane border4 = new Pane();
+    	border4.setStyle("-fx-border-color: black; -fx-border-width: 2px");
+    	border4.setPadding(new Insets(5));
+    	
     	grid.add(border1, 0, 0, 4, 5);
     	grid.add(border2, 0, 9, 4, 10);
     	grid.add(border3, 7, 0, 8, 7);
+    	grid.add(border4, 7, 9, 8, 7);
     	grid.add(weightLabel, 1, 1);
     	grid.add(weightField, 2, 1);
     	grid.add(operationBox, 2, 2);
@@ -225,8 +259,10 @@ public class humanMachineInterface extends Application{
     	grid.add(vehiclesListView, 8, 2, 2, 2);
     	grid.add(vehiclesInfo, 11, 2, 2, 2);
     	grid.add(avgInfoLabel, 8, 1);
+    	grid.add(chargeStationLabel, 8, 10);
+    	grid.add(chargeStationInfo, 8, 11, 2, 4);
     	
-    	Scene scene = new Scene(grid, 400, 400);
+    	Scene scene = new Scene(grid, 500, 500);
     	mainStage.setTitle("Order Creation");
     	mainStage.setScene(scene);
     	mainStage.show();
