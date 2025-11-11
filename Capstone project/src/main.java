@@ -1,4 +1,4 @@
-import java.io.Console;
+/*import java.io.Console;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class main {
 		//Scanner logname;
 		//logname = new Scanner(System.in);
 		taskManagement workday = new taskManagement(today,25); //date and avg in total 
-		/*
+		
 		Thread t1 = new Thread(() -> {
 			try {
 				workday.takeOrder(50, "toFactory",1);
@@ -35,7 +35,7 @@ public class main {
 		
 		t1.start();
 		t2.start();
-		*/
+		
 		//Order of 100 tones from warehouse to factory
 		//workday.takeOrder(10, "toWarehouse");
 		//workday.takeOrder(5,"toFactory");
@@ -44,7 +44,7 @@ public class main {
 		/*while(true) {
 			System.out.println("Enter searching log file: ");
 			file_ops.openLog(logname.nextLine());
-		}*/
+		}
     }
 
-}
+}*/

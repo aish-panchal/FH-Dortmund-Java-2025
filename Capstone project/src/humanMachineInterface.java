@@ -90,12 +90,7 @@ public class humanMachineInterface extends Application{
     	vehiclesListView.setMaxHeight(200);
     	vehiclesListView.setMaxWidth(200);
     	vehiclesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-    	
-    	/*// creating a listing of the charging stations
-    	ListView<chargingStation> chargeStationListView = new ListView<>();
-    	chargeStationListView.setMaxHeight(400);
-    	chargeStationListView.setMaxWidth(200);
-    	chargeStationListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);*/
+    
     	
     	// creating area to view log file contents
     	TextArea logContents = new TextArea();
