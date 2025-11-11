@@ -93,29 +93,4 @@ public class avg {
 				+ ", " + pos[1] + ")\n";
 	}
 
-<<<<<<< Updated upstream
-    public double overallTime(){
-   	return overallTime*60;//minutes
-    }
-    /* public double getdistance(){
-       return dis;
-       }
-    */
-    public double getConsump(){ // get the overall battery consumption 
-	// Assumption here is for the capacity of the battery to be 50 kWh
-   	return (1-overallConsum); //remaining battery
-    }
-    
-    public String toString() {
-    	return id;
-    }
-    
-    public String getInfo() {
-    	return "ID: " + id + "\n\n" + "Battery Load: " + 
-    			(int) (batteryload * 100) + "%\n\n" + "Position: (" + pos[0] + ", " + 
-    			pos[1] + ")\n";
-    }
-	
-=======
->>>>>>> Stashed changes
 }
