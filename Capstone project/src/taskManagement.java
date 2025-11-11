@@ -33,8 +33,8 @@ public class taskManagement {
 		//ArrayList<avg> vehicles = new ArrayList<avg>();
 		
 		for (int i = 0; i < noavgs; i++) {
-			avg a = new avg("avg." + i, 0.15);// id,consump %/h
-			a.setActSpeed(9);
+			avg a = new avg("avg." + i, 0.25);// id,consump %/h
+			a.setActSpeed(5);
 			a.avgfile = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + a.id + ".txt");// create/update vehicle file
 			file_ops.createUpdateLog(a.avgfile, "Started task.");
 			this.vehicles.add(a);
