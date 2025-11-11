@@ -27,29 +27,34 @@ public class taskManagement {
 
 	public taskManagement(Date date, int noavgs) {
 		this.orderno = 1;
+		this.vehicles = new ArrayList<avg>();
 		this.vehiclesInNeedOfCharging = new ArrayList<avg>();
 		currentdate = date;
-		ArrayList<avg> vehicles = new ArrayList<avg>();
+		//ArrayList<avg> vehicles = new ArrayList<avg>();
+		
 		for (int i = 0; i < noavgs; i++) {
-			avg a = new avg("avg." + i, 0.25);// id,consump %/h
-			vehicles.add(a);
-			a.setActSpeed(5);
+			avg a = new avg("avg." + i, 0.15);// id,consump %/h
+			a.setActSpeed(9);
 			a.avgfile = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + a.id + ".txt");// create/update vehicle file
 			file_ops.createUpdateLog(a.avgfile, "Started task.");
+			this.vehicles.add(a);
 		}
-		this.vehicles = vehicles;
+	//	this.vehicles = vehicles;
 
 		file = ("log." + new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + ".txt");
 
-		this.charge = new chargingStation(vehicles, vehiclesInNeedOfCharging);
+		this.charge = new chargingStation(file,vehicles, vehiclesInNeedOfCharging);
 		this.chargingStationThread = new Thread(this.charge);
 		this.chargingStationThread.start();
+		
 	}
 
-	public void takeOrder(int load, String order, int id) throws exception_handling.ZeroTonnesException,
+	public void takeOrder(int load, String order) throws exception_handling.ZeroTonnesException,
 			exception_handling.InvalidOrderException, exception_handling, exception_handling.VehicleNotFoundException {
-		ArrayList<avg> v = new ArrayList<avg>();
-		orderID = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + "Task" + "." + id);
+		
+		ArrayList<avg> v = new ArrayList<avg>();//vehicles that'll work in the order
+		
+		orderID = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + "Task" + "." + this.orderno++);
 		// determine range of the load
 		try {
 			if (load > 100) {
@@ -64,17 +69,20 @@ public class taskManagement {
 			while (op_vehicles > this.vehicles.size()) {
 				Thread.sleep(1000);
 			}
+			int vind=0;
 			for (int i = 0; i < op_vehicles; i++) {
-				v.add(this.vehicles.remove(i)); // removes avg from vehicles ArrayList and adds it to v
+				//adds avg to v and removes it from vehicles ArrayList
+				v.add(this.vehicles.get(vind));
+				this.vehicles.remove(vind);
 			}
 		} catch (Throwable e) {
 			System.out.println("Error: " + e.toString());
 		}
 		// manage order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}
-		this.orderno = id;
 		this.manageOrder(order, load, v);
 	}
-
+	
+	//TODO--------delete event_update and just update log file on movement classes
 	private void manageOrder(String task, int ton, ArrayList<avg> vehiclesToBeUsed) throws exception_handling,
 			exception_handling.InvalidOrderException, exception_handling.VehicleNotFoundException {
 		Date starttime = new java.util.Date();
@@ -85,47 +93,45 @@ public class taskManagement {
 		switch (task) {
 		case "toFactory":
 			ordermaterial = new rawMaterial("item" + orderno, "raw", ton, warehouse);
-			move = new movStorage(this.orderID, currentdate, factory, vehiclesToBeUsed, vehiclesInNeedOfCharging,
-					this.vehicles, file, warehouse, "warehouse", "factory", this.ordermaterial);
+			move = new movStorage(this.orderID, factory, vehiclesToBeUsed, vehiclesInNeedOfCharging,
+					this.vehicles, file, warehouse, 0, this.ordermaterial);
 			overallduration = (double) (move.timestamp.getTime() - starttime.getTime()) / 3600000; // in hours
 
-			entry = calculate_date(overallduration, move, this.orderID);
-			file_ops.createUpdateLog(file, entry);
-			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
+			event_update(overallduration,this.move);
+			//currentdate.setTime(move.timestamp.getTime());// update taskmanager time
 			break;
 
 		case "toWarehouse":
 			ordermaterial = new rawMaterial("item " + orderno, "product", ton, factory);
-			move = new movStorage(this.orderID, currentdate, warehouse, vehiclesToBeUsed, vehiclesInNeedOfCharging,
-					this.vehicles, file, factory, "factory", "warehouse", this.ordermaterial);
+			move = new movStorage(this.orderID, warehouse, vehiclesToBeUsed, vehiclesInNeedOfCharging,
+					this.vehicles, file, factory, 1, this.ordermaterial);
 			overallduration = (double) (move.timestamp.getTime() - starttime.getTime()) / 3600000; // in hours
 
-			entry = calculate_date(overallduration, move, this.orderID);
-			file_ops.createUpdateLog(file, entry);
-			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
+			event_update(overallduration,this.move);
+			//currentdate.setTime(move.timestamp.getTime());// update taskmanager time
 			break;
 
 		case "toDelivery":
 			ordermaterial = new rawMaterial("item " + orderno, "product", ton, warehouse);
 
-			move = new movDelivery(this.orderID, currentdate, file, vehiclesToBeUsed, vehiclesInNeedOfCharging,
+			move = new movDelivery(this.orderID, file, vehiclesToBeUsed, vehiclesInNeedOfCharging,
 					vehicles, warehouse, dispatch, this.ordermaterial);
 			overallduration = (double) (move.timestamp.getTime() - starttime.getTime()) / 3600000; // in hours
 
-			entry = calculate_date(overallduration, move, this.orderID);
-			file_ops.createUpdateLog(file, entry);
-			currentdate.setTime(move.timestamp.getTime());// update taskmanager time
+			event_update(overallduration,this.move);
+			//currentdate.setTime(move.timestamp.getTime());// update taskmanager time
 			break;
 
 		case null, default:
 			etask.handleInvalidOrder();
+			this.orderno -=1;//increase order number
 		}
-
 	}
 
-	private static String calculate_date(double overallduration, movementVehicle move, String orderID) {
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp) + ": " + orderID
-				+ " mission completed. Overall duration: " + String.format("%.2f", overallduration) + " hours.";
+	private void event_update(double overalltime, movementVehicle move) {
+		String entry = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp) + ": " + this.orderID
+				+ " mission completed. Overall duration: " + String.format("%.2f", overalltime) + " hours.");
+		file_ops.createUpdateLog(file, entry);
 	}
 
 }
