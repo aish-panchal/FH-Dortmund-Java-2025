@@ -84,7 +84,7 @@ public class chargingStation implements Runnable {
 					System.out.println("2nd for loop!");
 					charging.get(i).avg.getInfo();
 					avg.add(charging.get(i).avg);
-					System.out.println(avg);
+					//System.out.println(avg);
 					//l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
 					endevent = (l_event + charging.get(i).avg.id+" is charged.");
 					updateLogFile(charging.get(i).avg.avgfile,endevent);
