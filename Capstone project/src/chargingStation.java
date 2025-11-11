@@ -21,6 +21,8 @@ public class chargingStation implements Runnable {
 	public ArrayList<avg> chargingQ;// avg to charge
 	public ArrayList<avg> avg;
 	public ArrayList<pair> charging;
+	
+	//public ArrayList<avg> charging;
 	private boolean stationOccupied; // station status
 	public String logf;// charging station file
 	private String taskfile;// system file
@@ -29,58 +31,71 @@ public class chargingStation implements Runnable {
 	private Date accTime;// current date
 	private exception_handling echarge = new exception_handling();
 
-	public chargingStation(ArrayList<avg> avgs, ArrayList<avg> toCharge) {
+	public chargingStation(String taskfile,ArrayList<avg> avgs, ArrayList<avg> toCharge) {
 		// initialize log file for all n charging stations
 		accTime = new java.util.Date();
-		logf = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS").format(accTime) + "ChargingStation" + ".txt");
+		this.taskfile= taskfile;
+		logf = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(accTime) + "ChargingStation" + ".txt");
 		file_ops.createUpdateLog(logf, "");
 		this.availableStations = STATIONS;
 		this.avg = avgs;
 		this.chargingQ = toCharge;
 		charging = new ArrayList<pair>();
-		l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(accTime)+ ": Vehicle ");
+		//charging = new ArrayList<avg>();
+		l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(accTime)+ ": Vehicle ");
 	}
 
 	@Override
 	public void run() {
-		System.out.println("In thread");
+		//System.out.println("In thread");
 		String startevent, endevent;
 		accTime = new java.util.Date();
 		while (true) {
+
 			if (chargingQ.size() > 0) {
-				for (int i = 0; i < chargingQ.size() && availableStations > 0; i++) {
-					avg avgToBeCharged = chargingQ.get(chargingQ.size() - 1);
-					chargingQ.remove(chargingQ.size() - 1);
-					double chargepercent = avgToBeCharged.getComsup();
-					double chargeTime = avgToBeCharged.chargeBatteryPercentage(chargepercent);
-					pair a = new pair(avgToBeCharged, chargeTime);
+				avg avgToBeCharged=new avg("",0.15);
+				
+				for (int i = 0; (i < chargingQ.size()) && (availableStations > 0); i++) {
+					//avgToBeCharged = chargingQ.get(0);//chargingQ.size() - 1);
+					double chargepercent =chargingQ.get(i).getConsump(); //avgToBeCharged.getConsump();
+					double chargeTime = chargingQ.get(i).chargeBatteryPercentage(chargepercent);//avgToBeCharged.chargeBatteryPercentage(chargepercent);
+					
+					System.out.println("charging time: "+chargeTime+"hours");
+					//TODO ---------- why are we storing charging time if we're not using it?
+					
+					pair a = new pair(chargingQ.get(i),chargeTime);//avgToBeCharged, chargeTime);
 					charging.add(a);
-					availableStations -= 1;
-					System.out.println("In charging");//Update log to vehicles started charging
-					startevent = (l_event + charging.get(i).avg.id+" is charging.");
-					updateLogFile(startevent);
+					availableStations-= 1;
+					//Update log to vehicles started charging
+					startevent = (l_event + charging.get(i).avg.id+" is charging.");//avg.id+" is charging.");
+					updateLogFile(charging.get(i).avg.avgfile,startevent);
+				}
+			//}
+			int j=0;
+			for(int i=0; i<charging.size();i++) {
+				charging.get(i).time -= 0.01;
+				if (charging.get(j).time < 0) {
+					charging.get(j).avg.getInfo();
+					avg.add(charging.get(i).avg);
+					l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
+					endevent = (l_event + charging.get(j).avg.id+" is charged.");
+					updateLogFile(charging.get(j).avg.avgfile,endevent);
+					charging.remove(j);
+					availableStations += 1; //update log finish charging
+					chargingQ.remove(j);//chargingQ.size() - 1);
+					getChargingstatus();
 				}
 			}
-			for(int i=0; i<charging.size();i++) {
-				charging.get(i).time -= 0.1;
-				if (charging.get(i).time < 0) {
-					avg.add(charging.get(i).avg);
-					endevent = (l_event + charging.get(i).avg.id+" is charged.");
-					updateLogFile(endevent);
-					charging.remove(i);
-					availableStations += 1; //update log finish charging
-				}
 			}
 			try {
-				
 				Thread.sleep(1000);
-				l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(System.currentTimeMillis())+ ": Vehicle ");
+				l_event=(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())+ ": Vehicle ");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
+/*
 	public void charging(avg[] avgcharge) throws exception_handling.VehicleNotFoundException {
 		String startevent, endevent;
 		double chargepercent;
@@ -91,12 +106,12 @@ public class chargingStation implements Runnable {
 					echarge.handleVehicleNotFound();
 				}
 				stationOccupied = true;
-				chargepercent = avgcharge[i].getComsup();
+				chargepercent = avgcharge[i].getConsump();
 				chargtime = avgcharge[i].chargeBatteryPercentage(chargepercent);
 				waittime = TimeUnit.HOURS.toMillis((long) chargtime);
 				startevent = (l_event + avgcharge[i].id + " is charging.");
 				endevent = (l_event + avgcharge[i].id + " is charged.");
-				updateLogFile(startevent);
+				updateLogFile(,startevent);
 
 				Thread.sleep(waittime); // charging time
 				updateLogFile(endevent);
@@ -106,7 +121,7 @@ public class chargingStation implements Runnable {
 			System.out.println("Error: " + e.toString());
 		}
 	}
-
+*/
 	public String getChargingstatus() {
 		String status;
 		if (stationOccupied) {
@@ -117,13 +132,14 @@ public class chargingStation implements Runnable {
 		return status;
 	}
 
-	public boolean getStationStatus() {
-		return stationOccupied;
+	//TODO------add to GUI
+	public String getStationStatus() {
+		return ("Currently charging: "+charging.size()+ " vehicles.\n"+"Stations available: "+(this.availableStations));
 	}
 
-	public void updateLogFile(String event) {
-		//file_ops.createUpdateLog(taskfile, event);// update overall taskmanager file
-		// file_ops.createUpdateLog(batstat[i].avgfile, event);// update vehicle file
+	public void updateLogFile(String file, String event) {
+		file_ops.createUpdateLog(taskfile, event);// update overall taskmanager file
+		file_ops.createUpdateLog(file, event);// update vehicle file
 		file_ops.createUpdateLog(logf, event);// update charging station file
 	}
 }
