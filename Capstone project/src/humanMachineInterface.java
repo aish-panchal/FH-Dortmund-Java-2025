@@ -1,4 +1,4 @@
-
+/*
 import javafx.application.Application;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -240,3 +240,4 @@ public class humanMachineInterface extends Application{
     
     
 }
+*/
