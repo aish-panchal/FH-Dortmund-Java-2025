@@ -95,7 +95,7 @@ public class avg{
        return dis;
        }
     */
-    public double getComsup(){ // get the overall battery consumption 
+    public double getConsump(){ // get the overall battery consumption 
 	// Assumption here is for the capacity of the battery to be 50 kWh
    	return (1-overallConsum); //remaining battery
     }
