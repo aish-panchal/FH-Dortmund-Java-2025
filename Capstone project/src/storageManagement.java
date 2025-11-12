@@ -85,4 +85,12 @@ public class storageManagement {
 			file_ops.createUpdateLog(this.log, log_message);
 		}
 	}
+	
+	public String toString() {
+		String data = "";
+		for (rawMaterial m : stored_materials) {
+			data += "Type: " + m.type + "\n\nAmount: " + m.amount + " tonnes\n\nLocation: (" + m.location[0] + ", " + m.location[1] + ")\n";
+		}
+		return data;
+	}
 }

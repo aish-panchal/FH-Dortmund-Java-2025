@@ -135,7 +135,8 @@ public class humanMachineInterface extends Application{
     		public void run() {
     			Platform.runLater(() -> {
     				chargeStationInfo.setText(workday.charge.getInfo());
-    				inventoryInfo.setText(workday.ordermaterial.toString());
+    				inventoryInfo.setText(workday.store.toString());
+    				
     			});
     		}
     	}, 0, 100);
