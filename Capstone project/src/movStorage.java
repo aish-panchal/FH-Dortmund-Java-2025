@@ -105,6 +105,7 @@ public class movStorage extends movementVehicle {
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
 		try {
+		    System.out.println("at movStorage, added " + movingmaterial.amount + " tons");
 			store.store_material(movingmaterial.amount);
 		} catch (storageManagement.noFreeStorageSpaceException e) {
 			e.printStackTrace();

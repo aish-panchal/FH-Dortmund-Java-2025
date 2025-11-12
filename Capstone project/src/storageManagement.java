@@ -46,6 +46,7 @@ public class storageManagement {
 
 	public synchronized int retrieve_material(int tons) throws materialNotFoundException {
 		if (this.tons_stored == tons) {
+			System.out.println(tons + " tons taken from storage");
 			tons_stored -= tons;
 			free_storage += tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
@@ -70,6 +71,7 @@ public class storageManagement {
 			file_ops.createUpdateLog(this.log, log_message);
 			throw new noFreeStorageSpaceException();
 		} else {
+			System.out.println(tons + " tons put into storage");
 			tons_stored += tons;
 			free_storage -= tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
