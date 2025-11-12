@@ -13,7 +13,8 @@ public class movDelivery extends movementVehicle {
 	public movDelivery(String task, String filename, int avg_amount, Semaphore vMutex,
 			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles,
 			double storUnit[],
-			double dispatcharea[], rawMaterial prod) throws InterruptedException {
+			double dispatcharea[], rawMaterial prod, storageManagement store, Semaphore store_lock)
+			throws InterruptedException {
 
 		this.movementMutex = vMutex;
 		this.taskid = task;
@@ -24,7 +25,8 @@ public class movDelivery extends movementVehicle {
 		this.readyVehicleQ = vehicles;// available avg list
 
 		this.movingmaterial = prod;
-		this.store = new storageManagement();
+		this.store = store;
+		this.store_lock = store_lock;
 
 		this.index_loc = 2;
 		this.location = storUnit;
@@ -55,6 +57,17 @@ public class movDelivery extends movementVehicle {
 		status = in_progress;
 		String start = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", start);
+		
+		try {
+			store_lock.acquire();
+			try {
+				store.retrieve_material(movingmaterial.id);
+			} catch (storageManagement.materialNotFoundException e) {
+				e.printStackTrace();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(location);
@@ -132,7 +145,6 @@ public class movDelivery extends movementVehicle {
 			}
 			produpdate = (prodlog + " finished " + update + ".");
 			file_ops.createUpdateLog(this.sysfile, produpdate);
-			file_ops.createUpdateLog(this.tonnes.storageLog, produpdate);
 		} else {
 			for (avg a : this.avgsToBeUsed) {
 				upevent = (this.event + a.id + " is " + update + " the delivery to the " + delivarea
@@ -142,7 +154,6 @@ public class movDelivery extends movementVehicle {
 			}
 			produpdate = (prodlog + " is " + update + " at " + delivarea + ".");
 			file_ops.createUpdateLog(this.sysfile, produpdate);
-			file_ops.createUpdateLog(this.tonnes.storageLog, produpdate);
 		}
 		if (this.overallduration > 0) {
 			sysupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "

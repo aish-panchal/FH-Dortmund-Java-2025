@@ -26,10 +26,11 @@ abstract class movementVehicle implements Runnable {
 	protected String taskid;
 	protected Date timestamp;
 	protected double overallduration;
-	
+
 	protected rawMaterial movingmaterial;
 	protected exception_handling emov = new exception_handling();
 	protected storageManagement store;
+	protected Semaphore store_lock;
 
 	protected boolean status;
 	protected static boolean done = true;

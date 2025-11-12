@@ -28,7 +28,7 @@ public class taskManagement {
 	// public ArrayList<avg> vehiclesInNeedOfCharging;
 	public rawMaterial ordermaterial;
 	public storageManagement store;
-	public Semaphore storage_lock = new Semaphore(1);
+	public Semaphore store_lock = new Semaphore(1);
 	public movementVehicle move;
 	public Thread chargingStationThread;
 	// public Thread movementThread;
@@ -94,7 +94,8 @@ public class taskManagement {
 				ordermaterial = new rawMaterial("item" + orderno, "raw", ton, warehouse);
 				move = new movStorage(this.orderID, factory, this.op_vehicles, vehicleMutex,
 						vehiclesInNeedOfCharging,
-						this.vehicles, file, warehouse, 0, this.ordermaterial);
+						this.vehicles, file, warehouse, 0, this.ordermaterial, store,
+						store_lock);
 
 				movementThread = new Thread(move);
 				movementThread.start();
@@ -104,8 +105,7 @@ public class taskManagement {
 				ordermaterial = new rawMaterial("item " + orderno, "product", ton, factory);
 				move = new movStorage(this.orderID, warehouse, this.op_vehicles, vehicleMutex,
 						vehiclesInNeedOfCharging,
-						this.vehicles, file, factory, 1, this.ordermaterial);
-
+						this.vehicles, file, factory, 1, this.ordermaterial, store, store_lock);
 				movementThread = new Thread(move);
 				movementThread.start();
 				break;
@@ -115,8 +115,7 @@ public class taskManagement {
 
 				move = new movDelivery(this.orderID, file, this.op_vehicles, vehicleMutex,
 						vehiclesInNeedOfCharging,
-						vehicles, warehouse, dispatch, this.ordermaterial);
-
+						vehicles, warehouse, dispatch, this.ordermaterial, store, store_lock);
 				movementThread = new Thread(move);
 				movementThread.start();
 				break;

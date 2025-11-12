@@ -13,8 +13,10 @@ public class movStorage extends movementVehicle {
 	private Date starttime;
 
 	public movStorage(String task, double coord[], int avgAmount, Semaphore vehicleMutex,
-			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles, String logfile,
-			double orig[], int coord_index, rawMaterial mat) throws InterruptedException {
+			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles,
+			String logfile,
+			double orig[], int coord_index, rawMaterial mat, storageManagement store, Semaphore store_lock)
+			throws InterruptedException {
 
 		this.movementMutex = vehicleMutex;
 		this.taskid = task;
@@ -74,7 +76,8 @@ public class movStorage extends movementVehicle {
 		}
 		// add duration of the moving process
 		this.timestamp.setTime(
-				this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));
+				this.timestamp.getTime()
+						+ TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));
 		status = done;
 		updateLog("journey", place);// process finished
 	}
@@ -119,7 +122,8 @@ public class movStorage extends movementVehicle {
 
 	public void updateLog(String process, String location) {
 		String update, itemupdate, taskupdate;
-		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + this.taskid
+		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
+				+ this.taskid
 				+ " Vehicle: ");
 		String itemlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
 				+ this.movingmaterial.id + ": ");
@@ -143,8 +147,10 @@ public class movStorage extends movementVehicle {
 			file_ops.createUpdateLog(this.tonnes.storageLog, itemupdate);
 		}
 		if (this.overallduration > 0) {
-			taskupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": " + this.taskid
-					+ " mission completed. Overall duration: " + String.format("%.2f", this.overallduration)
+			taskupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "
+					+ this.taskid
+					+ " mission completed. Overall duration: "
+					+ String.format("%.2f", this.overallduration)
 					+ " hours.");
 			file_ops.createUpdateLog(this.sysfile, taskupdate);
 		}
