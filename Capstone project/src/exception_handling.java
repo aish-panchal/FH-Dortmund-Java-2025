@@ -69,4 +69,8 @@ public class exception_handling extends Exception {
 		throw new VehicleNotFoundException("There's no vehicle in this index");
 	}
 
+	public void WaitingForVehicles() {
+		System.out.println("Currently waiting for vehicles to be available");
+	}
+
 }

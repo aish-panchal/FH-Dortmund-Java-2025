@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class chargingStation implements Runnable {
 
@@ -27,15 +28,16 @@ public class chargingStation implements Runnable {
 	private Date accTime;// current date
 	private exception_handling echarge = new exception_handling();
 
-	public chargingStation(String taskfile, ArrayList<avg> avgs, ArrayList<avg> toCharge) {
+	public chargingStation(String taskfile, ConcurrentLinkedQueue<avg> vehicles,
+			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging) {
 		// initialize log file for all n charging stations
 		accTime = new java.util.Date();
 		this.taskfile = taskfile;
 		logf = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(accTime) + "ChargingStation" + ".txt");
 		file_ops.createUpdateLog(logf, "");
 		this.availableStations = STATIONS;
-		this.avg = avgs;
-		this.chargingQ = toCharge;
+		this.avg = vehicles;
+		this.chargingQ = vehiclesInNeedOfCharging;
 		charging = new ArrayList<pair>();
 		// charging = new ArrayList<avg>();
 		l_event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(accTime) + ": Vehicle ");
@@ -49,7 +51,7 @@ public class chargingStation implements Runnable {
 		while (true) {
 
 			if (chargingQ.size() > 0) {
-				System.out.println("ChargingQ: " + chargingQ.size());
+				// System.out.println("ChargingQ: " + chargingQ.size());
 				for (int i = 0; (i < chargingQ.size()) && (availableStations > 0); i++) {
 					avg avgToBeCharged = chargingQ.get(0);
 					double chargepercent = avgToBeCharged.getConsump();
@@ -79,7 +81,7 @@ public class chargingStation implements Runnable {
 				getStationStatus();
 			}
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(50);
 				l_event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())
 						+ ": Vehicle ");
 			} catch (InterruptedException e) {

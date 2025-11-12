@@ -1,55 +1,54 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /* movStorage: moving raw materials from warehouse to factory as well as moving finished
  * goods from factory to storage
  * */
-
-// ----- delete timestamp alternations and insert threadsleep, also readyvehicle doesn't return vehicles to the main avg list
 public class movStorage extends movementVehicle implements Runnable {
 	public int index_loc;
+	private Date starttime;
 
-	public movStorage(String task, double coord[], int avgAmount, Semaphore vehicleMutex, ArrayList<avg> chargeQ,
-			ArrayList<avg> readyVehicleQ, String logfile, double orig[], int coord_index, rawMaterial mat)
-			throws InterruptedException {
+	public movStorage(String task, double coord[], int avgAmount, Semaphore vehicleMutex,
+			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles, String logfile,
+			double orig[], int coord_index, rawMaterial mat) throws InterruptedException {
+
 		this.movementMutex = vehicleMutex;
-		this.avgsToBeUsed = new ArrayList<avg>(); // working avgs
-		this.chargeQ = chargeQ; // Charging queue
-		this.readyVehicleQ = readyVehicleQ; // available avg list
 		this.taskid = task;
 		this.sysfile = logfile;
-		this.index_loc = coord_index;
+
+		this.avgsToBeUsed = new ArrayList<avg>(); // working avgs
+		this.chargeQ = vehiclesInNeedOfCharging; // Charging queue
+		this.readyVehicleQ = vehicles; // available avg list
 
 		this.movingmaterial = mat;
 		this.tonnes = new storageManagement();
 
+		this.index_loc = coord_index;
 		this.location = orig;
 		this.destination = coord;// x2, y2
+		this.starttime = new java.util.Date();
 		this.timestamp = new java.util.Date();
+		this.overallduration = 0;
 
 		this.movementMutex.acquire();
 		while (avgAmount > avgsToBeUsed.size()) {
-			if (readyVehicleQ.size() > 0) {
-				avgsToBeUsed.add(readyVehicleQ.remove(0));
+			if (this.readyVehicleQ.size() > 0) {
+				avgsToBeUsed.add(this.readyVehicleQ.remove(0));
 			} else {
-				Thread.sleep(100);
+				Thread.sleep(1000);
+				this.emov.WaitingForVehicles();
 			}
 		}
 		this.movementMutex.release();
 
-		try {
-			if (avgsToBeUsed.size() < 1) {
-				this.emov.handleVehicleNotFound();
-			}
-		} catch (Throwable e) {
-			System.out.println("Error: " + e.toString());
-		}
-
 	}
 
 	public void loading(int destination_index) {
+		this.starttime.setTime(this.timestamp.getTime());
 		long loadtime = 10; // minutes
 		status = in_progress;
 		String inplace = "[" + location[0] + "," + location[1] + "]";
@@ -59,7 +58,7 @@ public class movStorage extends movementVehicle implements Runnable {
 			a.changepos(location);
 			a.wait_at_pos(loadtime);
 		}
-
+		// add duration of loading process
 		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(loadtime));
 		status = done;
 		updateLog("loading", inplace); // process finished
@@ -81,6 +80,7 @@ public class movStorage extends movementVehicle implements Runnable {
 	}
 
 	public void unloading(int destination_index) throws InterruptedException {
+		System.out.println("Storage process finish");
 		long unloadtime = 10; // minutes
 		status = in_progress;
 		String toplace = end_destination[destination_index];
@@ -89,22 +89,27 @@ public class movStorage extends movementVehicle implements Runnable {
 		for (avg a : this.avgsToBeUsed) {
 			a.wait_at_pos(unloadtime);
 		}
-
+		// add duration of unloading process
+		// this.movementMutex.acquire();
 		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(unloadtime));
-
+		this.overallduration = (double) (this.timestamp.getTime() - this.starttime.getTime()) / 3600000;
+		// this.movementMutex.release();
+		Thread.sleep(100);
 		status = done;
 		updateLog("unloading", toplace);// process finished and added to the log file
 		// Checks avg battery status
+
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(destination);
 			a.setActSpeed(5);
-			this.movementMutex.acquire();
+			// this.movementMutex.acquire();
 			if (a.getConsump() > 0.50) {
 				this.chargeQ.add(a);
 			} else {
 				this.readyVehicleQ.add(a);
 			}
-			this.movementMutex.release();
+
+			// this.movementMutex.release();
 		}
 	}
 
@@ -113,7 +118,7 @@ public class movStorage extends movementVehicle implements Runnable {
 	}
 
 	public void updateLog(String process, String location) {
-		String update, itemupdate;
+		String update, itemupdate, taskupdate;
 		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + this.taskid
 				+ " Vehicle: ");
 		String itemlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
@@ -136,6 +141,12 @@ public class movStorage extends movementVehicle implements Runnable {
 			itemupdate = (itemlog + " is " + process + " at " + location + ".");
 			file_ops.createUpdateLog(this.sysfile, itemupdate);
 			file_ops.createUpdateLog(this.tonnes.storageLog, itemupdate);
+		}
+		if (this.overallduration > 0) {
+			taskupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": " + this.taskid
+					+ " mission completed. Overall duration: " + String.format("%.2f", this.overallduration)
+					+ " hours.");
+			file_ops.createUpdateLog(this.sysfile, taskupdate);
 		}
 	}
 

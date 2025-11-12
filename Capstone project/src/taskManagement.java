@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Semaphore;
 
 public class taskManagement {
@@ -19,8 +20,12 @@ public class taskManagement {
 	public Date currentdate;
 	public int orderno;
 	private int op_vehicles = 0; // vehicles needed
-	public ArrayList<avg> vehicles;
-	public ArrayList<avg> vehiclesInNeedOfCharging;
+
+	public ConcurrentLinkedQueue<avg> vehicles;
+	public ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging;
+
+	// public ArrayList<avg> vehicles;
+	// public ArrayList<avg> vehiclesInNeedOfCharging;
 	public rawMaterial ordermaterial;
 	public movementVehicle move;
 	public Thread chargingStationThread;
@@ -30,8 +35,8 @@ public class taskManagement {
 
 	public taskManagement(Date date, int noavgs) {
 		this.orderno = 1;
-		this.vehicles = new ArrayList<avg>();
-		this.vehiclesInNeedOfCharging = new ArrayList<avg>();
+		this.vehicles = new ConcurrentLinkedQueue();
+		this.vehiclesInNeedOfCharging = new ConcurrentLinkedQueue();
 		currentdate = date;
 
 		for (int i = 0; i < noavgs; i++) {
@@ -55,8 +60,8 @@ public class taskManagement {
 			exception_handling.VehicleNotFoundException, InterruptedException {
 
 		ArrayList<avg> v = new ArrayList<avg>();// vehicles that'll work in the order
-
 		orderID = (new SimpleDateFormat("yyyy-MM-dd").format(currentdate) + "Task" + "." + this.orderno++);
+
 		// determine range of the load
 		try {
 			if (load > 100) {
@@ -68,17 +73,6 @@ public class taskManagement {
 			} else {
 				etask.handleNullTonnes();
 			}
-			/*
-			 * while (op_vehicles > this.vehicles.size()) {
-			 * System.out.println("we are waiting on new vehicles to be used");
-			 * Thread.sleep(1000); }
-			 */
-			int vind = 0;
-			/*
-			 * for (int i = 0; i < op_vehicles; i++) { // adds avg to v and removes it from
-			 * vehicles ArrayList v.add(this.vehicles.get(vind));
-			 * this.vehicles.remove(vind); }
-			 */
 		} catch (Throwable e) {
 			System.out.println("Error: " + e.toString());
 		}
@@ -86,14 +80,9 @@ public class taskManagement {
 		this.manageOrder(order, load, v);
 	}
 
-	// TODO--------delete event_update and just update log file on movement classes
 	private void manageOrder(String task, int ton, ArrayList<avg> vehiclesToBeUsed)
 			throws exception_handling, exception_handling.InvalidOrderException,
 			exception_handling.VehicleNotFoundException, InterruptedException {
-		Date starttime = new java.util.Date();
-		starttime.setTime(currentdate.getTime());
-		double overallduration = 0;
-		String entry;
 		Thread movementThread;
 		switch (task) {
 		case "toFactory":
@@ -101,16 +90,9 @@ public class taskManagement {
 			ordermaterial = new rawMaterial("item" + orderno, "raw", ton, warehouse);
 			move = new movStorage(this.orderID, factory, this.op_vehicles, vehicleMutex, vehiclesInNeedOfCharging,
 					this.vehicles, file, warehouse, 0, this.ordermaterial);
-			// move = new movStorage(this.orderID, factory, vehiclesToBeUsed,
-			// vehiclesInNeedOfCharging, this.vehicles,
-			// file, warehouse, 0, this.ordermaterial);*/
+
 			movementThread = new Thread(move);
 			movementThread.start();
-			overallduration = (double) (move.timestamp.getTime() - starttime.getTime()) / 3600000; // in
-			// hours
-
-			event_update(overallduration, this.move);
-			// currentdate.setTime(move.timestamp.getTime());// update taskmanager time
 			break;
 
 		case "toWarehouse":
@@ -120,12 +102,6 @@ public class taskManagement {
 
 			movementThread = new Thread(move);
 			movementThread.start();
-
-			overallduration = (double) (move.timestamp.getTime() - starttime.getTime()) / 3600000; // in
-			// hours
-
-			event_update(overallduration, this.move);
-			// currentdate.setTime(move.timestamp.getTime());// update taskmanager time
 			break;
 
 		case "toDelivery":
@@ -136,24 +112,11 @@ public class taskManagement {
 
 			movementThread = new Thread(move);
 			movementThread.start();
-
-			overallduration = (double) (move.timestamp.getTime() - starttime.getTime()) / 3600000; // in
-			// hours
-
-			event_update(overallduration, this.move);
-			// currentdate.setTime(move.timestamp.getTime());// update taskmanager time
 			break;
 
 		case null, default:
 			etask.handleInvalidOrder();
-			this.orderno -= 1;// increase order number
+			this.orderno -= 1;// decrease order number
 		}
 	}
-
-	private void event_update(double overalltime, movementVehicle move) {
-		String entry = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(move.timestamp) + ": " + this.orderID
-				+ " mission completed. Overall duration: " + String.format("%.2f", overalltime) + " hours.");
-		file_ops.createUpdateLog(file, entry);
-	}
-
 }
