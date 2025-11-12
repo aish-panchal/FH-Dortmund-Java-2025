@@ -104,13 +104,10 @@ public class movStorage extends movementVehicle {
 		status = in_progress;
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
-
-		if (toplace == "Warehouse") {
-			try {
-				store.store_material(movingmaterial);
-			} catch (storageManagement.noFreeStorageSpaceException e) {
-				e.printStackTrace();
-			}
+		try {
+			store.store_material(movingmaterial);
+		} catch (storageManagement.noFreeStorageSpaceException e) {
+			e.printStackTrace();
 		}
 
 		for (avg a : this.avgsToBeUsed) {
