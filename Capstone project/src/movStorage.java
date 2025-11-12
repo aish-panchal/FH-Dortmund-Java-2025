@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /* movStorage: moving raw materials from warehouse to factory as well as moving finished
  * goods from factory to storage
  * */
-public class movStorage extends movementVehicle implements Runnable {
+public class movStorage extends movementVehicle {
 	public int index_loc;
 	private Date starttime;
 

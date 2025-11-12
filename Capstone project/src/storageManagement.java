@@ -1,107 +1,88 @@
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class storageManagement{
-    // change to private later
-    public ArrayList<storageEquipment> equipment;
-    public ArrayList<rawMaterial> stored_materials;
-    public String storageLog;
+public class storageManagement {
+	// change to private later
+	public ConcurrentLinkedQueue<rawMaterial> stored_materials;
+	public String storageLog;
+	public int max_storage;
 
-    public class storageException extends Exception{}
-    public class storageOccupiedException extends storageException{}
-    public class storageNotFoundException extends storageException{}
-    public class materialNotFoundException extends storageException{}
-    public class noFreeStorageSpaceException extends storageException{}
-    
-    public storageManagement(){
-    	Date thisday = new java.util.Date();
-    	storageLog=(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS").format(thisday)+" Storage"+".txt");
-    	file_ops.createUpdateLog(storageLog, "");//create log file when initialized
-    }
-    public storageManagement(int n){
-	initialize_storage_equipment(n);
-    }
-    
-    public void initialize_storage_equipment(int n){
-	// initialize a grid of n*n storage devices
-	for(int i = 0; i < n; i++){
-	    for(int j = 0; j < n; j++){
-		equipment.add(new storageEquipment(new double[] {i, j}));
-	    }
+	public class storageException extends Exception {
 	}
-    }
-    public ArrayList<storageEquipment> equipment(){
-	return equipment;
-    }
-    public ArrayList<rawMaterial> stored_materials(){
-	return stored_materials;
-    }
-    public double[] free_space() throws noFreeStorageSpaceException{
-	// return the location of a free storage space
-	for(storageEquipment s: equipment){
-	    if (s.is_occupied() == false){
-		return s.equipmentLocation();
-	    }	 
+
+	public class storageOccupiedException extends storageException {
 	}
-	throw new noFreeStorageSpaceException();
-    }
-    //TODO make storage exceptions and specific ones for each error
-    public rawMaterial retrieve_material(double[] location) throws materialNotFoundException{
-   
-	for(rawMaterial item: stored_materials){
-	    if(item.location == location){
-		stored_materials.remove(item);
-		// TODO add logging here
-		
-		return item;
-	    }
+
+	public class storageNotFoundException extends storageException {
 	}
-	throw new materialNotFoundException();
-    }
-    public rawMaterial retrieve_material(String id) throws materialNotFoundException{
-	for(rawMaterial item: stored_materials){
-	    if(item.id == id){
-		stored_materials.remove(item);
-		// this should be refactored out into a function
-		for(storageEquipment s: equipment){
-		    if(s.equipmentLocation() == item.location){
-			s.unload();
-		    }
+
+	public class materialNotFoundException extends storageException {
+	}
+
+	public class noFreeStorageSpaceException extends storageException {
+	}
+
+	public storageManagement(int n) {
+		this.max_storage = n;
+		Date thisday = new java.util.Date();
+		String storageLog = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS").format(thisday) + " Storage"
+				+ ".txt");
+		file_ops.createUpdateLog(storageLog, "");// create log file when initialized
+	}
+
+	public ConcurrentLinkedQueue<rawMaterial> stored_materials() {
+		return stored_materials;
+	}
+
+	public synchronized double[] free_space() throws noFreeStorageSpaceException {
+		// return the location of a free storage space
+
+		throw new noFreeStorageSpaceException();
+	}
+
+	// TODO make storage exceptions and specific ones for each error
+	public synchronized rawMaterial retrieve_material(double[] location) throws materialNotFoundException {
+
+		for (rawMaterial item : stored_materials) {
+			if (item.location == location) {
+				stored_materials.remove(item);
+				// TODO add logging here
+
+				return item;
+			}
 		}
-		// TODO add logging here
-		return item;
-	    }
+		throw new materialNotFoundException();
 	}
-	throw new materialNotFoundException();
-    }
-    
-    public void store_material(rawMaterial item, double[] storage_location) throws storageOccupiedException, storageNotFoundException{
-    	
-	// store a material at a storage location
-	storageEquipment storageSpace = null;
-	for(storageEquipment s: equipment){
-	    if(s.equipmentLocation() == storage_location){
-		if(s.is_occupied()){
-		    throw new storageOccupiedException();
-		    // space is not empty
+
+	public synchronized rawMaterial retrieve_material(String id) throws materialNotFoundException {
+		for (rawMaterial item : stored_materials) {
+			if (item.id == id) {
+				stored_materials.remove(item);
+				// this should be refactored out into a function
+
+				// TODO add logging here
+				return item;
+			}
 		}
-		storageSpace = s;
-		break;
-	    }
+		throw new materialNotFoundException();
 	}
-	if(null == storageSpace){
-	    throw new storageNotFoundException();
-	    // no storage space at location
+
+	public synchronized void store_material(rawMaterial item, double[] storage_location)
+			throws storageOccupiedException, storageNotFoundException {
+
+		// store a material at a storage location
+		storageEquipment storageSpace = null;
+
+		if (null == storageSpace) {
+			throw new storageNotFoundException();
+			// no storage space at location
+		}
+		item.location = storage_location;
+		stored_materials.add(item);
+
+		// TODO add logging here
 	}
-	storageSpace.load();
-	item.location = storage_location;
-	stored_materials.addLast(item);
-	
-	// TODO add logging here
-    }
-    
-    
+
 }
-
-
