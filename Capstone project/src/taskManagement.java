@@ -36,7 +36,7 @@ public class taskManagement {
 	public exception_handling etask = new exception_handling();
 
 	public taskManagement(Date date, int noavgs) {
-		this.store = new storageManagement(100);
+		this.store = new storageManagement(1000);
 		this.orderno = 1;
 		this.vehicles = new ConcurrentLinkedQueue<avg>();
 		this.vehiclesInNeedOfCharging = new ConcurrentLinkedQueue<avg>();
