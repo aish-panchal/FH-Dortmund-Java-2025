@@ -18,8 +18,8 @@ public class chargingStation implements Runnable {
 	}
 
 	private int availableStations;
-	public ArrayList<avg> chargingQ;// avg to charge
-	public ArrayList<avg> avg;
+	public ConcurrentLinkedQueue<avg> chargingQ;// avg to charge
+	public ConcurrentLinkedQueue<avg> avg;
 	public ArrayList<pair> charging;
 
 	public String logf;// charging station file
@@ -53,7 +53,7 @@ public class chargingStation implements Runnable {
 			if (chargingQ.size() > 0) {
 				// System.out.println("ChargingQ: " + chargingQ.size());
 				for (int i = 0; (i < chargingQ.size()) && (availableStations > 0); i++) {
-					avg avgToBeCharged = chargingQ.get(0);
+				    avg avgToBeCharged = chargingQ.poll();
 					double chargepercent = avgToBeCharged.getConsump();
 					double chargeTime = avgToBeCharged.chargeBatteryPercentage(chargepercent);
 
@@ -62,7 +62,6 @@ public class chargingStation implements Runnable {
 					availableStations -= 1;
 					startevent = (l_event + charging.get(charging.size() - 1).avg.id + " is charging.");
 					updateLogFile(charging.get(charging.size() - 1).avg.avgfile, startevent);
-					chargingQ.remove(0);
 					getStationStatus();
 				}
 			}
