@@ -4,7 +4,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class storageManagement {
 	// change to private later
-	public ConcurrentLinkedQueue<rawMaterial> stored_materials = new ConcurrentLinkedQueue<rawMaterial>();
 	public String storageLog;
 	private int max_storage;
 	private int free_storage;
@@ -68,24 +67,7 @@ public class storageManagement {
 		return false;
 	}
 
-	public synchronized void store_material(rawMaterial item) throws noFreeStorageSpaceException {
-		if (free_storage < 1) {
-			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
-					+ item.id
-					+ " failed to store item. Free storage space: " + free_storage);
-			file_ops.createUpdateLog(this.log, log_message);
-			throw new noFreeStorageSpaceException();
-		} else {
-			stored_materials.add(item);
-			free_storage -= 1;
-			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
-					+ item.id
-					+ " has been stored. Free storage space: " + free_storage);
-			file_ops.createUpdateLog(this.log, log_message);
-		}
-	}
-
-	public synchronized void store__material(int tons) throws noFreeStorageSpaceException {
+	public synchronized void store_material(int tons) throws noFreeStorageSpaceException {
 		if (free_storage < tons) {
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
 					+ ": failed to store " + tons + " tons. Free storage space: " + free_storage);
@@ -101,12 +83,12 @@ public class storageManagement {
 		}
 	}
 
-	public String toString() {
-		String data = "";
-		for (rawMaterial m : stored_materials) {
-			data += "Type: " + m.type + "\n\nAmount: " + m.amount + " tonnes\n\nLocation: (" + m.location[0]
-					+ ", " + m.location[1] + ")\n";
-		}
-		return data;
-	}
+	// public String toString() {
+	// 	String data = "";
+	// 	for (rawMaterial m : stored_materials) {
+	// 		data += "Type: " + m.type + "\n\nAmount: " + m.amount + " tonnes\n\nLocation: (" + m.location[0]
+	// 				+ ", " + m.location[1] + ")\n";
+	// 	}
+	// 	return data;
+	// }
 }
