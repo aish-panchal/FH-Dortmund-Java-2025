@@ -7,9 +7,10 @@ public class storageManagement {
 	public ConcurrentLinkedQueue<rawMaterial> stored_materials = new ConcurrentLinkedQueue<rawMaterial>();
 	public String storageLog;
 	private int max_storage;
-	private int current_free_storage;
+	private int free_storage;
 	private String log;
 	private Date today;
+	private int tons_stored;
 
 	public class storageException extends Exception {
 	}
@@ -22,14 +23,14 @@ public class storageManagement {
 
 	public storageManagement(int n) {
 		this.max_storage = n;
-		this.current_free_storage = max_storage;
+		this.free_storage = max_storage;
 		this.today = new java.util.Date();
 		this.log = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS").format(this.today) + " Storage" + ".txt");
 		file_ops.createUpdateLog(this.log, "");// create log file when initialized
 	}
 
-	public ConcurrentLinkedQueue<rawMaterial> stored_materials() {
-		return stored_materials;
+	public int stored_materials() {
+		return tons_stored;
 	}
 
 	public int max_storage() {
@@ -38,24 +39,22 @@ public class storageManagement {
 
 	public synchronized boolean free_space() throws noFreeStorageSpaceException {
 		// return the location of a free storage space
-		if (current_free_storage > 0) {
+		if (free_storage > 0) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public synchronized rawMaterial retrieve_material(int tons) throws materialNotFoundException {
-		for (rawMaterial item : stored_materials) {
-			if (item.amount == tons) {
-				stored_materials.remove(item);
-				current_free_storage += 1;
-				String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
-						+ ": " + item.id
-						+ " has been retrieved. Free storage space: " + current_free_storage);
-				file_ops.createUpdateLog(this.log, log_message);
-				return item;
-			}
+	public synchronized int retrieve_material(int tons) throws materialNotFoundException {
+		if (this.tons_stored == tons) {
+			tons_stored -= tons;
+			free_storage += tons;
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
+					+ ": " + tons + " tons have been retrieved. Free storage space: "
+					+ free_storage);
+			file_ops.createUpdateLog(this.log, log_message);
+			return tons;
 		}
 		throw new materialNotFoundException();
 	}
@@ -70,26 +69,43 @@ public class storageManagement {
 	}
 
 	public synchronized void store_material(rawMaterial item) throws noFreeStorageSpaceException {
-		if (current_free_storage < 1) {
+		if (free_storage < 1) {
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
 					+ item.id
-					+ " failed to store item. Free storage space: " + current_free_storage);
+					+ " failed to store item. Free storage space: " + free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 			throw new noFreeStorageSpaceException();
 		} else {
 			stored_materials.add(item);
-			current_free_storage -= 1;
+			free_storage -= 1;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
 					+ item.id
-					+ " has been stored. Free storage space: " + current_free_storage);
+					+ " has been stored. Free storage space: " + free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 		}
 	}
-	
+
+	public synchronized void store__material(int tons) throws noFreeStorageSpaceException {
+		if (free_storage < tons) {
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
+					+ ": failed to store " + tons + " tons. Free storage space: " + free_storage);
+			file_ops.createUpdateLog(this.log, log_message);
+			throw new noFreeStorageSpaceException();
+		} else {
+		    tons_stored += tons;
+			free_storage -= tons;
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
+					+ tons
+					+ " tons have been stored. Free storage space: " + free_storage);
+			file_ops.createUpdateLog(this.log, log_message);
+		}
+	}
+
 	public String toString() {
 		String data = "";
 		for (rawMaterial m : stored_materials) {
-			data += "Type: " + m.type + "\n\nAmount: " + m.amount + " tonnes\n\nLocation: (" + m.location[0] + ", " + m.location[1] + ")\n";
+			data += "Type: " + m.type + "\n\nAmount: " + m.amount + " tonnes\n\nLocation: (" + m.location[0]
+					+ ", " + m.location[1] + ")\n";
 		}
 		return data;
 	}
