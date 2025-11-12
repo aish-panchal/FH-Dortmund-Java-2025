@@ -47,6 +47,9 @@ public class humanMachineInterface extends Application{
     	// creating label for charging station information
     	Label chargeStationLabel = new Label("Charging station information and status");
     	
+    	// creating label for storage inventory
+    	Label inventoryLabel = new Label("Storage Inventory information");
+    	
     	// creating text field to enter weight 
     	TextField weightField = new TextField();
     	weightField.setPromptText("Enter weight in tonnes");
@@ -110,8 +113,14 @@ public class humanMachineInterface extends Application{
     	// creating area to view charging station information
     	TextArea chargeStationInfo = new TextArea();
     	chargeStationInfo.setEditable(false);
-    	chargeStationInfo.setMaxHeight(300);
+    	chargeStationInfo.setMaxHeight(80);
     	chargeStationInfo.setMaxWidth(300);
+    	
+    	// creating area to view storage inventory information
+    	TextArea inventoryInfo = new TextArea();
+    	inventoryInfo.setEditable(false);
+    	inventoryInfo.setMaxHeight(100);
+    	inventoryInfo.setMaxWidth(300);
     	
     	// show information of selected avg in the relevant text box
     	vehiclesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldAvg, newAvg) -> {
@@ -126,6 +135,7 @@ public class humanMachineInterface extends Application{
     		public void run() {
     			Platform.runLater(() -> {
     				chargeStationInfo.setText(workday.charge.getInfo());
+    				inventoryInfo.setText(workday.ordermaterial.toString());
     			});
     		}
     	}, 0, 100);
@@ -237,10 +247,15 @@ public class humanMachineInterface extends Application{
     	border4.setStyle("-fx-border-color: black; -fx-border-width: 2px");
     	border4.setPadding(new Insets(5));
     	
+    	Pane border5 = new Pane();
+    	border5.setStyle("-fx-border-color: black; -fx-border-width: 2px");
+    	border5.setPadding(new Insets(5));
+    	
     	grid.add(border1, 0, 0, 4, 5);
     	grid.add(border2, 0, 9, 4, 10);
     	grid.add(border3, 7, 0, 8, 7);
-    	grid.add(border4, 7, 9, 8, 7);
+    	grid.add(border4, 7, 9, 8, 5);
+    	grid.add(border5, 7, 15, 8, 5);
     	grid.add(weightLabel, 1, 1);
     	grid.add(weightField, 2, 1);
     	grid.add(operationBox, 2, 2);
@@ -259,7 +274,9 @@ public class humanMachineInterface extends Application{
     	grid.add(vehiclesInfo, 11, 2, 2, 2);
     	grid.add(avgInfoLabel, 8, 1);
     	grid.add(chargeStationLabel, 8, 10);
-    	grid.add(chargeStationInfo, 8, 11, 2, 4);
+    	grid.add(chargeStationInfo, 8, 11, 2, 2);
+    	grid.add(inventoryLabel, 8, 16);
+    	grid.add(inventoryInfo, 8, 17);
     	
     	Scene scene = new Scene(grid, 500, 500);
     	mainStage.setTitle("Order Creation");

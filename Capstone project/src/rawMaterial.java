@@ -9,4 +9,8 @@ public class rawMaterial{
 	this.amount = amount;
 	this.location = location;
     }
+    
+    public String toString() {
+    	return "Type: " + type + "\n\nAmount: " + amount + " tonnes\n\nLocation: (" + location[0] + ", " + location[1] + ")";
+    }
 }
