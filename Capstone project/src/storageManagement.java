@@ -45,7 +45,7 @@ public class storageManagement {
 	}
 
 	public synchronized int retrieve_material(int tons) throws materialNotFoundException {
-		if (this.tons_stored <= tons) {
+		if (this.tons_stored >= tons) {
 			System.out.println(tons + " tons taken from storage");
 			tons_stored -= tons;
 			free_storage += tons;
