@@ -59,13 +59,8 @@ public class movDelivery extends movementVehicle {
 		updateLog("loading", start);
 		
 		try {
-			store_lock.acquire();
-			try {
-			    store.retrieve_material(movingmaterial.amount);
-			} catch (storageManagement.materialNotFoundException e) {
-				e.printStackTrace();
-			}
-		} catch (InterruptedException e) {
+		    store.retrieve_material(movingmaterial.amount);
+		} catch (storageManagement.materialNotFoundException e) {
 			e.printStackTrace();
 		}
 
