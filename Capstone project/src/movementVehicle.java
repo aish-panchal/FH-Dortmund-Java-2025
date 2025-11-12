@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Semaphore;
 
 /*locations:
@@ -15,8 +16,8 @@ abstract class movementVehicle implements Runnable {
 	protected double destination[] = new double[2];
 	protected String end_destination[] = { "Factory", "Warehouse", "Dispatch area" };
 	protected ArrayList<avg> avgsToBeUsed;
-	protected ArrayList<avg> chargeQ; // stores vehicles to be charged
-	protected ArrayList<avg> readyVehicleQ;
+	protected ConcurrentLinkedQueue<avg> chargeQ; // stores vehicles to be charged
+	protected ConcurrentLinkedQueue<avg> readyVehicleQ;
 	protected Semaphore movementMutex;
 
 	public String sysfile;

@@ -6,7 +6,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /* movDelivery: moving finished products from warehouse to dispatch area */
-public class movDelivery extends movementVehicle implements Runnable {
+public class movDelivery extends movementVehicle {
 	public int index_loc;
 	private Date startdev;
 
@@ -38,7 +38,7 @@ public class movDelivery extends movementVehicle implements Runnable {
 		}
 		while (avg_amount > this.avgsToBeUsed.size()) {
 			if (this.readyVehicleQ.size() > 0) {
-				this.avgsToBeUsed.add(this.readyVehicleQ.remove(0));
+			    this.avgsToBeUsed.add(this.readyVehicleQ.poll());
 			} else {
 				Thread.sleep(1000);
 				this.emov.WaitingForVehicles();
@@ -156,7 +156,6 @@ public class movDelivery extends movementVehicle implements Runnable {
 		try {
 			this.unloading(this.index_loc);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

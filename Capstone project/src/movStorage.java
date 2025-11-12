@@ -37,7 +37,7 @@ public class movStorage extends movementVehicle implements Runnable {
 		this.movementMutex.acquire();
 		while (avgAmount > avgsToBeUsed.size()) {
 			if (this.readyVehicleQ.size() > 0) {
-				avgsToBeUsed.add(this.readyVehicleQ.remove(0));
+				avgsToBeUsed.add(this.readyVehicleQ.poll());
 			} else {
 				Thread.sleep(1000);
 				this.emov.WaitingForVehicles();
