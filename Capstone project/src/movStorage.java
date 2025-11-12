@@ -27,7 +27,8 @@ public class movStorage extends movementVehicle {
 		this.readyVehicleQ = vehicles; // available avg list
 
 		this.movingmaterial = mat;
-		this.tonnes = new storageManagement(10);
+		this.store = store;
+		this.store_lock = store_lock;
 
 		this.index_loc = coord_index;
 		this.location = orig;
@@ -83,11 +84,19 @@ public class movStorage extends movementVehicle {
 	}
 
 	public void unloading(int destination_index) throws InterruptedException {
-		System.out.println("Storage process finish");
 		long unloadtime = 10; // minutes
 		status = in_progress;
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
+
+		if (toplace == "Warehouse"){
+		    try {
+				store.store_material(movingmaterial);
+			} catch (storageManagement.noFreeStorageSpaceException e) {
+				e.printStackTrace();
+			}		    
+		}
+		
 
 		for (avg a : this.avgsToBeUsed) {
 			a.wait_at_pos(unloadtime);
@@ -135,7 +144,6 @@ public class movStorage extends movementVehicle {
 			}
 			itemupdate = (itemlog + " finished " + process + ".");
 			file_ops.createUpdateLog(this.sysfile, itemupdate);
-			file_ops.createUpdateLog(this.tonnes.storageLog, itemupdate);
 		} else {
 			for (avg a : avgsToBeUsed) {
 				update = (this.event + a.id + " is " + process + " at " + location + ".");
@@ -144,7 +152,6 @@ public class movStorage extends movementVehicle {
 			}
 			itemupdate = (itemlog + " is " + process + " at " + location + ".");
 			file_ops.createUpdateLog(this.sysfile, itemupdate);
-			file_ops.createUpdateLog(this.tonnes.storageLog, itemupdate);
 		}
 		if (this.overallduration > 0) {
 			taskupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "
@@ -163,7 +170,6 @@ public class movStorage extends movementVehicle {
 		try {
 			this.unloading(this.index_loc);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
