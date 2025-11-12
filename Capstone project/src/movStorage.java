@@ -40,7 +40,7 @@ public class movStorage extends movementVehicle implements Runnable {
 				avgsToBeUsed.add(this.readyVehicleQ.poll());
 			} else {
 				Thread.sleep(1000);
-				this.emov.WaitingForVehicles();
+				this.emov.WaitingForVehicles();// Message for the GUI
 			}
 		}
 		this.movementMutex.release();

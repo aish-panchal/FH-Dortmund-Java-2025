@@ -38,10 +38,10 @@ public class movDelivery extends movementVehicle {
 		}
 		while (avg_amount > this.avgsToBeUsed.size()) {
 			if (this.readyVehicleQ.size() > 0) {
-			    this.avgsToBeUsed.add(this.readyVehicleQ.poll());
+				this.avgsToBeUsed.add(this.readyVehicleQ.poll());
 			} else {
 				Thread.sleep(1000);
-				this.emov.WaitingForVehicles();
+				this.emov.WaitingForVehicles(); // Message for the GUI
 			}
 		}
 		this.movementMutex.release();
