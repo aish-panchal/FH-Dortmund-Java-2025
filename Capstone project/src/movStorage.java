@@ -60,7 +60,9 @@ public class movStorage extends movementVehicle {
 			try {
 				while (!store.material_stored(movingmaterial.amount)) {
 					try {
-						Thread.sleep(100);
+						System.out.println("waiting for item with " + movingmaterial.amount
+								+ " to be in storage");
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
