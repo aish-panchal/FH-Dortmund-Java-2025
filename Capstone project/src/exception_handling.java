@@ -1,15 +1,18 @@
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class exception_handling extends Exception {
-	
+
 	public void multipleExceptions() {
 		try {
 			File file = new File("missing.txt");
 			Scanner scanner = new Scanner(file);
-			while (scanner.hasNextLine()){
+			while (scanner.hasNextLine()) {
 				System.out.println(scanner.nextLine());
 			}
 			scanner.close();
@@ -20,50 +23,50 @@ public class exception_handling extends Exception {
 		}
 	}
 
-	
 	public void resourceManagement() {
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("testFile.txt"))){
-		    writer.write("Log event: recorded"); 		
+		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("testFile.txt"))) {
+			writer.write("Log event: recorded");
 		} catch (IOException e) {
 			System.out.println("IOException demo for resource management: " + e.getMessage());
 		}
 	}
-	
-	
-	//Task Management, Charging Station, Movement Vehicle exceptions
-	public class InvalidOrderException extends Exception{
+
+	// Task Management, Charging Station, Movement Vehicle exceptions
+	public class InvalidOrderException extends Exception {
 		public InvalidOrderException(String s) {
 			super(s);
 		}
 	}
-	//chained exception
-	public void handleInvalidOrder() throws exception_handling.InvalidOrderException{ 
+
+	// chained exception
+	public void handleInvalidOrder() throws exception_handling.InvalidOrderException {
 		try {
 			InvalidOrderException orderex = new InvalidOrderException("Order not found");
-		throw orderex;
-		}catch (InvalidOrderException orderex) {
-			throw (InvalidOrderException ) orderex.initCause(new Exception("Invalid order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}"));
+			throw orderex;
+		} catch (InvalidOrderException orderex) {
+			throw (InvalidOrderException) orderex.initCause(
+					new Exception("Invalid order. Orders can be: {'toFactory', 'toWarehouse'. 'toDelivery'}"));
 		}
 	}
-	
-	public class ZeroTonnesException extends Exception{
+
+	public class ZeroTonnesException extends Exception {
 		public ZeroTonnesException(String s) {
 			super(s);
 		}
 	}
-	
-	public  void handleNullTonnes() throws exception_handling.ZeroTonnesException{
+
+	public void handleNullTonnes() throws exception_handling.ZeroTonnesException {
 		throw new ZeroTonnesException("Can't process null tonnes");
 	}
-	
-	public class VehicleNotFoundException extends Exception{
+
+	public class VehicleNotFoundException extends Exception {
 		public VehicleNotFoundException(String s) {
 			super(s);
 		}
 	}
-	
-	public  void handleVehicleNotFound() throws exception_handling.VehicleNotFoundException{
+
+	public void handleVehicleNotFound() throws exception_handling.VehicleNotFoundException {
 		throw new VehicleNotFoundException("There's no vehicle in this index");
 	}
-	
+
 }
