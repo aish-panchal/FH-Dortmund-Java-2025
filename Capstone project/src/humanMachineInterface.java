@@ -1,5 +1,7 @@
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -126,7 +128,7 @@ public class humanMachineInterface extends Application{
     				chargeStationInfo.setText(workday.charge.getInfo());
     			});
     		}
-    	}, 0, 250);
+    	}, 0, 100);
     	
     	
     	// section to trigger the method call to takeOrder
@@ -150,6 +152,9 @@ public class humanMachineInterface extends Application{
 				System.out.println("General exception: " + e1.getMessage());
 			} catch (exception_handling.VehicleNotFoundException e1) {
 				System.out.println("Vehicle not found exception: " + e1.getMessage());
+			} catch (InterruptedException e1) {
+				System.out.println("Interrupted exception: " + e1.getMessage());
+				e1.printStackTrace();
 			}
     	});
     	
@@ -208,9 +213,8 @@ public class humanMachineInterface extends Application{
     	});
     	
     	// adding all the created avgs to the list view
-    	for (int i = 0; i < workday.vehicles.size(); i++) {
-    		vehiclesListView.getItems().add(workday.vehicles.get(i));
-    	}
+    	ObservableList<avg> observableVehicles = FXCollections.observableArrayList(workday.vehicles);
+    	vehiclesListView.setItems(observableVehicles);
     	
     	GridPane grid = new GridPane();
     	grid.setVgap(15);
