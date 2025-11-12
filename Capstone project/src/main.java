@@ -16,12 +16,13 @@ public class main {
 		// workday.takeOrder(10, "toWarehouse");
 		// workday.takeOrder(5, "toFactory");
 		// workday.takeOrder(5, "toDelivery");// wrong task
-		while (true) {
-			workday.takeOrder(70, "toWarehouse");// 10 avgs
-			workday.takeOrder(150, "toDelivery");// 25 avgs
-			workday.takeOrder(10, "toWarehouse");// 5 avgs
-			// Thread.sleep(100);
-		}
+		// while (true) {
+		workday.takeOrder(70, "toWarehouse");// 10 avgs
+		workday.takeOrder(70, "toFactory");
+		// workday.takeOrder(150, "toDelivery");// 25 avgs
+		// workday.takeOrder(10, "toWarehouse");// 5 avgs
+		// Thread.sleep(100);
+		// }
 //		if (load > 100) {
 //			op_vehicles = high_load;
 //		} else if ((load <= 100) && (load > 50)) {

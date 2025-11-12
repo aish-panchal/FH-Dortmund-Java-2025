@@ -24,9 +24,8 @@ public class storageManagement {
 		this.max_storage = n;
 		this.current_free_storage = max_storage;
 		this.today = new java.util.Date();
-		this.log = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS").format(this.today) + " Storage"
-				+ ".txt");
-		file_ops.createUpdateLog(storageLog, "");// create log file when initialized
+		this.log = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS").format(this.today) + " Storage" + ".txt");
+		file_ops.createUpdateLog(this.log, "");// create log file when initialized
 	}
 
 	public ConcurrentLinkedQueue<rawMaterial> stored_materials() {
@@ -51,11 +50,8 @@ public class storageManagement {
 			if (item.amount == tons) {
 				stored_materials.remove(item);
 				current_free_storage += 1;
-				String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
-						+ ": "
-						+ item.id
-						+ " has been retrieved. Free storage space: "
-						+ current_free_storage);
+				String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": " + item.id
+						+ " has been retrieved. Free storage space: " + current_free_storage);
 				file_ops.createUpdateLog(this.log, log_message);
 				return item;
 			}
@@ -63,22 +59,17 @@ public class storageManagement {
 		throw new materialNotFoundException();
 	}
 
-	public synchronized void store_material(rawMaterial item)
-			throws noFreeStorageSpaceException {
+	public synchronized void store_material(rawMaterial item) throws noFreeStorageSpaceException {
 		if (current_free_storage < 1) {
-			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
-					+ item.id
-					+ " failed to store item. Free storage space: "
-					+ current_free_storage);
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": " + item.id
+					+ " failed to store item. Free storage space: " + current_free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 			throw new noFreeStorageSpaceException();
 		} else {
 			stored_materials.add(item);
 			current_free_storage -= 1;
-			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
-					+ item.id
-					+ " has been stored. Free storage space: "
-					+ current_free_storage);
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": " + item.id
+					+ " has been stored. Free storage space: " + current_free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 		}
 	}
