@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class storageManagement {
 	// change to private later
-	public ConcurrentLinkedQueue<rawMaterial> stored_materials;
+	public ConcurrentLinkedQueue<rawMaterial> stored_materials = new ConcurrentLinkedQueue<rawMaterial>();
 	public String storageLog;
 	private int max_storage;
 	private int current_free_storage;
@@ -50,7 +50,8 @@ public class storageManagement {
 			if (item.amount == tons) {
 				stored_materials.remove(item);
 				current_free_storage += 1;
-				String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": " + item.id
+				String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
+						+ ": " + item.id
 						+ " has been retrieved. Free storage space: " + current_free_storage);
 				file_ops.createUpdateLog(this.log, log_message);
 				return item;
@@ -61,14 +62,16 @@ public class storageManagement {
 
 	public synchronized void store_material(rawMaterial item) throws noFreeStorageSpaceException {
 		if (current_free_storage < 1) {
-			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": " + item.id
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
+					+ item.id
 					+ " failed to store item. Free storage space: " + current_free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 			throw new noFreeStorageSpaceException();
 		} else {
 			stored_materials.add(item);
 			current_free_storage -= 1;
-			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": " + item.id
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
+					+ item.id
 					+ " has been stored. Free storage space: " + current_free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 		}
