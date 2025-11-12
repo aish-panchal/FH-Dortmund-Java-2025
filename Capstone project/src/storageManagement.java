@@ -128,5 +128,10 @@ public class storageManagement {
 			file_ops.createUpdateLog(this.log, log_message);
 		}
 	}
+	
+	public String toString() {
+		return "Raw Materials inventory: " + raw_materials_stored + "\n\n" + "Processed goods inventory: " 
+				+ processed_materials_stored;
+	}
 
 }

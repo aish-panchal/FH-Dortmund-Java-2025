@@ -119,7 +119,7 @@ public class humanMachineInterface extends Application{
     	// creating area to view storage inventory information
     	TextArea inventoryInfo = new TextArea();
     	inventoryInfo.setEditable(false);
-    	inventoryInfo.setMaxHeight(100);
+    	inventoryInfo.setMaxHeight(80);
     	inventoryInfo.setMaxWidth(300);
     	
     	// show information of selected avg in the relevant text box
@@ -256,7 +256,7 @@ public class humanMachineInterface extends Application{
     	grid.add(border2, 0, 9, 4, 10);
     	grid.add(border3, 7, 0, 8, 7);
     	grid.add(border4, 7, 9, 8, 5);
-    	grid.add(border5, 7, 15, 8, 5);
+    	grid.add(border5, 7, 15, 8, 4);
     	grid.add(weightLabel, 1, 1);
     	grid.add(weightField, 2, 1);
     	grid.add(operationBox, 2, 2);
