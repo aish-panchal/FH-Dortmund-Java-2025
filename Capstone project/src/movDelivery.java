@@ -61,7 +61,7 @@ public class movDelivery extends movementVehicle {
 		try {
 			store_lock.acquire();
 			try {
-				store.retrieve_material(movingmaterial.id);
+			    store.retrieve_material(movingmaterial.amount);
 			} catch (storageManagement.materialNotFoundException e) {
 				e.printStackTrace();
 			}
