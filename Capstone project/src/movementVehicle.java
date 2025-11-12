@@ -36,9 +36,11 @@ abstract class movementVehicle implements Runnable {
 	protected static boolean done = true;
 	protected static boolean in_progress = false;
 
-	abstract void loading(int start);// starts and finishes loading
+	abstract void loading(int start) throws storageManagement.storageException;// starts and finishes loading
 
-	abstract void unloading(int end) throws InterruptedException;// starts and finishes unloading
+	abstract void unloading(int end) throws InterruptedException, storageManagement.storageException;// starts and
+														// finishes
+														// unloading
 
 	abstract double[] getlocation(); // get's current location of the avgs
 

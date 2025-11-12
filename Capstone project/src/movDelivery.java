@@ -51,27 +51,17 @@ public class movDelivery extends movementVehicle {
 
 	}
 
-	public void loading(int end_index) {
+	public void loading(int end_index) throws storageManagement.materialNotFoundException {
 		this.startdev.setTime(this.timestamp.getTime());
 		long loadtime = 20; // minutes
 		status = in_progress;
 		String start = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", start);
 
-		try {
-		    while (!store.processed_material_stored(movingmaterial.amount)) {
-				try {
-					Thread.sleep(1000);
-					System.out.println("waiting for " + movingmaterial.amount
-							+ " tons of processed to be in storage");
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			store.retrieve_processed_material(movingmaterial.amount);
-		} catch (storageManagement.materialNotFoundException e) {
-			e.printStackTrace();
-		}
+		System.out.println("waiting for " + movingmaterial.amount
+				+ " tons of processed to be in storage");
+
+		store.retrieve_processed_material(movingmaterial.amount);
 
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(location);
@@ -171,7 +161,21 @@ public class movDelivery extends movementVehicle {
 
 	@Override
 	public void run() {
-		this.loading(this.index_loc);
+		try {
+			this.loading(this.index_loc);
+		} catch (storageManagement.materialNotFoundException e) {
+			for (avg a : this.avgsToBeUsed) {
+				a.changepos(destination);
+				a.setActSpeed(5);
+				if (a.getConsump() > 0.50) {
+					this.chargeQ.add(a);
+				} else {
+					this.readyVehicleQ.add(a);
+				}
+			}
+			System.out.println("Failed delivery, not enough processed material");
+			return;
+		}
 		this.movingtolocation(this.index_loc);
 		try {
 			this.unloading(this.index_loc);
