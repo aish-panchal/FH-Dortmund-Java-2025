@@ -8,7 +8,8 @@ public class storageManagement {
 	private int free_storage;
 	private String log;
 	private Date today;
-	private int tons_stored;
+	private int processed_materials_stored;
+	private int raw_materials_stored;
 
 	public class storageException extends Exception {
 	}
@@ -27,8 +28,12 @@ public class storageManagement {
 		file_ops.createUpdateLog(this.log, "");// create log file when initialized
 	}
 
-	public synchronized int stored_materials() {
-		return tons_stored;
+	public synchronized int stored_raw_material() {
+		return raw_materials_stored;
+	}
+
+	public synchronized int stored_processed_material() {
+		return processed_materials_stored;
 	}
 
 	public synchronized int max_storage() {
@@ -44,13 +49,14 @@ public class storageManagement {
 		}
 	}
 
-	public synchronized int retrieve_material(int tons) throws materialNotFoundException {
-		if (this.tons_stored >= tons) {
-			System.out.println(tons + " tons taken from storage");
-			tons_stored -= tons;
+	public synchronized int retrieve_raw_material(int tons) throws materialNotFoundException {
+		if (this.raw_materials_stored >= tons) {
+			System.out.println(tons + " tons of raw material taken from storage");
+			raw_materials_stored -= tons;
 			free_storage += tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
-					+ ": " + tons + " tons have been retrieved. Free storage space: "
+					+ ": " + tons
+					+ " tons of raw material have been retrieved. Free storage space: "
 					+ free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 			return tons;
@@ -58,36 +64,69 @@ public class storageManagement {
 		throw new materialNotFoundException();
 	}
 
-	public synchronized boolean material_stored(int tons) {
-		if (tons_stored >= tons)
+	public synchronized int retrieve_processed_material(int tons) throws materialNotFoundException {
+		if (this.processed_materials_stored >= tons) {
+			System.out.println(tons + " tons taken from storage");
+			processed_materials_stored -= tons;
+			free_storage += tons;
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
+					+ ": " + tons
+					+ " tons of processed material have been retrieved. Free storage space: "
+					+ free_storage);
+			file_ops.createUpdateLog(this.log, log_message);
+			return tons;
+		}
+		throw new materialNotFoundException();
+	}
+
+	public synchronized boolean raw_material_stored(int tons) {
+		if (raw_materials_stored >= tons)
 			return true;
 		return false;
 	}
 
-	public synchronized void store_material(int tons) throws noFreeStorageSpaceException {
+	public synchronized boolean processed_material_stored(int tons) {
+		if (processed_materials_stored >= tons)
+			return true;
+		return false;
+	}
+
+	public synchronized void store_processed_material(int tons) throws noFreeStorageSpaceException {
 		if (free_storage < tons) {
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
-					+ ": failed to store " + tons + " tons. Free storage space: " + free_storage);
+					+ ": failed to store " + tons
+					+ " tons of processed material. Free storage space: " + free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 			throw new noFreeStorageSpaceException();
 		} else {
-			System.out.println(tons + " tons put into storage");
-			tons_stored += tons;
+			System.out.println(tons + " tons of processed material put into storage");
+			processed_materials_stored += tons;
 			free_storage -= tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
 					+ tons
-					+ " tons have been stored. Free storage space: " + free_storage);
+					+ " tons of processed material have been stored. Free storage space: "
+					+ free_storage);
 			file_ops.createUpdateLog(this.log, log_message);
 		}
 	}
 
-	// public String toString() {
-	// String data = "";
-	// for (rawMaterial m : stored_materials) {
-	// data += "Type: " + m.type + "\n\nAmount: " + m.amount + " tonnes\n\nLocation:
-	// (" + m.location[0]
-	// + ", " + m.location[1] + ")\n";
-	// }
-	// return data;
-	// }
+	public synchronized void store_raw_material(int tons) throws noFreeStorageSpaceException {
+		if (free_storage < tons) {
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
+					+ ": failed to store " + tons
+					+ " tons of processed material. Free storage space: " + free_storage);
+			file_ops.createUpdateLog(this.log, log_message);
+			throw new noFreeStorageSpaceException();
+		} else {
+			System.out.println(tons + " tons of processed put into storage");
+		        raw_materials_stored += tons;
+			free_storage -= tons;
+			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
+					+ tons
+					+ " tons of processed material have been stored. Free storage space: "
+					+ free_storage);
+			file_ops.createUpdateLog(this.log, log_message);
+		}
+	}
+
 }
