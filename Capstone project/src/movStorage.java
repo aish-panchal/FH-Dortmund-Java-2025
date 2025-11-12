@@ -58,7 +58,7 @@ public class movStorage extends movementVehicle {
 		updateLog("loading", inplace);// start process
 		if (end_destination[destination_index] == "Factory") {
 			try {
-				while (!store.material_stored(movingmaterial.amount)) {
+				while (!store.raw_material_stored(movingmaterial.amount)) {
 					try {
 						System.out.println("waiting for item with " + movingmaterial.amount
 								+ " to be in storage");
@@ -69,7 +69,7 @@ public class movStorage extends movementVehicle {
 				}
 				System.out.println(movingmaterial.amount
 						+ " tons will be removed from storage (at movStorage load)");
-				store.retrieve_material(movingmaterial.amount);
+				store.retrieve_raw_material(movingmaterial.amount);
 			} catch (storageManagement.materialNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -106,11 +106,22 @@ public class movStorage extends movementVehicle {
 		status = in_progress;
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
-		try {
-			System.out.println("at movStorage, added " + movingmaterial.amount + " tons");
-			store.store_material(movingmaterial.amount);
-		} catch (storageManagement.noFreeStorageSpaceException e) {
-			e.printStackTrace();
+		if (toplace == "Factory") {
+			System.out.println("at movStorage to factory, added " + movingmaterial.amount + " tons of processed material");
+			try {
+				store.store_processed_material(movingmaterial.amount);
+			} catch (storageManagement.noFreeStorageSpaceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (toplace == "Warehouse") {
+		    			System.out.println("at movStorage to warehouse, added " + movingmaterial.amount + " tons of raw material");
+			try {
+				store.store_raw_material(movingmaterial.amount);
+			} catch (storageManagement.noFreeStorageSpaceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		for (avg a : this.avgsToBeUsed) {

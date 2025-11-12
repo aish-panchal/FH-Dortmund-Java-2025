@@ -59,16 +59,16 @@ public class movDelivery extends movementVehicle {
 		updateLog("loading", start);
 
 		try {
-			while (!store.material_stored(movingmaterial.amount)) {
+		    while (!store.processed_material_stored(movingmaterial.amount)) {
 				try {
 					Thread.sleep(1000);
-					System.out.println("waiting for items with " + movingmaterial.amount
-							+ " tons to be in storage");
+					System.out.println("waiting for " + movingmaterial.amount
+							+ " tons of processed to be in storage");
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			store.retrieve_material(movingmaterial.amount);
+			store.retrieve_processed_material(movingmaterial.amount);
 		} catch (storageManagement.materialNotFoundException e) {
 			e.printStackTrace();
 		}
