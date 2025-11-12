@@ -60,6 +60,15 @@ public class storageManagement {
 		throw new materialNotFoundException();
 	}
 
+	public synchronized boolean material_stored(int tons) {
+		for (rawMaterial item : stored_materials) {
+			if (item.amount == tons) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public synchronized void store_material(rawMaterial item) throws noFreeStorageSpaceException {
 		if (current_free_storage < 1) {
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "

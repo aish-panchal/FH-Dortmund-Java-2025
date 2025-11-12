@@ -58,6 +58,13 @@ public class movStorage extends movementVehicle {
 		updateLog("loading", inplace);// start process
 		if (end_destination[destination_index] == "Factory") {
 			try {
+				while (!store.material_stored(movingmaterial.amount)) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 				store.retrieve_material(movingmaterial.amount);
 			} catch (storageManagement.materialNotFoundException e) {
 				e.printStackTrace();

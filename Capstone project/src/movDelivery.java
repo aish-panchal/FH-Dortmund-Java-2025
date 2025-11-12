@@ -57,9 +57,16 @@ public class movDelivery extends movementVehicle {
 		status = in_progress;
 		String start = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", start);
-		
+
 		try {
-		    store.retrieve_material(movingmaterial.amount);
+			while (!store.material_stored(movingmaterial.amount)) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			store.retrieve_material(movingmaterial.amount);
 		} catch (storageManagement.materialNotFoundException e) {
 			e.printStackTrace();
 		}
