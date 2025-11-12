@@ -59,11 +59,8 @@ public class storageManagement {
 	}
 
 	public synchronized boolean material_stored(int tons) {
-		for (rawMaterial item : stored_materials) {
-			if (item.amount == tons) {
-				return true;
-			}
-		}
+		if (tons_stored >= tons)
+			return true;
 		return false;
 	}
 
@@ -74,7 +71,7 @@ public class storageManagement {
 			file_ops.createUpdateLog(this.log, log_message);
 			throw new noFreeStorageSpaceException();
 		} else {
-		    tons_stored += tons;
+			tons_stored += tons;
 			free_storage -= tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
 					+ tons
@@ -84,11 +81,12 @@ public class storageManagement {
 	}
 
 	// public String toString() {
-	// 	String data = "";
-	// 	for (rawMaterial m : stored_materials) {
-	// 		data += "Type: " + m.type + "\n\nAmount: " + m.amount + " tonnes\n\nLocation: (" + m.location[0]
-	// 				+ ", " + m.location[1] + ")\n";
-	// 	}
-	// 	return data;
+	// String data = "";
+	// for (rawMaterial m : stored_materials) {
+	// data += "Type: " + m.type + "\n\nAmount: " + m.amount + " tonnes\n\nLocation:
+	// (" + m.location[0]
+	// + ", " + m.location[1] + ")\n";
+	// }
+	// return data;
 	// }
 }
