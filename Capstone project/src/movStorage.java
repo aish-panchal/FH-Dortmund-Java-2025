@@ -56,6 +56,13 @@ public class movStorage extends movementVehicle {
 		status = in_progress;
 		String inplace = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", inplace);// start process
+		if (end_destination[destination_index] == "Factory") {
+			try {
+				store.retrieve_material(movingmaterial.amount);
+			} catch (storageManagement.materialNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(location);
@@ -89,14 +96,13 @@ public class movStorage extends movementVehicle {
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
 
-		if (toplace == "Warehouse"){
-		    try {
+		if (toplace == "Warehouse") {
+			try {
 				store.store_material(movingmaterial);
 			} catch (storageManagement.noFreeStorageSpaceException e) {
 				e.printStackTrace();
-			}		    
+			}
 		}
-		
 
 		for (avg a : this.avgsToBeUsed) {
 			a.wait_at_pos(unloadtime);

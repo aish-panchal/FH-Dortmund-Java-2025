@@ -46,9 +46,9 @@ public class storageManagement {
 		}
 	}
 
-	public synchronized rawMaterial retrieve_material(String id) throws materialNotFoundException {
+	public synchronized rawMaterial retrieve_material(int tons) throws materialNotFoundException {
 		for (rawMaterial item : stored_materials) {
-			if (item.id == id) {
+			if (item.amount == tons) {
 				stored_materials.remove(item);
 				current_free_storage += 1;
 				String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
