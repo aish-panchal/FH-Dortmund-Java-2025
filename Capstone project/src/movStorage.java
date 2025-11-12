@@ -25,7 +25,7 @@ public class movStorage extends movementVehicle {
 		this.readyVehicleQ = vehicles; // available avg list
 
 		this.movingmaterial = mat;
-		this.tonnes = new storageManagement();
+		this.tonnes = new storageManagement(10);
 
 		this.index_loc = coord_index;
 		this.location = orig;

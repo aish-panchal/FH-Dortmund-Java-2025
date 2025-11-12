@@ -28,6 +28,7 @@ public class taskManagement {
 	// public ArrayList<avg> vehiclesInNeedOfCharging;
 	public rawMaterial ordermaterial;
 	public storageManagement store;
+	public Semaphore storage_lock = new Semaphore(1);
 	public movementVehicle move;
 	public Thread chargingStationThread;
 	// public Thread movementThread;
@@ -35,7 +36,7 @@ public class taskManagement {
 	public exception_handling etask = new exception_handling();
 
 	public taskManagement(Date date, int noavgs) {
-		this.store = new storageManagement(10);
+		this.store = new storageManagement(100);
 		this.orderno = 1;
 		this.vehicles = new ConcurrentLinkedQueue<avg>();
 		this.vehiclesInNeedOfCharging = new ConcurrentLinkedQueue<avg>();
