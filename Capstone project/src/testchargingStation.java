@@ -31,55 +31,66 @@ class testchargingStation {
 			testQ.add(a);
 		}
 		testchargingstation = new chargingStation("taskfile", returnQ, testQ);
-//		testdate = new java.util.Date();
-//		String testfile = (new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(testdate) + "ChargingStation" + ".txt");
 
 		assertNotNull(testchargingstation.logf);
 		assertEquals(5, testchargingstation.chargingQ.size());
 	}
 
 	@Test
-	@DisplayName("Take vehicles to the station")
+	@DisplayName("Take vehicles from queue into charging")
 	void testchargingvehicles() throws exception_handling.ZeroTonnesException, exception_handling.InvalidOrderException,
 			exception_handling, exception_handling.VehicleNotFoundException {
-		testdate = new java.util.Date();
-		for (int i = 0; i < 5; i++) {
-			testvehicle[i] = new avg("avg." + i, 0.25);// id,consump %/h
+		testQ = new ConcurrentLinkedQueue();
+		returnQ = new ConcurrentLinkedQueue();
+		double pos[] = { 4, 2 };
+		for (int i = 0; i < 15; i++) {
+			avg a = new avg("avg." + i, 0.25);// id,consump %/h
+			// discharge avg
+			while (a.getConsump() < 0.50) {
+				a.changepos(pos);
+			}
+			testQ.add(a);
 		}
-		chargingStation teststation = new chargingStation("log.txt", testdate, testvehicle);
 
-		assertNotNull(teststation.chargingavg);// there are vehicles in the station
+		testchargingstation = new chargingStation("taskfile", returnQ, testQ);
+		// there's only 10 stations
+		assertEquals(10, testchargingstation.charging.size());// there should be only 10 vehicles charging
+		assertEquals(5, testchargingstation.chargingQ.size());// 5 vehicles remain on the queue
 	}
 
 	@Test
-	@DisplayName("Charging vehicles")
+	@DisplayName("Put vehicles back to ready queue")
 	void testcharging() throws exception_handling.ZeroTonnesException, exception_handling.InvalidOrderException,
 			exception_handling, exception_handling.VehicleNotFoundException {
-		testdate = new java.util.Date();
-		double warehouse[] = { 3, 1 };
-		double factory[] = { 5, 6 };
-		double dispatch[] = { 4, 5 };
-		for (int i = 0; i < 5; i++) {
-			testvehicle[i] = new avg("avg." + i, 0.25);// id,consump %/h
-			testvehicle[i].changepos(warehouse);
+		testQ = new ConcurrentLinkedQueue();
+		returnQ = new ConcurrentLinkedQueue();
+		double pos[] = { 4, 2 };
+		for (int i = 0; i < 15; i++) {
+			avg a = new avg("avg." + i, 0.25);// id,consump %/h
+			// discharge avg
+			while (a.getConsump() < 0.50) {
+				a.changepos(pos);
+			}
+			testQ.add(a);
 		}
-		chargingStation teststation = new chargingStation("log.txt", testdate, testvehicle);
-		teststation.charging(testvehicle);
-		taskManagement order = new taskManagement(testdate);
-		order.takeOrder(10, "toDelivery");
 
-		assertEquals(1, order.charge.chargingavg[1].getComsup()); // avg should have 100% battery
+		testchargingstation = new chargingStation("taskfile", returnQ, testQ);
+		int readyqSize = returnQ.size();
+		assertEquals(10, readyqSize); // avg should return to
 	}
 
 	@Test
-	@DisplayName("Get status after done")
+	@DisplayName("Get station status")
 	void testgetStationStatues() throws exception_handling.ZeroTonnesException,
 			exception_handling.InvalidOrderException, exception_handling, exception_handling.VehicleNotFoundException {
-		testdate = new java.util.Date();
-		for (int i = 0; i < 5; i++) {
-			testvehicle[i] = new avg("avg." + i, 0.25);// id,consump %/h
-		}
-		chargingStation teststation = new chargingStation("log.txt", testdate, testvehicle);
+		
+		testQ = new ConcurrentLinkedQueue();
+		returnQ = new ConcurrentLinkedQueue();
+		
+		testchargingstation = new chargingStation("taskfile", returnQ, testQ);
+		
+		String testStatus=("Currently charging: 0 vehicles.\n\n" + "Stations available: ");
+		String accStatus =;
 		boolean isOccupy = false;
 		assertEquals(isOccupy, teststation.station_status); // station should be unoccupy
 	}
