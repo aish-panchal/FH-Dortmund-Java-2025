@@ -1,21 +1,26 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /* movStorage: moving raw materials from warehouse to factory as well as moving finished
  * goods from factory to storage
  * */
 
-//TODO ----- delete timestamp alternations and insert threadsleep, also readyvehicle doesn't return vehicles to the main avg list
-public class movStorage extends movementVehicle {
-	public movStorage(String task, double coord[], ArrayList<avg> avgsToBeUsed, ArrayList<avg> chargeQ,
-			ArrayList<avg> readyVehicleQ, String logfile, double orig[], int coord_index, rawMaterial mat) {
-		this.avgsToBeUsed = avgsToBeUsed; // working avgs
+// ----- delete timestamp alternations and insert threadsleep, also readyvehicle doesn't return vehicles to the main avg list
+public class movStorage extends movementVehicle implements Runnable {
+	public int index_loc;
+
+	public movStorage(String task, double coord[], int avgAmount, Semaphore vehicleMutex, ArrayList<avg> chargeQ,
+			ArrayList<avg> readyVehicleQ, String logfile, double orig[], int coord_index, rawMaterial mat)
+			throws InterruptedException {
+		this.movementMutex = vehicleMutex;
+		this.avgsToBeUsed = new ArrayList<avg>(); // working avgs
 		this.chargeQ = chargeQ; // Charging queue
 		this.readyVehicleQ = readyVehicleQ; // available avg list
 		this.taskid = task;
 		this.sysfile = logfile;
+		this.index_loc = coord_index;
 
 		this.movingmaterial = mat;
 		this.tonnes = new storageManagement();
@@ -23,6 +28,16 @@ public class movStorage extends movementVehicle {
 		this.location = orig;
 		this.destination = coord;// x2, y2
 		this.timestamp = new java.util.Date();
+
+		this.movementMutex.acquire();
+		while (avgAmount > avgsToBeUsed.size()) {
+			if (readyVehicleQ.size() > 0) {
+				avgsToBeUsed.add(readyVehicleQ.remove(0));
+			} else {
+				Thread.sleep(100);
+			}
+		}
+		this.movementMutex.release();
 
 		try {
 			if (avgsToBeUsed.size() < 1) {
@@ -32,15 +47,12 @@ public class movStorage extends movementVehicle {
 			System.out.println("Error: " + e.toString());
 		}
 
-		this.loading(coord_index);
-		this.movingtolocation(coord_index);
-		this.unloading(coord_index);
 	}
 
 	public void loading(int destination_index) {
 		long loadtime = 10; // minutes
 		status = in_progress;
-		String inplace="["+location[0]+","+location[1]+"]";
+		String inplace = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", inplace);// start process
 
 		for (avg a : this.avgsToBeUsed) {
@@ -55,7 +67,7 @@ public class movStorage extends movementVehicle {
 
 	public void movingtolocation(int destination_index) {
 		status = in_progress;
-		String place=end_destination[destination_index];
+		String place = end_destination[destination_index];
 		updateLog("moving", place);
 		location = destination;
 		for (avg a : this.avgsToBeUsed) {
@@ -68,12 +80,12 @@ public class movStorage extends movementVehicle {
 		updateLog("journey", place);// process finished
 	}
 
-	public void unloading(int destination_index) {
+	public void unloading(int destination_index) throws InterruptedException {
 		long unloadtime = 10; // minutes
 		status = in_progress;
-		String toplace=end_destination[destination_index];
+		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
-		
+
 		for (avg a : this.avgsToBeUsed) {
 			a.wait_at_pos(unloadtime);
 		}
@@ -86,11 +98,13 @@ public class movStorage extends movementVehicle {
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(destination);
 			a.setActSpeed(5);
+			this.movementMutex.acquire();
 			if (a.getConsump() > 0.50) {
 				this.chargeQ.add(a);
 			} else {
 				this.readyVehicleQ.add(a);
 			}
+			this.movementMutex.release();
 		}
 	}
 
@@ -125,6 +139,16 @@ public class movStorage extends movementVehicle {
 		}
 	}
 
-
+	@Override
+	public void run() {
+		this.loading(this.index_loc);
+		this.movingtolocation(this.index_loc);
+		try {
+			this.unloading(this.index_loc);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
