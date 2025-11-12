@@ -105,7 +105,7 @@ public class movStorage extends movementVehicle {
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
 		try {
-			store.store_material(movingmaterial);
+			store.store_material(movingmaterial.amount);
 		} catch (storageManagement.noFreeStorageSpaceException e) {
 			e.printStackTrace();
 		}
