@@ -67,6 +67,8 @@ public class movStorage extends movementVehicle {
 						e.printStackTrace();
 					}
 				}
+				System.out.println(movingmaterial.amount
+						+ " tons will be removed from storage (at movStorage load)");
 				store.retrieve_material(movingmaterial.amount);
 			} catch (storageManagement.materialNotFoundException e) {
 				e.printStackTrace();
@@ -105,7 +107,7 @@ public class movStorage extends movementVehicle {
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
 		try {
-		    System.out.println("at movStorage, added " + movingmaterial.amount + " tons");
+			System.out.println("at movStorage, added " + movingmaterial.amount + " tons");
 			store.store_material(movingmaterial.amount);
 		} catch (storageManagement.noFreeStorageSpaceException e) {
 			e.printStackTrace();
