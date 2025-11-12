@@ -1,6 +1,5 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class storageManagement {
 	// change to private later
@@ -28,11 +27,11 @@ public class storageManagement {
 		file_ops.createUpdateLog(this.log, "");// create log file when initialized
 	}
 
-	public int stored_materials() {
+	public synchronized int stored_materials() {
 		return tons_stored;
 	}
 
-	public int max_storage() {
+	public synchronized int max_storage() {
 		return max_storage;
 	}
 
