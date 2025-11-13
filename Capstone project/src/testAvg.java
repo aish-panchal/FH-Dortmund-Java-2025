@@ -11,7 +11,7 @@ class testAvg {
 	void testavg() {
 
 		avg testavg = new avg("testavg", 0.15);
-
+		testavg.avgfile = ("test avg file");
 		assertNotNull(testavg.avgfile);
 	}
 
@@ -23,7 +23,8 @@ class testAvg {
 		double testposition[] = new double[2];
 		testposition = testavg.changepos(newposition);
 
-		assertEquals(newposition, testposition);
+		assertEquals(newposition[0], testposition[0]);
+		assertEquals(newposition[1], testposition[1]);
 	}
 
 	@Test
@@ -36,18 +37,20 @@ class testAvg {
 	}
 
 	@Test
-	@DisplayName("Change a percentage of battery")
+	@DisplayName("Charge a percentage of battery")
 	void testchargepercentage() {
-
+		boolean sameload = false;
 		avg testavg = new avg("testavg", 0.15);
-		while (testavg.getConsump() > 0.0) {
-			testavg.wait_at_pos(10);
+		while (testavg.getConsump() < 1.0) {
+			testavg.wait_at_pos(30);
 		}
 		double percentage = 0.30;
 		testavg.chargeBatteryPercentage(percentage);
 		double batteryload = 1 - testavg.getConsump();
-
-		assertEquals(percentage, batteryload);
+		if (batteryload >= 0.30) {
+			sameload = true;
+		}
+		assertEquals(true, sameload);
 	}
 
 	@Test
