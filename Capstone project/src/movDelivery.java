@@ -58,8 +58,8 @@ public class movDelivery extends movementVehicle {
 		String start = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", start);
 
-		System.out.println("waiting for " + tons
-				+ " tons of processed to be in storage");
+		// System.out.println("waiting for " + tons
+				// + " tons of processed to be in storage");
 
 		store.retrieve_processed_material(tons);
 
@@ -90,7 +90,7 @@ public class movDelivery extends movementVehicle {
 	}
 
 	public void unloading(int end) throws InterruptedException {
-		System.out.println("Delivery process finish");
+	    //System.out.println("Delivery process finish");
 		long unloadtime = 20; // minutes
 		status = in_progress;
 		updateLog("unloading", end_destination[end]);
@@ -173,7 +173,8 @@ public class movDelivery extends movementVehicle {
 					this.readyVehicleQ.add(a);
 				}
 			}
-			System.out.println("Failed delivery, not enough processed material");
+			//System.out.println("Failed delivery, not enough processed material");
+			//TODO add some type of message to make it clear in the GUI what happened
 			return;
 		}
 		this.movingtolocation(this.index_loc);
