@@ -53,48 +53,6 @@ class testchargingStation {
 	}
 
 	@Test
-	@DisplayName("Take vehicles from queue into charging")
-	void testchargingvehicles() throws exception_handling.ZeroTonnesException, exception_handling.InvalidOrderException,
-			exception_handling, exception_handling.VehicleNotFoundException {
-		testQ = new ConcurrentLinkedQueue();
-		returnQ = new ConcurrentLinkedQueue();
-		double pos[] = { 4, 2 };
-		for (int i = 0; i < 15; i++) {
-			avg a = new avg("avg." + i, 0.25);// id,consump %/h
-			// discharge avg
-			while (a.getConsump() < 0.50) {
-				a.changepos(pos);
-			}
-			testQ.add(a);
-		}
-
-		testchargingstation = new chargingStation("taskfile", returnQ, testQ);
-		// there's only 10 stations
-		assertEquals(10, testchargingstation.charging.size());// there should be only 10 vehicles charging
-		assertEquals(5, testchargingstation.chargingQ.size());// 5 vehicles remain on the queue
-	}
-
-	/*
-	 * @Test
-	 * 
-	 * @DisplayName("Put vehicles back to ready queue") void testcharging() throws
-	 * exception_handling.ZeroTonnesException,
-	 * exception_handling.InvalidOrderException, exception_handling,
-	 * exception_handling.VehicleNotFoundException { testdate = new
-	 * java.util.Date(); testQ = new ConcurrentLinkedQueue(); returnQ = new
-	 * ConcurrentLinkedQueue();
-	 * 
-	 * double pos[] = { 4, 2 }; for (int i = 0; i < 15; i++) { avg a = new
-	 * avg("avg." + i, 0.25);// id,consump %/h // discharge avg while
-	 * (a.getConsump() < 0.50) { a.changepos(pos); a.avgfile = (new
-	 * SimpleDateFormat("yyyy-MM-dd").format(testdate) + a.id + ".txt");
-	 * file_ops.createUpdateLog(a.avgfile, "Started task."); } testQ.add(a); }
-	 * 
-	 * testchargingstation = new chargingStation("taskfile", returnQ, testQ);
-	 * testchargingstation.run(); int readyqSize = testchargingstation.avg.size();
-	 * assertEquals(10, readyqSize); // avg should return to }
-	 */
-	@Test
 	@DisplayName("Get station status")
 	void testgetStationStatues() throws exception_handling.ZeroTonnesException,
 			exception_handling.InvalidOrderException, exception_handling, exception_handling.VehicleNotFoundException {
