@@ -2,103 +2,82 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 class storageManagementTest {
 
     storageManagement sm;
 
     @BeforeEach
     void setup() {
-        sm = new storageManagement();
-        sm.equipment = new ArrayList<>();
-        sm.stored_materials = new ArrayList<>();
-        sm.initialize_storage_equipment(2); // 2x2 grid
+        sm = new storageManagement(100); // 100 tons total capacity
     }
 
     @Test
-    void testInitializationCreatesEquipment() {
-        assertEquals(4, sm.equipment.size(), "Should initialize 4 storageEquipment objects for 2x2 grid");
+    void testInitializationSetsMaxAndFreeStorage() {
+        assertEquals(100, sm.max_storage(), "Max storage should be initialized correctly");
+        assertDoesNotThrow(() -> assertTrue(sm.free_space(), "Should have free space after initialization"));
     }
 
     @Test
-    void testFreeSpaceReturnsUnoccupiedLocation() throws Exception {
-        double[] free = sm.free_space();
-        assertNotNull(free, "free_space() should return a non-null location");
-        assertEquals(2, free.length, "Location should have two coordinates");
+    void testStoreRawMaterialReducesFreeStorage() throws Exception {
+        sm.store_raw_material(30);
+        assertEquals(70, sm.max_storage() - sm.stored_raw_material(), "Free storage should decrease after storing");
+        assertEquals(30, sm.stored_raw_material(), "Should have 30 tons of raw material stored");
     }
 
     @Test
-    void testFreeSpaceThrowsIfNoneAvailable() throws Exception {
-        // occupy all
-        for (storageEquipment s : sm.equipment) {
-            s.load();
-        }
-        assertThrows(storageManagement.noFreeStorageSpaceException.class, () -> sm.free_space());
+    void testStoreProcessedMaterialReducesFreeStorage() throws Exception {
+        sm.store_processed_material(20);
+        assertEquals(20, sm.stored_processed_material(), "Should have 20 tons of processed material stored");
     }
 
     @Test
-    void testStoreMaterialSuccess() throws Exception {
-        double[] loc = sm.equipment.get(0).equipmentLocation();
-        rawMaterial mat = new rawMaterial("ID1", "Steel", 10, null);
-
-        sm.store_material(mat, loc);
-
-        assertTrue(sm.equipment.get(0).is_occupied(), "Storage should be marked occupied after storing");
-        assertTrue(sm.stored_materials.contains(mat), "Stored material should be in stored_materials list");
-        assertArrayEquals(loc, mat.location, "Stored material should record its storage location");
+    void testStoreRawMaterialThrowsWhenFull() throws Exception {
+        sm.store_raw_material(100);
+        assertThrows(storageManagement.noFreeStorageSpaceException.class, () -> sm.store_raw_material(1),
+                "Should throw when trying to exceed capacity");
     }
 
     @Test
-    void testStoreMaterialThrowsWhenOccupied() throws Exception {
-        double[] loc = sm.equipment.get(0).equipmentLocation();
-        rawMaterial mat1 = new rawMaterial("ID1", "Steel", 10, null);
-        rawMaterial mat2 = new rawMaterial("ID2", "Aluminum", 5, null);
-
-        sm.store_material(mat1, loc);
-        assertThrows(storageManagement.storageOccupiedException.class, () -> sm.store_material(mat2, loc));
+    void testRetrieveRawMaterialDecreasesInventory() throws Exception {
+        sm.store_raw_material(50);
+        int retrieved = sm.retrieve_raw_material(20);
+        assertEquals(20, retrieved, "Should retrieve 20 tons");
+        assertEquals(30, sm.stored_raw_material(), "30 tons should remain");
     }
 
     @Test
-    void testStoreMaterialThrowsWhenLocationNotFound() {
-        rawMaterial mat = new rawMaterial("ID1", "Plastic", 2, null);
-        double[] badLoc = {99.0, 99.0};
-        assertThrows(storageManagement.storageNotFoundException.class, () -> sm.store_material(mat, badLoc));
+    void testRetrieveRawMaterialThrowsIfNotEnough() {
+        assertThrows(storageManagement.materialNotFoundException.class, () -> sm.retrieve_raw_material(10),
+                "Should throw if trying to retrieve material not stored");
     }
 
     @Test
-    void testRetrieveMaterialById() throws Exception {
-        double[] loc = sm.equipment.get(0).equipmentLocation();
-        rawMaterial mat = new rawMaterial("ID1", "Copper", 5, null);
-        sm.store_material(mat, loc);
-
-        rawMaterial retrieved = sm.retrieve_material("ID1");
-
-        assertEquals(mat, retrieved, "Should retrieve the same material object");
-        assertFalse(sm.stored_materials.contains(mat), "Retrieved material should be removed from stored list");
-        assertFalse(sm.equipment.get(0).is_occupied(), "Storage should be freed after retrieval");
+    void testRetrieveProcessedMaterialDecreasesInventory() throws Exception {
+        sm.store_processed_material(60);
+        int retrieved = sm.retrieve_processed_material(30);
+        assertEquals(30, retrieved, "Should retrieve 30 tons");
+        assertEquals(30, sm.stored_processed_material(), "Should have 30 tons left");
     }
 
     @Test
-    void testRetrieveMaterialByIdThrowsIfNotFound() {
+    void testRetrieveProcessedMaterialThrowsIfNotEnough() {
         assertThrows(storageManagement.materialNotFoundException.class,
-                     () -> sm.retrieve_material("NON_EXISTENT"));
+                () -> sm.retrieve_processed_material(10),
+                "Should throw if trying to retrieve nonexistent processed material");
     }
 
     @Test
-    void testRetrieveMaterialByLocation() throws Exception {
-        double[] loc = sm.equipment.get(0).equipmentLocation();
-        rawMaterial mat = new rawMaterial("ID2", "Wood", 12, loc);
-        sm.stored_materials.add(mat);
-
-        rawMaterial retrieved = sm.retrieve_material(loc);
-        assertEquals(mat, retrieved, "Should retrieve material by matching location");
-        assertFalse(sm.stored_materials.contains(mat), "Material should be removed after retrieval");
+    void testFreeSpaceReturnsFalseWhenFull() throws Exception {
+        sm.store_raw_material(100);
+        assertFalse(sm.free_space(), "Should report no free space when full");
     }
 
     @Test
-    void testRetrieveMaterialByLocationThrowsIfNotFound() {
-        double[] loc = {0, 0};
-        assertThrows(storageManagement.materialNotFoundException.class, () -> sm.retrieve_material(loc));
+    void testToStringReportsInventoryCorrectly() throws Exception {
+        sm.store_raw_material(20);
+        sm.store_processed_material(10);
+        String s = sm.toString();
+        assertTrue(s.contains("Raw Materials inventory: 20"), "Should include raw material amount");
+        assertTrue(s.contains("Processed goods inventory: 10"), "Should include processed material amount");
     }
 }
