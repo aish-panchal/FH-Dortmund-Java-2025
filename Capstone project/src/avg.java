@@ -1,7 +1,5 @@
 /* Constructs AVGs and returns it data
  */
-
-//add status: loaded/unloaded
 public class avg {
 
 	public String id;
@@ -38,7 +36,7 @@ public class avg {
 	}
 
 	// changes position, entitles a battery consumption and a distance traveled
-	public double[] changepos(double[] p2) { 
+	public double[] changepos(double[] p2) {
 		double distance = 0;
 		double time = 0;
 		double batteryConsumed = 0;
@@ -46,10 +44,10 @@ public class avg {
 		// distance traveled along x,y
 		distance = Math.sqrt(Math.pow((pos[0] - p2[0]), 2) + Math.pow((pos[1] - p2[1]), 2));
 		time = (distance / actspeed); // time taken to cover the distance at actual speed
-		batteryConsumed = consumptionRate * time; // Battery consumed in % 
+		batteryConsumed = consumptionRate * time; // Battery consumed in %
 		batteryload -= batteryConsumed; // remaining battery level
 		// new position of the AGV
-		pos[0] = p2[0]; 
+		pos[0] = p2[0];
 		pos[1] = p2[1];
 
 		overallTime = time; // h; time of journey
@@ -58,18 +56,18 @@ public class avg {
 	}
 
 	public double chargeBatteryPercentage(double amount) {
-		double time = (amount * 100) / chargeRate;//h
+		double time = (amount * 100) / chargeRate;// h
 		// overallTime += time;
-		batteryload +=amount;
-		overallConsum = 0;
-		return time;//hours
+		batteryload += amount;
+		overallConsum -= amount;
+		return time;// hours
 	}
 
 	public void wait_at_pos(double time) {
 		// chargeBattery(time);
 		double hours = time / 60;
 		batteryload -= (consumptionRate * hours);
-		overallConsum+= (consumptionRate*hours);
+		overallConsum += (consumptionRate * hours);
 	}
 
 	public double overallTime() {
@@ -78,8 +76,8 @@ public class avg {
 
 	public double getConsump() { // get the overall battery consumption
 		// Assumption here is for the capacity of the battery to be 50 kWh
-		if(overallConsum>1) {
-			overallConsum=1;
+		if (overallConsum > 1) {
+			overallConsum = 1;
 		}
 		return (overallConsum); // % consumed
 	}
