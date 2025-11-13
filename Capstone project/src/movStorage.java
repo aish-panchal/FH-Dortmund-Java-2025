@@ -21,7 +21,7 @@ public class movStorage extends movementVehicle {
 		this.movementMutex = vehicleMutex;
 		this.taskid = task;
 		this.sysfile = logfile;
-		
+
 		this.avgsToBeUsed = new ArrayList<avg>(); // working avgs
 		this.chargeQ = vehiclesInNeedOfCharging; // Charging queue
 		this.readyVehicleQ = vehicles; // available avg list
@@ -57,9 +57,9 @@ public class movStorage extends movementVehicle {
 		String inplace = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", inplace);// start process
 		if (end_destination[destination_index] == "Factory") {
-			System.out.println(tons
-					+ " tons will be removed from storage (at movStorage load)");
-			store.retrieve_raw_material(tons);
+			// System.out.println(tons
+			// + " tons will be removed from storage (at movStorage load)");
+			// store.retrieve_raw_material(tons);
 
 		}
 
@@ -96,22 +96,25 @@ public class movStorage extends movementVehicle {
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
 		if (toplace == "Factory") {
-			System.out.println("at movStorage to factory, added " + tons
-					+ " tons of processed material");
+			// System.out.println("at movStorage to factory, added " + tons
+			// + " tons of processed material");
 			try {
 				store.store_processed_material(tons);
 			} catch (storageManagement.noFreeStorageSpaceException e) {
-				System.out.println(
-						"Failed to return processed items to warehouse from factory, not enough space");
+				// System.out.println(
+				// "Failed to return processed items to warehouse from factory, not enough
+				// space");
+				// TODO give message that there was an issue in GUI
 				throw e;
 			}
 		} else if (toplace == "Warehouse") {
-			System.out.println("at movStorage to warehouse, added " + tons
-					+ " tons of raw material");
+			// System.out.println("at movStorage to warehouse, added " + tons
+			// + " tons of raw material");
 			try {
 				store.store_raw_material(tons);
 			} catch (storageManagement.noFreeStorageSpaceException e) {
-				System.out.println("Failed to store raw material in warehouse, not enough space");
+				// System.out.println("Failed to store raw material in warehouse, not enough
+				// space");
 				throw e;
 			}
 		}
@@ -186,16 +189,18 @@ public class movStorage extends movementVehicle {
 		try {
 			this.loading(this.index_loc);
 		} catch (storageManagement.materialNotFoundException e) {
-			System.out.println("Not enough raw material to take to factory");
+			// System.out.println("Not enough raw material to take to factory");
+			// TODO add something in GUI to say this
 			for (avg a : avgsToBeUsed) {
 				this.readyVehicleQ.add(a);
 			}
-			System.out.println("Failed task due to lack of material");
+			// System.out.println("Failed task due to lack of material");
+			// TODO add something that makes this clear in GUI
 			return;
 		}
-		
+
 		this.movingtolocation(this.index_loc);
-		
+
 		try {
 			this.unloading(this.index_loc);
 		} catch (InterruptedException e) {
