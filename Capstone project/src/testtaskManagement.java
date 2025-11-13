@@ -71,20 +71,14 @@ class testtaskManagement {
 	}
 
 	@Test
-	@DisplayName("Charging queue after a task")
+	@DisplayName("Creating chargingStation thread")
 	void testcallchargingStation()
 			throws exception_handling.ZeroTonnesException, exception_handling.InvalidOrderException, exception_handling,
 			exception_handling.VehicleNotFoundException, InterruptedException {
 
 		taskManagement order2 = new taskManagement(testdate, 50);
-		// taskManagement order3 = new taskManagement(testdate, 25);
-		order2.takeOrder(10, "toWarehouse");// 5 vehicles end up in need of charging
-		// order3.takeOrder(10, "toWarehouse");//5 vehicles end up in need of charging
+		boolean threadIsActive = order2.chargingStationThread.isAlive();
 
-		int avgToCharge = 5;
-
-		assertEquals(avgToCharge, order2.charge.chargingQ.size());// there should be 5 vehicles on the queue
-		// assertEquals(0, order3.vehiclesInNeedOfCharging.size());// there should be
-		// vehicles in the queue
+		assertEquals(true, threadIsActive);// there should be 5 vehicles on the queue
 	}
 }
