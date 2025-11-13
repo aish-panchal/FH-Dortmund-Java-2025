@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import javafx.scene.control.TextArea;
 import java.io.*;
 import java.nio.file.*;
 import org.junit.jupiter.api.AfterEach;
@@ -96,19 +97,16 @@ class file_ops_Test {
 		assertFalse(Files.exists(log_path), "log file should be deleted");
 	}
 	
-	/*@Test
-	void testOpenLog() {
-		String fileName = "logFile.txt";
-		String logEvent = "opening the log";
+	@Test
+	void testCreateUpdateLog_fail() {
+		String fileName = "/invalid/logFile.txt";
+		String logEvent = "Test event";
+		
 		file_ops.createUpdateLog(fileName, logEvent);
 		
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(output));
-		
-		file_ops.openLog("Fil");
-		
-		assertTrue(output.toString().contains(logEvent), "log events should be printed to console");
-	}*/
+		Path log_path = Paths.get(fileName);
+		assertFalse(Files.exists(log_path), "Log file should be created");
+	}
 	
 
 }
