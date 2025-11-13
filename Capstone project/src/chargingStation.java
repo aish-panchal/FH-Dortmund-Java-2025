@@ -45,7 +45,10 @@ public class chargingStation implements Runnable {
 
 	@Override
 	public void run() {
-		// System.out.println("In thread");
+		chargeManagement();
+	}
+
+	private void chargeManagement() {
 		String startevent, endevent;
 		accTime = new java.util.Date();
 		while (true) {
@@ -53,14 +56,15 @@ public class chargingStation implements Runnable {
 			if (chargingQ.size() > 0) {
 				// System.out.println("ChargingQ: " + chargingQ.size());
 				for (int i = 0; (i < chargingQ.size()) && (availableStations > 0); i++) {
-				    avg avgToBeCharged = chargingQ.poll();
+					avg avgToBeCharged = chargingQ.poll();
 					double chargepercent = avgToBeCharged.getConsump();
 					double chargeTime = avgToBeCharged.chargeBatteryPercentage(chargepercent);
 
 					pair a = new pair(avgToBeCharged, chargeTime);
 					charging.add(a);
 					availableStations -= 1;
-					startevent = (l_event + charging.get(charging.size() - 1).avg.id + " is charging.");
+					startevent = (l_event + charging.get(charging.size() - 1).avg.id
+							+ " is charging.");
 					updateLogFile(charging.get(charging.size() - 1).avg.avgfile, startevent);
 					getStationStatus();
 				}
@@ -81,7 +85,8 @@ public class chargingStation implements Runnable {
 			}
 			try {
 				Thread.sleep(50);
-				l_event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())
+				l_event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+						.format(System.currentTimeMillis())
 						+ ": Vehicle ");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
