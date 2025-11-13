@@ -11,7 +11,6 @@ public class file_ops {
 
 	// to create or update a log file with the event being performed
 	public static void createUpdateLog(String fileName, String loggingEvent) {
-		//System.out.println("File name: "+fileName);
 		Path log_path = Paths.get(Logs_dir, fileName);
 
 		try {
@@ -24,17 +23,6 @@ public class file_ops {
 				writer.write("Log event: " + loggingEvent + "\n");
 			}
 			
-			/* creating a new file if one doesn't already exist
-			if (Files.notExists(log_path)) {
-				Files.createFile(log_path);
-				try (BufferedWriter writer = Files.newBufferedWriter(log_path)) {
-					writer.write("Log event: " + loggingEvent + "\n");
-				}
-			} else {
-				try (BufferedWriter writer = Files.newBufferedWriter(log_path, StandardOpenOption.APPEND)) {
-					writer.write("Log event: " + loggingEvent + "\n");
-				}
-			}*/
 		} catch (IOException e) {
 			System.out.println("Error creating/writing to log file: " + e.getMessage());
 			e.printStackTrace();
@@ -93,7 +81,7 @@ public class file_ops {
 		}
 	}
 
-	// to open a log file with log name and its relevant extension
+	// to search for a log file with some search term using REGEX and display it in the listview in the GUI
 	public static void searchLog(String equipmentDateTerm, ListView<String> logView) {
 		Path log_path = Paths.get(Logs_dir);
 
@@ -113,6 +101,7 @@ public class file_ops {
 		}
 	}
 
+	// to open a log file and display its contents in the textarea in the GUI by double clicking on the file name
 	public static void openLog(String fileName, TextArea logContentArea) {
 		Path log_path = Paths.get(Logs_dir, fileName);
 

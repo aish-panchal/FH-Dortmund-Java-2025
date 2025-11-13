@@ -1,5 +1,6 @@
-import java.util.Date;
+/*import java.util.Date;
 
+// main created for testing in absence of GUI
 //Type of tasks: {"toFactory", "toWarehouse","toDelivery","toCharge"}
 
 public class main {
@@ -30,10 +31,10 @@ public class main {
 //		} else if ((load <= 50) && (load > 0)) {
 //			op_vehicles = low_load;
 //		} else {
-		/*
-		 * while(true) { System.out.println("Enter searching log file: ");
-		 * file_ops.openLog(logname.nextLine()); }
-		 */
+		
+		 while(true) { System.out.println("Enter searching log file: ");
+		 file_ops.openLog(logname.nextLine()); }
+		
 	}
 
-}
+}*/

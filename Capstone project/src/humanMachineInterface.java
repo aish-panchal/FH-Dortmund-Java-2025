@@ -21,20 +21,14 @@ import java.util.stream.Stream;
 
 
 public class humanMachineInterface extends Application{
-    //public double[] lastAvgLocation;
-    //public String itemStatus;
-    //public String orderStatus;
-    //public String avgStatus;
-	//private static final String Logs_dir = "logs";
-	//private static final String archive_dir = "logs/archive";
-	private int orderID = 1;
+    
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
     
     public void start(Stage mainStage) {
-    	orderID= 1;
+    	// creation of the taskmanagement object to start taking orders
     	Date today = new Date();
     	taskManagement workday = new taskManagement(today,50);
     	
@@ -129,7 +123,7 @@ public class humanMachineInterface extends Application{
     		}
     	});
     	
-    	
+    	// creating timer to run constantly to update vehicle and inventory info in the GUI
     	Timer timer = new Timer();
     	timer.scheduleAtFixedRate(new TimerTask() {
     		public void run() {
@@ -151,7 +145,6 @@ public class humanMachineInterface extends Application{
     			
     			
     			workday.takeOrder(weight, operation);
-    			orderID++;
     		} catch (NumberFormatException excep) {
     			// exception for the bad weight input
     			System.out.println("Incorrect input! Enter a valid whole number weight.");
@@ -227,11 +220,13 @@ public class humanMachineInterface extends Application{
     	ObservableList<avg> observableVehicles = FXCollections.observableArrayList(workday.vehicles);
     	vehiclesListView.setItems(observableVehicles);
     	
+    	// creation of grid pane to set the base for the GUI
     	GridPane grid = new GridPane();
     	grid.setVgap(15);
     	grid.setHgap(15);
     	grid.setPadding(new Insets(40));
     	
+    	// creation of the borders for each individual section of the GUI
     	Pane border1 = new Pane();
     	border1.setStyle("-fx-border-color: black; -fx-border-width: 2px");
     	border1.setPadding(new Insets(5));
@@ -252,6 +247,7 @@ public class humanMachineInterface extends Application{
     	border5.setStyle("-fx-border-color: black; -fx-border-width: 2px");
     	border5.setPadding(new Insets(5));
     	
+    	// adding each individual element to the GUI
     	grid.add(border1, 0, 0, 4, 5);
     	grid.add(border2, 0, 9, 4, 10);
     	grid.add(border3, 7, 0, 8, 7);
@@ -279,17 +275,12 @@ public class humanMachineInterface extends Application{
     	grid.add(inventoryLabel, 8, 16);
     	grid.add(inventoryInfo, 8, 17);
     	
+    	// creating the scene which is displayed when the code is run 
     	Scene scene = new Scene(grid, 500, 500);
     	mainStage.setTitle("Order Creation");
     	mainStage.setScene(scene);
     	mainStage.show();
     	
-    	
-    	
-    	
-    	
-    	
     }
-    
     
 }
