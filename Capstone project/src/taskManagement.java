@@ -24,9 +24,6 @@ public class taskManagement {
 	public ConcurrentLinkedQueue<avg> vehicles;
 	public ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging;
 
-	// public ArrayList<avg> vehicles;
-	// public ArrayList<avg> vehiclesInNeedOfCharging;
-	public rawMaterial ordermaterial;
 	public storageManagement store;
 	public Semaphore store_lock = new Semaphore(1);
 	public movementVehicle move;
@@ -59,7 +56,8 @@ public class taskManagement {
 	}
 
 	public void takeOrder(int load, String order)
-			throws exception_handling.ZeroTonnesException, exception_handling.InvalidOrderException, exception_handling,
+			throws exception_handling.ZeroTonnesException, exception_handling.InvalidOrderException,
+			exception_handling,
 			exception_handling.VehicleNotFoundException, InterruptedException {
 
 		ArrayList<avg> v = new ArrayList<avg>();// vehicles that'll work in the order
@@ -88,36 +86,34 @@ public class taskManagement {
 			exception_handling.VehicleNotFoundException, InterruptedException {
 		Thread movementThread;
 		switch (task) {
-		case "toFactory":
+			case "toFactory":
+				move = new movStorage(this.orderID, factory, this.op_vehicles, vehicleMutex,
+						vehiclesInNeedOfCharging,
+						this.vehicles, file, warehouse, 0, ton, store, store_lock);
 
-			ordermaterial = new rawMaterial("item" + orderno, "raw", ton, warehouse);
-			move = new movStorage(this.orderID, factory, this.op_vehicles, vehicleMutex, vehiclesInNeedOfCharging,
-					this.vehicles, file, warehouse, 0, this.ordermaterial, store, store_lock);
+				movementThread = new Thread(move);
+				movementThread.start();
+				break;
 
-			movementThread = new Thread(move);
-			movementThread.start();
-			break;
+			case "toWarehouse":
+				move = new movStorage(this.orderID, warehouse, this.op_vehicles, vehicleMutex,
+						vehiclesInNeedOfCharging,
+						this.vehicles, file, factory, 1, ton, store, store_lock);
+				movementThread = new Thread(move);
+				movementThread.start();
+				break;
 
-		case "toWarehouse":
-			ordermaterial = new rawMaterial("item " + orderno, "product", ton, factory);
-			move = new movStorage(this.orderID, warehouse, this.op_vehicles, vehicleMutex, vehiclesInNeedOfCharging,
-					this.vehicles, file, factory, 1, this.ordermaterial, store, store_lock);
-			movementThread = new Thread(move);
-			movementThread.start();
-			break;
+			case "toDelivery":
+				move = new movDelivery(this.orderID, file, this.op_vehicles, vehicleMutex,
+						vehiclesInNeedOfCharging,
+						vehicles, warehouse, dispatch, ton, store, store_lock);
+				movementThread = new Thread(move);
+				movementThread.start();
+				break;
 
-		case "toDelivery":
-			ordermaterial = new rawMaterial("item " + orderno, "product", ton, warehouse);
-
-			move = new movDelivery(this.orderID, file, this.op_vehicles, vehicleMutex, vehiclesInNeedOfCharging,
-					vehicles, warehouse, dispatch, this.ordermaterial, store, store_lock);
-			movementThread = new Thread(move);
-			movementThread.start();
-			break;
-
-		case null, default:
-			etask.handleInvalidOrder();
-			this.orderno -= 1;// decrease order number
+			case null, default:
+				etask.handleInvalidOrder();
+				this.orderno -= 1;// decrease order number
 		}
 	}
 }

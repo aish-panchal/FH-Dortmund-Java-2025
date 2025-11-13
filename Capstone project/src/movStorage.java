@@ -15,18 +15,18 @@ public class movStorage extends movementVehicle {
 	public movStorage(String task, double coord[], int avgAmount, Semaphore vehicleMutex,
 			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles,
 			String logfile,
-			double orig[], int coord_index, rawMaterial mat, storageManagement store, Semaphore store_lock)
+			double orig[], int coord_index, int tons, storageManagement store, Semaphore store_lock)
 			throws InterruptedException {
 
 		this.movementMutex = vehicleMutex;
 		this.taskid = task;
 		this.sysfile = logfile;
-
+		
 		this.avgsToBeUsed = new ArrayList<avg>(); // working avgs
 		this.chargeQ = vehiclesInNeedOfCharging; // Charging queue
 		this.readyVehicleQ = vehicles; // available avg list
 
-		this.movingmaterial = mat;
+		this.tons = tons;
 		this.store = store;
 		this.store_lock = store_lock;
 
@@ -57,9 +57,9 @@ public class movStorage extends movementVehicle {
 		String inplace = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", inplace);// start process
 		if (end_destination[destination_index] == "Factory") {
-			System.out.println(movingmaterial.amount
+			System.out.println(tons
 					+ " tons will be removed from storage (at movStorage load)");
-			store.retrieve_raw_material(movingmaterial.amount);
+			store.retrieve_raw_material(tons);
 
 		}
 
@@ -96,20 +96,20 @@ public class movStorage extends movementVehicle {
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
 		if (toplace == "Factory") {
-			System.out.println("at movStorage to factory, added " + movingmaterial.amount
+			System.out.println("at movStorage to factory, added " + tons
 					+ " tons of processed material");
 			try {
-				store.store_processed_material(movingmaterial.amount);
+				store.store_processed_material(tons);
 			} catch (storageManagement.noFreeStorageSpaceException e) {
 				System.out.println(
 						"Failed to return processed items to warehouse from factory, not enough space");
 				throw e;
 			}
 		} else if (toplace == "Warehouse") {
-			System.out.println("at movStorage to warehouse, added " + movingmaterial.amount
+			System.out.println("at movStorage to warehouse, added " + tons
 					+ " tons of raw material");
 			try {
-				store.store_raw_material(movingmaterial.amount);
+				store.store_raw_material(tons);
 			} catch (storageManagement.noFreeStorageSpaceException e) {
 				System.out.println("Failed to store raw material in warehouse, not enough space");
 				throw e;
@@ -153,7 +153,7 @@ public class movStorage extends movementVehicle {
 				+ this.taskid
 				+ " Vehicle: ");
 		String itemlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
-				+ this.movingmaterial.id + ": ");
+				+ this.tons + ": ");
 		if (status) {
 			for (avg a : avgsToBeUsed) {
 				update = (this.event + a.id + " finished " + process + ".");

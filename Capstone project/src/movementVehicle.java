@@ -27,7 +27,7 @@ abstract class movementVehicle implements Runnable {
 	protected Date timestamp;
 	protected double overallduration;
 
-	protected rawMaterial movingmaterial;
+	protected int tons;
 	protected exception_handling emov = new exception_handling();
 	protected storageManagement store;
 	protected Semaphore store_lock;

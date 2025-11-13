@@ -13,7 +13,7 @@ public class movDelivery extends movementVehicle {
 	public movDelivery(String task, String filename, int avg_amount, Semaphore vMutex,
 			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles,
 			double storUnit[],
-			double dispatcharea[], rawMaterial prod, storageManagement store, Semaphore store_lock)
+			double dispatcharea[], int tons, storageManagement store, Semaphore store_lock)
 			throws InterruptedException {
 
 		this.movementMutex = vMutex;
@@ -24,7 +24,7 @@ public class movDelivery extends movementVehicle {
 		this.chargeQ = vehiclesInNeedOfCharging; // charging queue
 		this.readyVehicleQ = vehicles;// available avg list
 
-		this.movingmaterial = prod;
+		this.tons = tons;
 		this.store = store;
 		this.store_lock = store_lock;
 
@@ -58,10 +58,10 @@ public class movDelivery extends movementVehicle {
 		String start = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", start);
 
-		System.out.println("waiting for " + movingmaterial.amount
+		System.out.println("waiting for " + tons
 				+ " tons of processed to be in storage");
 
-		store.retrieve_processed_material(movingmaterial.amount);
+		store.retrieve_processed_material(tons);
 
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(location);
@@ -130,7 +130,7 @@ public class movDelivery extends movementVehicle {
 		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + taskid
 				+ " Vehicle: ");
 		String prodlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
-				+ this.movingmaterial.id + ": ");
+				+ this.tons + ": ");
 		if (status) {
 			for (avg a : this.avgsToBeUsed) {
 				upevent = (this.event + a.id + " finished " + update + " the delivary at " + delivarea);
