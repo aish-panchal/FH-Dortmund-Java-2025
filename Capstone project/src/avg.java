@@ -74,6 +74,10 @@ public class avg {
 		return overallTime * 60;// minutes
 	}
 
+	public double[] getPosition() {
+		return pos;
+	}
+
 	public double getConsump() { // get the overall battery consumption
 		// Assumption here is for the capacity of the battery to be 50 kWh
 		if (overallConsum > 1) {
