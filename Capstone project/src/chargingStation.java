@@ -39,22 +39,24 @@ public class chargingStation implements Runnable {
 		this.avg = vehicles;
 		this.chargingQ = vehiclesInNeedOfCharging;
 		charging = new ArrayList<pair>();
-		// charging = new ArrayList<avg>();
 		l_event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(accTime) + ": Vehicle ");
 	}
 
 	@Override
 	public void run() {
-		chargeManagement();
+		try {
+			chargeManagement();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void chargeManagement() {
+	private void chargeManagement() throws InterruptedException {
 		String startevent, endevent;
 		accTime = new java.util.Date();
 		while (true) {
 
 			if (chargingQ.size() > 0) {
-				// System.out.println("ChargingQ: " + chargingQ.size());
 				for (int i = 0; (i < chargingQ.size()) && (availableStations > 0); i++) {
 					avg avgToBeCharged = chargingQ.poll();
 					double chargepercent = avgToBeCharged.getConsump();
@@ -63,8 +65,8 @@ public class chargingStation implements Runnable {
 					pair a = new pair(avgToBeCharged, chargeTime);
 					charging.add(a);
 					availableStations -= 1;
-					startevent = (l_event + charging.get(charging.size() - 1).avg.id
-							+ " is charging.");
+					Thread.sleep(500);
+					startevent = (l_event + charging.get(charging.size() - 1).avg.id + " is charging.");
 					updateLogFile(charging.get(charging.size() - 1).avg.avgfile, startevent);
 					getStationStatus();
 				}
@@ -75,6 +77,7 @@ public class chargingStation implements Runnable {
 
 				if (charging.get(i).time <= 0) {
 					avg.add(charging.get(i).avg);
+					Thread.sleep(500);
 					endevent = (l_event + charging.get(i).avg.id + " is charged.");
 					updateLogFile(charging.get(i).avg.avgfile, endevent);
 					charging.remove(i);
@@ -85,8 +88,7 @@ public class chargingStation implements Runnable {
 			}
 			try {
 				Thread.sleep(50);
-				l_event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-						.format(System.currentTimeMillis())
+				l_event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())
 						+ ": Vehicle ");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
