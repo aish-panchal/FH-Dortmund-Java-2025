@@ -5,7 +5,7 @@ public class storageManagement {
 	// change to private later
 	public String storageLog;
 	private int max_storage;
-	private int free_storage;
+	public int free_storage;
 	private String log;
 	private Date today;
 	public int processed_materials_stored;
@@ -130,8 +130,8 @@ public class storageManagement {
 	}
 	
 	public String toString() {
-		return "Raw Materials inventory: " + raw_materials_stored + "\n\n" + "Processed goods inventory: " 
-				+ processed_materials_stored;
+		return "Raw Materials inventory: " + raw_materials_stored + "\n\nProcessed goods inventory: " 
+				+ processed_materials_stored + "\n\nRemaining warehouse space: " + free_storage;
 	}
 
 }

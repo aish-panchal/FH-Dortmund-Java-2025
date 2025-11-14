@@ -114,7 +114,7 @@ public class humanMachineInterface extends Application{
     	// creating area to view storage inventory information
     	TextArea inventoryInfo = new TextArea();
     	inventoryInfo.setEditable(false);
-    	inventoryInfo.setMaxHeight(80);
+    	inventoryInfo.setMaxHeight(120);
     	inventoryInfo.setMaxWidth(300);
     	
     	// show information of selected avg in the relevant text box
@@ -163,6 +163,15 @@ public class humanMachineInterface extends Application{
     				alert2.setContentText("Please enter a weight lower than the processed materials inventory");
     				
     				alert2.showAndWait();
+    			}
+    			
+    			if (weight > workday.store.free_storage && operation == "toWarehouse") {
+    				Alert alert3 = new Alert(AlertType.ERROR);
+    				alert3.setTitle("Error");
+    				alert3.setHeaderText("Insufficient warehouse space");
+    				alert3.setContentText("Please enter a weight lower than the remaining warehouse space");
+    				
+    				alert3.showAndWait();
     			}
     		} catch (NumberFormatException excep) {
     			// exception for the bad weight input
@@ -271,7 +280,7 @@ public class humanMachineInterface extends Application{
     	grid.add(border2, 0, 9, 4, 10);
     	grid.add(border3, 7, 0, 8, 7);
     	grid.add(border4, 7, 9, 8, 5);
-    	grid.add(border5, 7, 15, 8, 4);
+    	grid.add(border5, 7, 15, 8, 5);
     	grid.add(weightLabel, 1, 1);
     	grid.add(weightField, 2, 1);
     	grid.add(operationBox, 2, 2);
@@ -292,7 +301,7 @@ public class humanMachineInterface extends Application{
     	grid.add(chargeStationLabel, 8, 10);
     	grid.add(chargeStationInfo, 8, 11, 2, 2);
     	grid.add(inventoryLabel, 8, 16);
-    	grid.add(inventoryInfo, 8, 17);
+    	grid.add(inventoryInfo, 8, 17, 2, 2);
     	
     	// creating the scene which is displayed when the code is run 
     	Scene scene = new Scene(grid, 500, 500);
