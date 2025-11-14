@@ -8,8 +8,8 @@ public class storageManagement {
 	private int free_storage;
 	private String log;
 	private Date today;
-	private int processed_materials_stored;
-	private int raw_materials_stored;
+	public int processed_materials_stored;
+	public int raw_materials_stored;
 
 	public class storageException extends Exception {
 	}

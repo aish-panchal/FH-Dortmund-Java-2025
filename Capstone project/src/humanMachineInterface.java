@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.scene.text.*;
@@ -145,6 +146,24 @@ public class humanMachineInterface extends Application{
     			
     			
     			workday.takeOrder(weight, operation);
+    			
+    			if (weight > workday.store.raw_materials_stored && operation == "toFactory") {
+    				Alert alert1 = new Alert(AlertType.ERROR);
+    				alert1.setTitle("Error");
+    				alert1.setHeaderText("Insufficient stock");
+    				alert1.setContentText("Please enter a weight lower than the raw material inventory");
+    				
+    				alert1.showAndWait();
+    			} 
+    			
+    			if (weight > workday.store.processed_materials_stored && operation == "toDelivery") {
+    				Alert alert2 = new Alert(AlertType.ERROR);
+    				alert2.setTitle("Error");
+    				alert2.setHeaderText("Insufficient stock");
+    				alert2.setContentText("Please enter a weight lower than the processed materials inventory");
+    				
+    				alert2.showAndWait();
+    			}
     		} catch (NumberFormatException excep) {
     			// exception for the bad weight input
     			System.out.println("Incorrect input! Enter a valid whole number weight.");
@@ -159,7 +178,7 @@ public class humanMachineInterface extends Application{
 			} catch (InterruptedException e1) {
 				System.out.println("Interrupted exception: " + e1.getMessage());
 				e1.printStackTrace();
-			}
+			} 
     	});
     	
     	// section to trigger call to search log

@@ -59,7 +59,7 @@ public class movStorage extends movementVehicle {
 		if (end_destination[destination_index] == "Factory") {
 			// System.out.println(tons
 			// + " tons will be removed from storage (at movStorage load)");
-			// store.retrieve_raw_material(tons);
+			 store.retrieve_raw_material(tons);
 
 		}
 
@@ -197,6 +197,7 @@ public class movStorage extends movementVehicle {
 			// System.out.println("Failed task due to lack of material");
 			// TODO add something that makes this clear in GUI
 			return;
+			//throw e;
 		}
 
 		this.movingtolocation(this.index_loc);
