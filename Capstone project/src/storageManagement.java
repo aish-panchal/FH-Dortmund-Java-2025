@@ -51,7 +51,6 @@ public class storageManagement {
 
 	public synchronized int retrieve_raw_material(int tons) throws materialNotFoundException {
 		if (this.raw_materials_stored >= tons) {
-			// System.out.println(tons + " tons of raw material taken from storage");
 			raw_materials_stored -= tons;
 			free_storage += tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
@@ -66,7 +65,6 @@ public class storageManagement {
 
 	public synchronized int retrieve_processed_material(int tons) throws materialNotFoundException {
 		if (this.processed_materials_stored >= tons) {
-			// System.out.println(tons + " tons taken from storage");
 			processed_materials_stored -= tons;
 			free_storage += tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today)
