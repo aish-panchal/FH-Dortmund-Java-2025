@@ -11,8 +11,7 @@ public class movDelivery extends movementVehicle {
 	private Date startdev;
 
 	public movDelivery(String task, String filename, int avg_amount, Semaphore vMutex,
-			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles,
-			double storUnit[],
+			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles, double storUnit[],
 			double dispatcharea[], int tons, storageManagement store, Semaphore store_lock)
 			throws InterruptedException {
 
@@ -57,10 +56,6 @@ public class movDelivery extends movementVehicle {
 		status = in_progress;
 		String start = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", start);
-
-		// System.out.println("waiting for " + tons
-				// + " tons of processed to be in storage");
-
 		store.retrieve_processed_material(tons);
 
 		for (avg a : this.avgsToBeUsed) {
@@ -81,16 +76,14 @@ public class movDelivery extends movementVehicle {
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(destination);
 		}
-		// add duration of journey]
+		// add duration of journey
 		this.timestamp.setTime(
-				this.timestamp.getTime()
-						+ TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));
+				this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));
 		status = done;
 		updateLog("transporting", end_destination[toplace]);// process finished and added to the log file
 	}
 
 	public void unloading(int end) throws InterruptedException {
-	    //System.out.println("Delivery process finish");
 		long unloadtime = 20; // minutes
 		status = in_progress;
 		updateLog("unloading", end_destination[end]);
@@ -99,25 +92,20 @@ public class movDelivery extends movementVehicle {
 			a.wait_at_pos(unloadtime);
 		}
 		// add duration of unloading process
-		// this.movementMutex.acquire();
 		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(unloadtime));
 		this.overallduration = (double) (this.timestamp.getTime() - this.startdev.getTime()) / 3600000;
-		// this.movementMutex.release();
 		Thread.sleep(100);
 		status = done;
 		updateLog("unloading", end_destination[end]);// process finished and added to the log file
 		// checks battery status
-
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(destination);
 			a.setActSpeed(5);
-			// this.movementMutex.acquire();
 			if (a.getConsump() > 0.50) {
 				this.chargeQ.add(a);
 			} else {
 				this.readyVehicleQ.add(a);
 			}
-			// this.movementMutex.release();
 		}
 	}
 
@@ -129,8 +117,8 @@ public class movDelivery extends movementVehicle {
 		String upevent, produpdate, sysupdate;
 		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + taskid
 				+ " Vehicle: ");
-		String prodlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
-				+ this.tons + ": ");
+		String prodlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + this.tons
+				+ ": ");
 		if (status) {
 			for (avg a : this.avgsToBeUsed) {
 				upevent = (this.event + a.id + " finished " + update + " the delivary at " + delivarea);
@@ -141,8 +129,7 @@ public class movDelivery extends movementVehicle {
 			file_ops.createUpdateLog(this.sysfile, produpdate);
 		} else {
 			for (avg a : this.avgsToBeUsed) {
-				upevent = (this.event + a.id + " is " + update + " the delivery to the " + delivarea
-						+ ".");
+				upevent = (this.event + a.id + " is " + update + " the delivery to the " + delivarea + ".");
 				file_ops.createUpdateLog(this.sysfile, upevent);
 				file_ops.createUpdateLog(a.avgfile, upevent);
 			}
@@ -150,10 +137,8 @@ public class movDelivery extends movementVehicle {
 			file_ops.createUpdateLog(this.sysfile, produpdate);
 		}
 		if (this.overallduration > 0) {
-			sysupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "
-					+ this.taskid
-					+ " mission completed. Overall duration: "
-					+ String.format("%.2f", this.overallduration)
+			sysupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": " + this.taskid
+					+ " mission completed. Overall duration: " + String.format("%.2f", this.overallduration)
 					+ " hours.");
 			file_ops.createUpdateLog(this.sysfile, sysupdate);
 		}
@@ -173,9 +158,6 @@ public class movDelivery extends movementVehicle {
 					this.readyVehicleQ.add(a);
 				}
 			}
-			//System.out.println("Failed delivery, not enough processed material");
-			//TODO add some type of message to make it clear in the GUI what happened
-			return;
 		}
 		this.movingtolocation(this.index_loc);
 		try {

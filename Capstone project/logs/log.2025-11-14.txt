@@ -1,0 +1,168 @@
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.10 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.0 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.11 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.1 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.12 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.2 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.3 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.13 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.14 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.4 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.5 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.15 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.16 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.6 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.17 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.7 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.8 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.18 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.9 is loading at [5.0,6.0].
+Log event: 2025-11-14 12:28:19-491: 2025-11-14Task.2 Vehicle: avg.19 is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-491: 70:  is loading at [3.0,1.0].
+Log event: 2025-11-14 12:28:19-489: 70:  is loading at [5.0,6.0].
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.0 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.10 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.11 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.1 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.12 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.2 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.13 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.3 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.14 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.4 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.15 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.5 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.6 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.16 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.7 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.17 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.8 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.18 finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.19 finished loading.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.9 finished loading.
+Log event: 2025-11-14 12:38:19-491: 70:  finished loading.
+Log event: 2025-11-14 12:38:19-489: 70:  finished loading.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.10 is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.0 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.11 is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.1 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.2 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.12 is moving at Factory.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.13 is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.3 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.14 is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.4 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.15 is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.5 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.6 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.16 is moving at Factory.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.17 is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.7 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.18 is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.8 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-491: 2025-11-14Task.2 Vehicle: avg.19 is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.9 is moving at Warehouse.
+Log event: 2025-11-14 12:38:19-491: 70:  is moving at Factory.
+Log event: 2025-11-14 12:38:19-489: 70:  is moving at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.10 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.0 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.1 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.11 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.2 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.12 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.13 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.3 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.14 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.4 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.15 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.5 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.16 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.6 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.17 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.7 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.8 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.18 finished journey.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.9 finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.19 finished journey.
+Log event: 2025-11-14 13:42:19-489: 70:  finished journey.
+Log event: 2025-11-14 13:42:19-491: 70:  finished journey.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.10 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.0 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.11 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.1 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.12 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.2 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.13 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.3 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.14 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.4 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.5 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.15 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.16 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.6 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.17 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.7 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.18 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.8 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 2025-11-14Task.2 Vehicle: avg.19 is unloading at Factory.
+Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.9 is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-489: 70:  is unloading at Warehouse.
+Log event: 2025-11-14 13:42:19-491: 70:  is unloading at Factory.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.10 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.0 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.1 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.11 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.2 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.12 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.3 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.13 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.4 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.14 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.5 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.15 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.6 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.16 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.17 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.7 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.18 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.8 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 2025-11-14Task.2 Vehicle: avg.19 finished unloading.
+Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.9 finished unloading.
+Log event: 2025-11-14 13:52:19-491: 70:  finished unloading.
+Log event: 2025-11-14 13:52:19-489: 70:  finished unloading.
+Log event: 2025-11-14 13:52:19: 2025-11-14Task.1 mission completed. Overall duration: 1.40 hours.
+Log event: 2025-11-14 13:52:19: 2025-11-14Task.2 mission completed. Overall duration: 1.40 hours.
+Log event: 2025-11-14 12:28:19: Vehicle avg.0 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.10 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.1 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.2 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.11 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.12 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.13 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.3 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.14 is charging.
+Log event: 2025-11-14 12:28:19: Vehicle avg.4 is charging.
+Log event: 2025-11-14 12:28:25: Vehicle avg.10 is charged.
+Log event: 2025-11-14 12:28:25: Vehicle avg.11 is charged.
+Log event: 2025-11-14 12:28:25: Vehicle avg.13 is charged.
+Log event: 2025-11-14 12:28:25: Vehicle avg.14 is charged.
+Log event: 2025-11-14 12:28:27: Vehicle avg.15 is charging.
+Log event: 2025-11-14 12:28:27: Vehicle avg.5 is charging.
+Log event: 2025-11-14 12:28:27: Vehicle avg.16 is charging.
+Log event: 2025-11-14 12:28:27: Vehicle avg.6 is charging.
+Log event: 2025-11-14 12:28:27: Vehicle avg.12 is charged.
+Log event: 2025-11-14 12:28:30: Vehicle avg.17 is charging.
+Log event: 2025-11-14 12:28:31: Vehicle avg.0 is charged.
+Log event: 2025-11-14 12:28:31: Vehicle avg.2 is charged.
+Log event: 2025-11-14 12:28:32: Vehicle avg.7 is charging.
+Log event: 2025-11-14 12:28:32: Vehicle avg.8 is charging.
+Log event: 2025-11-14 12:28:32: Vehicle avg.4 is charged.
+Log event: 2025-11-14 12:28:33: Vehicle avg.18 is charging.
+Log event: 2025-11-14 12:28:33: Vehicle avg.1 is charged.
+Log event: 2025-11-14 12:28:34: Vehicle avg.9 is charging.
+Log event: 2025-11-14 12:28:35: Vehicle avg.3 is charged.
+Log event: 2025-11-14 12:28:35: Vehicle avg.19 is charging.
+Log event: 2025-11-14 12:28:36: Vehicle avg.16 is charged.
+Log event: 2025-11-14 12:28:37: Vehicle avg.17 is charged.
+Log event: 2025-11-14 12:28:37: Vehicle avg.15 is charged.
+Log event: 2025-11-14 12:28:38: Vehicle avg.5 is charged.

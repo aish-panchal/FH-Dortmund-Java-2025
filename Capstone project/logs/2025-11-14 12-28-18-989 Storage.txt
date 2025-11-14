@@ -1,0 +1,3 @@
+Log event: 
+Log event: 2025-11-14 12:28:18: 70 tons of processed material have been stored. Free storage space: 930
+Log event: 2025-11-14 12:28:18: 70 tons of processed material have been stored. Free storage space: 860

@@ -13,8 +13,7 @@ public class movStorage extends movementVehicle {
 	private Date starttime;
 
 	public movStorage(String task, double coord[], int avgAmount, Semaphore vehicleMutex,
-			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles,
-			String logfile,
+			ConcurrentLinkedQueue<avg> vehiclesInNeedOfCharging, ConcurrentLinkedQueue<avg> vehicles, String logfile,
 			double orig[], int coord_index, int tons, storageManagement store, Semaphore store_lock)
 			throws InterruptedException {
 
@@ -57,10 +56,7 @@ public class movStorage extends movementVehicle {
 		String inplace = "[" + location[0] + "," + location[1] + "]";
 		updateLog("loading", inplace);// start process
 		if (end_destination[destination_index] == "Factory") {
-			// System.out.println(tons
-			// + " tons will be removed from storage (at movStorage load)");
-			 store.retrieve_raw_material(tons);
-
+			store.retrieve_raw_material(tons);
 		}
 
 		for (avg a : this.avgsToBeUsed) {
@@ -83,8 +79,7 @@ public class movStorage extends movementVehicle {
 		}
 		// add duration of the moving process
 		this.timestamp.setTime(
-				this.timestamp.getTime()
-						+ TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));
+				this.timestamp.getTime() + TimeUnit.MINUTES.toMillis((long) avgsToBeUsed.get(0).overallTime()));
 		status = done;
 		updateLog("journey", place);// process finished
 	}
@@ -96,25 +91,15 @@ public class movStorage extends movementVehicle {
 		String toplace = end_destination[destination_index];
 		updateLog("unloading", toplace);
 		if (toplace == "Factory") {
-			// System.out.println("at movStorage to factory, added " + tons
-			// + " tons of processed material");
 			try {
 				store.store_processed_material(tons);
 			} catch (storageManagement.noFreeStorageSpaceException e) {
-				// System.out.println(
-				// "Failed to return processed items to warehouse from factory, not enough
-				// space");
-				// TODO give message that there was an issue in GUI
 				throw e;
 			}
 		} else if (toplace == "Warehouse") {
-			// System.out.println("at movStorage to warehouse, added " + tons
-			// + " tons of raw material");
 			try {
 				store.store_raw_material(tons);
 			} catch (storageManagement.noFreeStorageSpaceException e) {
-				// System.out.println("Failed to store raw material in warehouse, not enough
-				// space");
 				throw e;
 			}
 		}
@@ -123,26 +108,20 @@ public class movStorage extends movementVehicle {
 			a.wait_at_pos(unloadtime);
 		}
 		// add duration of unloading process
-		// this.movementMutex.acquire();
 		this.timestamp.setTime(this.timestamp.getTime() + TimeUnit.MINUTES.toMillis(unloadtime));
 		this.overallduration = (double) (this.timestamp.getTime() - this.starttime.getTime()) / 3600000;
-		// this.movementMutex.release();
 		Thread.sleep(100);
 		status = done;
 		updateLog("unloading", toplace);// process finished and added to the log file
 		// Checks avg battery status
-
 		for (avg a : this.avgsToBeUsed) {
 			a.changepos(destination);
 			a.setActSpeed(5);
-			// this.movementMutex.acquire();
 			if (a.getConsump() > 0.50) {
 				this.chargeQ.add(a);
 			} else {
 				this.readyVehicleQ.add(a);
 			}
-
-			// this.movementMutex.release();
 		}
 	}
 
@@ -152,11 +131,10 @@ public class movStorage extends movementVehicle {
 
 	public void updateLog(String process, String location) {
 		String update, itemupdate, taskupdate;
-		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
-				+ this.taskid
+		this.event = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + this.taskid
 				+ " Vehicle: ");
-		String itemlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": "
-				+ this.tons + ": ");
+		String itemlog = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss-SSS").format(this.timestamp) + ": " + this.tons
+				+ ": ");
 		if (status) {
 			for (avg a : avgsToBeUsed) {
 				update = (this.event + a.id + " finished " + process + ".");
@@ -175,10 +153,8 @@ public class movStorage extends movementVehicle {
 			file_ops.createUpdateLog(this.sysfile, itemupdate);
 		}
 		if (this.overallduration > 0) {
-			taskupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": "
-					+ this.taskid
-					+ " mission completed. Overall duration: "
-					+ String.format("%.2f", this.overallduration)
+			taskupdate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.timestamp) + ": " + this.taskid
+					+ " mission completed. Overall duration: " + String.format("%.2f", this.overallduration)
 					+ " hours.");
 			file_ops.createUpdateLog(this.sysfile, taskupdate);
 		}
@@ -189,15 +165,10 @@ public class movStorage extends movementVehicle {
 		try {
 			this.loading(this.index_loc);
 		} catch (storageManagement.materialNotFoundException e) {
-			// System.out.println("Not enough raw material to take to factory");
-			// TODO add something in GUI to say this
 			for (avg a : avgsToBeUsed) {
 				this.readyVehicleQ.add(a);
 			}
-			// System.out.println("Failed task due to lack of material");
-			// TODO add something that makes this clear in GUI
 			return;
-			//throw e;
 		}
 
 		this.movingtolocation(this.index_loc);

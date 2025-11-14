@@ -13,8 +13,6 @@ public class avg {
 	private double overallConsum;
 	public String avgfile;
 
-	// TODO--------convert timings into minutes for simulation
-
 	public avg(String type, double comsup) {
 		id = type;
 		consumptionRate = comsup; // in %/h
@@ -57,14 +55,12 @@ public class avg {
 
 	public double chargeBatteryPercentage(double amount) {
 		double time = (amount * 100) / chargeRate;// h
-		// overallTime += time;
 		batteryload += amount;
 		overallConsum -= amount;
 		return time;// hours
 	}
 
 	public void wait_at_pos(double time) {
-		// chargeBattery(time);
 		double hours = time / 60;
 		batteryload -= (consumptionRate * hours);
 		overallConsum += (consumptionRate * hours);
