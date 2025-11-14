@@ -1,8 +1,0 @@
-Log event: Started task.
-Log event: 2025-11-14 12:28:19-489: 2025-11-14Task.1 Vehicle: avg.8 is loading at [5.0,6.0].
-Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.8 finished loading.
-Log event: 2025-11-14 12:38:19-489: 2025-11-14Task.1 Vehicle: avg.8 is moving at Warehouse.
-Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.8 finished journey.
-Log event: 2025-11-14 13:42:19-489: 2025-11-14Task.1 Vehicle: avg.8 is unloading at Warehouse.
-Log event: 2025-11-14 13:52:19-489: 2025-11-14Task.1 Vehicle: avg.8 finished unloading.
-Log event: 2025-11-14 12:28:32: Vehicle avg.8 is charging.

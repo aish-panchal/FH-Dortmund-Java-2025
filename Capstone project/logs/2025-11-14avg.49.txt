@@ -1,1 +1,0 @@
-Log event: Started task.
