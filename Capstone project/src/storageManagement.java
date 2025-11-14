@@ -97,7 +97,6 @@ public class storageManagement {
 			file_ops.createUpdateLog(this.log, log_message);
 			throw new noFreeStorageSpaceException();
 		} else {
-			// System.out.println(tons + " tons of processed material put into storage");
 			processed_materials_stored += tons;
 			free_storage -= tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
@@ -116,7 +115,6 @@ public class storageManagement {
 			file_ops.createUpdateLog(this.log, log_message);
 			throw new noFreeStorageSpaceException();
 		} else {
-			// System.out.println(tons + " tons of processed put into storage");
 		        raw_materials_stored += tons;
 			free_storage -= tons;
 			String log_message = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.today) + ": "
