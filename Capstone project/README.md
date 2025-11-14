@@ -6,6 +6,9 @@ Project description:
 - The system allows to create orders, view the logs of the different systems, view status of vehicles, charging station and inventory in the GUI.​
 - This would fit a raw material processing industry, like raw iron ore processing​
 
+Project screencast: 
+https://drive.google.com/file/d/1dz7-kFBFue5I1ZApXy2fqdgLDTrtPB9g/view?usp=sharing
+
 Team description: 
 
 - Smart Storage Management System: Abdelrahman Abdin​
